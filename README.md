@@ -5,7 +5,7 @@ Projet généré avec [Angular CLI](https://github.com/angular/angular-cli) vers
 
 # Mise à jour
 Mettre à jour votre version de node sur ce site https://nodejs.org/en/download.
-Ensuite effectuer la mise à jour de de npm
+Ensuite effectuer la mise à jour de npm
 ```bash
 npm install -g npm
 ```

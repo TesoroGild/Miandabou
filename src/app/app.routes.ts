@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Home } from './components/home/home';
-import { Item } from './components/item/item';
-import { Cart } from './components/cart/cart';
+import { Home } from './pages/home/home';
+import { Item } from './pages/item/item';
+import { Cart } from './pages/cart/cart';
+import { Checkout } from './pages/checkout/checkout';
 
 export const routes: Routes = [
     {
-        path: '/',
-        redirectTo: '/home',
+        path: '',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
         path: 'cart',
         component: Cart,
+    },
+    {
+        path: 'checkout',
+        component: Checkout
     },
     {
         path: 'home',
