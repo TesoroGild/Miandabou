@@ -4,6 +4,9 @@ import { Home } from './pages/home/home';
 import { Item } from './pages/item/item';
 import { Cart } from './pages/cart/cart';
 import { Checkout } from './pages/checkout/checkout';
+import { Login } from './pages/login/login';
+import { AboutPage } from './pages/about/about.page';
+import { Contact } from './pages/contact/contact';
 
 export const routes: Routes = [
     {
@@ -12,8 +15,16 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'about',
+        component: AboutPage
+    },
+    {
         path: 'cart',
         component: Cart,
+    },
+    {
+        path: 'contact',
+        component: Contact
     },
     {
         path: 'checkout',
@@ -26,6 +37,10 @@ export const routes: Routes = [
     {
         path: 'item',
         component: Item,
+    },
+    {
+        path: 'login',
+        component: Login
     }
 ];
 
