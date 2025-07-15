@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Email } from '../../services/email/email';
+import { EmailService } from '../../services/email/email.service';
 
 //Reusable components
+import { ToastService } from '../../services/toast/toast.service';
 
 //Modules
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,8 @@ export class Home {
   alertForm!: FormGroup;
 
   constructor(
-    private emailService: Email,
+    private emailService: EmailService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -53,20 +55,10 @@ export class Home {
         console.log(mailAdded.mail);
         if (mailAdded.mail != null && mailAdded.mail != undefined) {
           this.emailService.sendEmail(mailAdded.mail);
-          // this.snackBar.open("Mail ajouté!", "", {
-          //   duration: 3000,
-          //   horizontalPosition: 'center',
-          //   verticalPosition: 'bottom',
-          //   panelClass: 'success'
-          // });
+          this.toastService.success('Mail ajouté!');
           this.alertForm.reset();
         } else {
-          // this.snackBar.open(mailAdded.msg, "", {
-          //   duration: 3000,
-          //   horizontalPosition: 'center',
-          //   verticalPosition: 'bottom',
-          //   panelClass: 'fail'
-          // });
+          this.toastService.error(mailAdded.msg);
         }
       });
     } else this.alertForm.markAllAsTouched();
@@ -92,20 +84,5 @@ export class Home {
       this.alertForm.controls[field].hasError(error) &&
       (this.alertForm.controls[field].dirty || this.alertForm.controls[field].touched)
     );
-  }
-
-  handleError() {
-    this.showToastError = true;
-    setTimeout(() => this.showToastError = false, 3000);
-  }
-
-  handleSuccess() {
-    this.showToastSuccess = true;
-    setTimeout(() => this.showToastSuccess = false, 3000);
-  }
-
-  handleWarning() {
-    this.showToastWarning = true;
-    setTimeout(() => this.showToastWarning = false, 3000);
   }
 }

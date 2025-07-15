@@ -3,13 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 
 //Reusable components
-import { Toast } from './shared/components/toast/toast';
-import { Navbar } from './shared/components/navbar/navbar';
-import { Footbar } from './shared/components/footbar/footbar';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { FootbarComponent } from './shared/components/footbar/footbar.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  imports: [Toast, Footbar, Navbar, RouterOutlet],
+  imports: [
+    FootbarComponent, 
+    NavbarComponent, 
+    RouterOutlet,
+    ToastComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

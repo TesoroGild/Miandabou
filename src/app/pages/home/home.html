@@ -7,7 +7,6 @@
             <button 
                 type="button"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                (click)="handleSuccess()"
                 >
                 Jettez-y un coup d'oeil!
             </button>
@@ -49,13 +48,8 @@
                             type="text" placeholder="john@Doe.ca">
                         <button
                             class="flex-shrink-0 border-[#e7cc96] text-sm border-4 text-white hover:text-teal-800 py-1 px-2 rounded bg-[#e7cc96]"
-                            type="button">
-                            Sign Up
-                        </button>
-                        <button
-                            class="flex-shrink-0 border-transparent border-4 text-[#e7cc96] hover:text-teal-800 text-sm py-1 px-2 rounded"
-                            type="button">
-                            Cancel
+                            type="submit">
+                            Rejoindre
                         </button>
                     </div>
                     <span *ngIf="emailEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez

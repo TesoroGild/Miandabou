@@ -6,23 +6,7 @@
 
   <div>
     <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-      <app-toast
-        *ngIf="showToastError"
-        type="danger"
-        message="Test mail non ajouté !"
-      ></app-toast>
-
-      <app-toast
-        *ngIf="showToastSuccess"
-        type="success"
-        message="Test mail ajouté !"
-      ></app-toast>
-
-      <app-toast
-        *ngIf="showToastWarning"
-        type="warning"
-        message="Attention !"
-      ></app-toast>
+      <app-toast></app-toast>
     </div>
     <router-outlet></router-outlet>
   </div>

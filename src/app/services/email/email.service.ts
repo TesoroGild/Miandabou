@@ -5,7 +5,7 @@ import { environment } from '../../../environments/dev.environment';
 @Injectable({
   providedIn: 'root'
 })
-export class Email {
+export class EmailService {
   constructor(
     private http: HttpClient
   ) { }
