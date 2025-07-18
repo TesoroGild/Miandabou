@@ -22,7 +22,6 @@ export class ToastComponent {
 
   ngOnInit() {
     this.toastService.toast$.subscribe(({message, type}) => {
-      console.log(message);
       this.message = message;
       this.type = type;
       this.isVisible = true;

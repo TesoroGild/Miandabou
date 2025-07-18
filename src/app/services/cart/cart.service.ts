@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 //Interfaces
 import { Coupon } from '../../interfaces/coupon.interface';
@@ -14,7 +14,7 @@ import { environment } from '../../../environments/dev.environment';
   providedIn: 'root'
 })
 export class CartService {
-  items$ = this.itemService.getAllItems();
+  items$!: Observable<Item[]>;
   itemsSubscription: Subscription;
   items: Item[] = [];
   private itemsCartSubject: BehaviorSubject<ItemCart[]>;
@@ -51,6 +51,7 @@ export class CartService {
     private itemService: ItemService,
     private http: HttpClient
   ) {
+    this.items$ = this.itemService.getAllItems();
     this.itemsSubscription = this.items$.subscribe((i) => {
       this.items = i;
     });

@@ -22,16 +22,23 @@ export class ItemService {
 
   getItems () {
     this.http.get<any>(
-      `${environment.backendUrl}/php/items/itemsGet.php`
-    ).subscribe((items: any) => {
-      if (items.items != null && items.items != undefined)
-        this.itemsToDisplay.next(items.items);
+      `${environment.backendUrl}/api/items`
+    ).subscribe((response: any) => {
+      if (response.items != null && response.items != undefined)
+        this.itemsToDisplay.next(response.items);
       return this.itemsToDisplay.asObservable();
     });
   }
 
   getAllItems () {
     return this.itemsToDisplay.asObservable();
+  }
+
+  addItem (item: FormData) : any {
+    return this.http.post<any>(
+      `${environment.backendUrl}/api/items`,
+      item
+    )
   }
 
   // setItemsToDisplay (items: Item[]) {

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { Item } from './pages/item/item';
-import { Cart } from './pages/cart/cart';
-import { Checkout } from './pages/checkout/checkout';
-import { Login } from './pages/login/login';
+import { HomePage } from './pages/home/home.page';
+import { ItemsPage } from './pages/item/items.page';
+import { CartPage } from './pages/cart/cart.page';
+import { CheckoutPage } from './pages/checkout/checkout.page';
+import { LoginPage } from './pages/login/login.page';
 import { AboutPage } from './pages/about/about.page';
-import { Contact } from './pages/contact/contact';
+import { ContactPage } from './pages/contact/contact.page';
+import { RegisterPage } from './pages/register/register.page';
+import { NotFoundPage } from './pages/not-found/not-found.page';
 
 export const routes: Routes = [
     {
@@ -20,27 +22,40 @@ export const routes: Routes = [
     },
     {
         path: 'cart',
-        component: Cart,
-    },
-    {
-        path: 'contact',
-        component: Contact
+        component: CartPage
     },
     {
         path: 'checkout',
-        component: Checkout
+        component: CheckoutPage
+    },
+    {
+        path: 'contact',
+        component: ContactPage
     },
     {
         path: 'home',
-        component: Home,
+        component: HomePage
     },
     {
-        path: 'item',
-        component: Item,
+        path: 'items',
+        component: ItemsPage
     },
     {
         path: 'login',
-        component: Login
+        component: LoginPage
+    },
+    {
+        path: 'notfound',
+        component: NotFoundPage
+    },
+    {
+        path: 'register',
+        component: RegisterPage
+    },
+    {
+        path: '**',
+        redirectTo: 'notfound',
+        pathMatch: 'full'
     }
 ];
 

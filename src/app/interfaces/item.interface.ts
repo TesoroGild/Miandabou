@@ -19,6 +19,7 @@ export interface Item {
     rate: number;
     totalSell: number;
 }
+
 export interface ItemCaisse {
     id: string;
     name: string;
@@ -30,4 +31,14 @@ export interface ItemCaisse {
 export interface ItemCart {
     item: Item;
     quantityBuy: number;
+}
+
+export interface ItemToAdd {
+    name: string;
+    category: string;
+    description : string;
+    picture: string;
+    video? : string;
+    price : string;
+    qte: number;
 }
