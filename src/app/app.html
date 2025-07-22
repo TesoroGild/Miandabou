@@ -1,13 +1,13 @@
-<div>
+<div class="min-h-screen flex flex-col">
   <!-- Navbar -->
-  <div>
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
+
+  
+  <div class="mt-22 z-40 fixed w-full flex justify-center">
+    <app-toast class="w-full contents"></app-toast>
   </div>
 
-  <div>
-    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-      <app-toast></app-toast>
-    </div>
+  <div class="mt-20 flex-grow"> 
     <router-outlet></router-outlet>
   </div>
 

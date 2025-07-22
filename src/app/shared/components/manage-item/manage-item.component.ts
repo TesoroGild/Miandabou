@@ -1,21 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 //Modules
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ItemService } from '../../services/item/item.service';
-import { ToastService } from '../../services/toast/toast.service';
+import { ItemService } from '../../../services/item/item.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-manage-item',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './manage-item.component.html',
-  styleUrl: './manage-item.component.css'
+  styleUrl: './manage-item.component.scss'
 })
 export class ManageItemComponent {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   itemForm!: FormGroup;
   pictureTmp: FormControl= new FormControl('');
@@ -30,44 +31,44 @@ export class ManageItemComponent {
 
   ngOnInit() {
     this.itemForm = this.formBuilder.group({
-    name: [
-      null, 
-      [
-        Validators.required,
-        Validators.maxLength(250)
-      ]
-    ],
-    description: [
-      null,
-      [
-        Validators.required,
-        Validators.maxLength(1000)
+      name: [
+        null, 
+        [
+          Validators.required,
+          Validators.maxLength(250)
+        ]
       ],
-    ],
-    category: [
-      null, 
-      [
-        Validators.required
-      ]
-    ],
-    price: [
-      null, 
-      [
-        Validators.required,
-        Validators.pattern(/^\d+(\.\d{1,2})?$/), // nombre avec max 2 décimales
-        Validators.min(0.01)
-      ]
-    ],
-    qte: [
-      null, 
-      [
-        Validators.required,
-        Validators.pattern(/^[1-9]\d*$/)
-      ]
-    ],
-    picture: [null],
-    video: [null]
-  });
+      description: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(1000)
+        ],
+      ],
+      category: [
+        null, 
+        [
+          Validators.required
+        ]
+      ],
+      price: [
+        null, 
+        [
+          Validators.required,
+          Validators.pattern(/^\d+(\.\d{1,2})?$/), // nombre avec max 2 décimales
+          Validators.min(0.01)
+        ]
+      ],
+      qte: [
+        null, 
+        [
+          Validators.required,
+          Validators.pattern(/^[1-9]\d*$/)
+        ]
+      ],
+      picture: [null],
+      video: [null]
+    });
   }
 
   closeModal() {
@@ -79,9 +80,11 @@ export class ManageItemComponent {
     if (!this.pictureTmp) return;
     this.isImgExtension = this.pictureExtension(this.pictureTmp.value.name);
     if (!this.isImgExtension) return;
+    console.log(this.pictureTmp.value);
+    console.log(this.pictureTmp);
 
     const output = document.getElementById('preview_img') as HTMLImageElement;
-
+    console.log(output);
     output.src = URL.createObjectURL(this.pictureTmp.value);
     output.onload = () => {
         URL.revokeObjectURL(output.src); // free memory
@@ -92,6 +95,13 @@ export class ManageItemComponent {
     const type = fileName.split('.').pop() || '';
     if (type == 'png' || type == 'jpg' || type == 'jpeg' || type == 'gif' || type == 'bmp') return true;
     else return false;
+  }
+
+  resetPicture() {
+    this.pictureTmp.setValue(null);
+    this.pictureTmp.reset();
+    const output = document.getElementById('preview_img') as HTMLImageElement;
+    output.remove();
   }
 
   nameEmpty(): boolean {
@@ -152,14 +162,17 @@ export class ManageItemComponent {
       
       this.itemService.addItem(itemToAdd).subscribe({
         next: (res: any) => {
+          this.itemService.getItems();
           this.toastService.success(res.msg);
           this.itemForm.reset();
+          this.resetPicture();
         },
         error: (err: any) => {
-          if (err.status >= 404 || err.status < 500) {
+          if (err.status >= 404 && err.status < 500) {
             this.toastService.error('Erreur : ' + err.msg);
-          } else if (err.status >= 500) {
+          } else if (err.status >= 500 && err.status <= 511) {
             this.toastService.warning('Erreur : ' + err.msg);
+            console.log(err.msg);
           } else {
             this.toastService.warning('Erreur inconnue');
           }
@@ -173,4 +186,9 @@ export class ManageItemComponent {
       });
     }
   }
+
+  /*TODO*/
+  updateItem() {}
+
+  deleteItem() {}
 }

@@ -38,7 +38,7 @@ export class ItemService {
     return this.http.post<any>(
       `${environment.backendUrl}/api/items`,
       item
-    )
+    );
   }
 
   // setItemsToDisplay (items: Item[]) {

@@ -9,6 +9,7 @@ export interface Item {
     contenthash : string;
     video : string;
     price : string;
+    qte: string;
     quantityS: number;
     quantityM: number;
     quantityL: number;

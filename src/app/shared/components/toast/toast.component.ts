@@ -11,7 +11,7 @@ import { ToastService } from '../../../services/toast/toast.service';
   selector: 'app-toast',
   imports: [CommonModule],
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.css'
+  styleUrl: './toast.component.scss'
 })
 export class ToastComponent {
   message: string = '';
