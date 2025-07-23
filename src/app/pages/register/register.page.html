@@ -130,26 +130,26 @@
                     <input type="email" name="email" id="email"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         placeholder="name@company.com" formControlName="email">
-                    <span *ngIf="emailEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez
-                        saisir un email.</span>
-                    <span *ngIf="emailFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">Format
-                        email invalid!</span>
-                    <span *ngIf="emailLength()" class="text-xs font-light text-red-500" style="margin: 0px;">Vous
-                        avez dépassé la taille maximale de 35 caractères.</span>
+                    <span *ngIf="emailEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        Veuillez saisir un email.</span>
+                    <span *ngIf="emailFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        Format email invalid!</span>
+                    <span *ngIf="emailLength()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        Vous avez dépassé la taille maximale de 35 caractères.</span>
                 </div>
 
-                <!--  TEL -->
+                <!--  PHONE NUMBER -->
                 <div class="mb-5">
-                    <label for="tel" 
+                    <label for="phonenumber" 
                         class="mb-3 block text-base font-medium text-black dark:text-white"
                     >
                         Téléphone
                     </label>
-                    <input type="text" name="tel" id="tel" placeholder="(111) 111-1111"
+                    <input type="text" name="phonenumber" id="phonenumber" placeholder="(111) 111-1111"
                         #phoneInput 
                         (input)="formatInput(phoneInput)"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
-                        formControlName="tel"
+                        formControlName="phonenumber"
                     />
                     <span *ngIf="phoneFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">Mauvais format.</span>
                 </div>
@@ -226,10 +226,10 @@
 
                 <!--  STATUS -->
                 <div>
-                    <label for="status" class="inline-flex items-center cursor-pointer">
-                        <span class="ms-3 text-base font-medium text-gray-900 dark:text-gray-300">Activer le compte</span>
+                    <label for="isActive" class="inline-flex items-center cursor-pointer">
+                        <span class=" text-base font-medium text-gray-900 dark:text-gray-300">Activer le compte</span>
                         <input type="checkbox" value="" class="sr-only peer" 
-                            name="status" id="status" formControlName="status" checked>
+                            name="isActive" id="isActive" formControlName="isActive" checked>
                         <div
                             class="ml-2 relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                         </div>
@@ -260,6 +260,13 @@
                     Créer
                 </button>
             </form>
+
+            <!-- Separator between social media sign in and email/password sign in -->
+            <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500"></div>
+            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                    Vous avez déjà un compte? 
+                    <a [routerLink]="['/login']" class="font-medium text-[#af8124] hover:underline dark:text-primary-500">Connnectez-vous!</a>
+                </p>
         </div>
     </div>
 </section>

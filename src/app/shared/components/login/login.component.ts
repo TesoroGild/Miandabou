@@ -53,8 +53,8 @@ export class LoginComponent {
         this.authService.logIn(userToConnect).subscribe((userConnected: any) => {
           console.log(userConnected.user);
           if (userConnected.user != null && userConnected.user != undefined) {
-            this.authService.setUserToDisplay(userConnected.user);
-            this.toastService.success("Connexion réussie!");
+            this.authService.setUserToDisplay(userConnected.user, userConnected.token);
+            this.toastService.success(userConnected.msg);
             this.loginForm.reset();
             const currentUrl = this.router.url;
             //remplacer true

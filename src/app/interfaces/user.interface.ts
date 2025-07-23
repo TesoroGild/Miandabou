@@ -22,7 +22,7 @@ export interface UserToDisplay {
     username?: string;
     dateOfBirth?: string;
     tel?: string;
-    role: string;
+    roles: [string];
     department?: string;
     contenthash?: string;
     status: string;

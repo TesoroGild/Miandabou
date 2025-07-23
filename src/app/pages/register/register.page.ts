@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
 import { ToastService } from '../../services/toast/toast.service';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss'
 })
@@ -37,7 +37,7 @@ export class RegisterPage {
         null,
         [
           Validators.required,
-          Validators.pattern('^[^\s@]+@[^\s@]+\.[^\s@]{2,}$'),
+          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
           Validators.maxLength(35)
         ],
       ],
@@ -76,13 +76,13 @@ export class RegisterPage {
       ],
       dateOfBirth: [null],
       picture: [null],
-      tel: [
+      phonenumber: [
         null,
         [
           Validators.pattern(this.phonePattern)
         ]
       ],
-      status: [
+      isActive: [
         false, 
         [
           Validators.required
@@ -102,7 +102,7 @@ export class RegisterPage {
       let passwordValue = this.registerForm.get("password")!.value;
       let lastnameValue =  this.registerForm.get("lastname")!.value;
       let firstnameValue =  this.registerForm.get("firstname")!.value;
-      let statusValue =  this.registerForm.get("status")!.value;
+      let isActiveValue =  this.registerForm.get("isActive")!.value;
       let roleValue: string[] =  this.registerForm.get("role")!.value;
       let acceptTermsValue = this.registerForm.get("acceptTerms")!.value;
       let dateOfBirthValue = this.registerForm.get("dateOfBirth")!.value;
@@ -112,7 +112,7 @@ export class RegisterPage {
         passwordValue != null &&
         lastnameValue  != null &&
         firstnameValue != null &&
-        statusValue != null &&
+        isActiveValue != null &&
         roleValue[0] != "false" &&
         dateOfBirthValue != null &&
         acceptTermsValue != false
@@ -135,8 +135,11 @@ export class RegisterPage {
           if (userCreated.user!= null && userCreated.user != undefined) {
             //CAS ou c'est le user qui fait le register
             //CAS ou c'est l'admin qui fait le register
-            this.authService.setUserToDisplay(userCreated.user);
-            this.toastService.success("Connexion reussie!");
+            console.log(userCreated.user);
+            console.log(userCreated.token);
+            console.log(userCreated.user.roles);
+            this.authService.setUserToDisplay(userCreated.user, userCreated.token);
+            this.toastService.success(userCreated.msg);
             this.registerForm.reset();
             this.resetPicture();
             //if (userCreated.role == "employee") this.router.navigate(['/employeehome']);
@@ -155,7 +158,7 @@ export class RegisterPage {
   resetPicture() {
     this.pictureTmp.setValue(null);
     this.pictureTmp.reset();
-    const output = document.getElementById('preview_img') as HTMLImageElement;
+    const output = document.getElementById('preview_user_img') as HTMLImageElement;
     output.remove();
   }
 
@@ -215,7 +218,7 @@ export class RegisterPage {
       && this.registerForm.get('email')!.touched;
   }
 
-  //tel
+  //phonenumber
   formatInput(inputElement: HTMLInputElement) {
     // Get the raw input value
     let rawValue = inputElement.value.replace(/\D/g, '');
@@ -231,8 +234,8 @@ export class RegisterPage {
   }
 
   phoneFormat() {
-    return this.registerForm.get('tel')!.hasError('pattern') 
-      && this.registerForm.get('tel')!.touched;
+    return this.registerForm.get('phonenumber')!.hasError('pattern') 
+      && this.registerForm.get('phonenumber')!.touched;
   }
 
   //picture
@@ -269,7 +272,7 @@ export class RegisterPage {
   }
 
   private showError(
-    field: "email" | "password" | "firstname" | "lastname" | "role" | "dateOfBirth" | "picture" | "tel" | "username", 
+    field: "email" | "password" | "firstname" | "lastname" | "role" | "dateOfBirth" | "picture" | "phonenumber" | "username", 
     error: string): boolean {
     return (
       this.registerForm.controls[field].hasError(error) &&

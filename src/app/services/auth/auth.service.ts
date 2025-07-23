@@ -3,6 +3,8 @@ import { UserToDisplay } from '../../interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/dev.environment';
 import { BehaviorSubject } from 'rxjs';
+import { ToastService } from '../toast/toast.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,9 @@ export class AuthService {
   userConnected: UserToDisplay = { } as UserToDisplay;
 
   constructor(
-    private http : HttpClient
+    private http : HttpClient,
+    private toastService: ToastService,
+    private router: Router
   ) { 
     const token = localStorage.getItem('token');
     const admin = localStorage.getItem('role');
@@ -40,48 +44,86 @@ export class AuthService {
     );
   }
 
+  // logOut() {
+  //   const qparams = { 'id': 0 };
+  //   return this.http.post<any>(
+  //     `${environment.backendUrl}/php/users/userLogout.php`, 
+  //     { /*params: qparams*/ }
+  //   );
+  // }
+
   logOut() {
-    const qparams = { 'id': 0 };
-    return this.http.post<any>(
-      `${environment.backendUrl}/api/logout`, 
-      { /*params: qparams*/ }
-    );
+    if (this.isLoggedIn()) {
+      this.unsetUserToDisplay();
+      this.router.navigate(['/home']);
+      console.log("LOGOUT: USER DISCONNECTED");
+      
+
+
+    //if (this.isUserLoggedIn()) {
+      // this.authService.logOut().subscribe((userLogout: any) => {
+      //   if (userLogout.msg.trim() != "") {
+      //     this.authService.unsetUserToDisplay();
+      //     this.toastService.success(userLogout.msg);
+      //     this.router.navigate(['/home']);
+      //     console.log("LOGOUT: USER DISCONNECTED");
+      //   } else {
+      //     this.toastService.warning("Erreur lors de la déconnection!");
+      //   }
+      // });
+      //}
+    } else {
+      this.toastService.warning("Aucun utilisateur connecté!");
+    }
   }
+
+  // isUserLoggedIn() {
+  //   this.authService.userIsLoggedIn.subscribe({
+  //     next: (result)=> {
+  //       this.userIsLoggedIn = result;
+  //     }
+  //   })
+  //   return this.userIsLoggedIn; 
+  // }
 
   isAdmin() {
-    return localStorage.getItem(this.keyRole) === "admin";
+    return localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN") != -1;
   }
 
-  setSession(authToken: any) {
-      localStorage.setItem(this.keyToken, authToken.token);
-      localStorage.setItem(this.keyRole, authToken.role);
-      this.userIsLoggedIn.next(true);
+  setSession(token: string, roles: string[]) {
+    console.log(roles);
+    console.log(token);
+    localStorage.setItem(this.keyToken, token);
+    localStorage.setItem(this.keyRole, JSON.stringify(roles));
+    this.userIsLoggedIn.next(true);
 
-      // envoyer le token JWT dans l'en-tête d'autorisation des requêtes HTTP
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem(this.keyToken)
-        })
-      };
-    }
+    // envoyer le token JWT dans l'en-tête d'autorisation des requêtes HTTP
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem(this.keyToken)
+      })
+    };
+  }
 
-    unsetSession() {
-      localStorage.removeItem(this.keyToken);
-      localStorage.removeItem(this.keyRole);
-      localStorage.clear();
-      this.userIsLoggedIn.next(false);
-      this.userIsAdmin.next(false);
-    }
+  unsetSession() {
+    localStorage.removeItem(this.keyToken);
+    localStorage.removeItem(this.keyRole);
+    localStorage.clear();
+    this.userIsLoggedIn.next(false);
+    this.userIsAdmin.next(false);
+    if (this.isLoggedIn()) this.toastService.success("Déconnexion réussie!");
+    else this.toastService.warning("Erreur lors de la déconnection!");
+  }
 
   getToken(): string | null {
     return localStorage.getItem(this.keyToken);
   }
 
-  setUserToDisplay(user: UserToDisplay) {
+  setUserToDisplay(user: UserToDisplay, token: string) {
     //this.userToDisplay = user;
     this.userToDisplay.next(user);
-    this.setSession(user.token);
+    this.setSession(token, user.roles);
     return this.userToDisplay.asObservable();
     //console.log(this.userToDisplay);
   }
