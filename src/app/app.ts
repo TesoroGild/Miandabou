@@ -23,4 +23,11 @@ export class App {
   ngOnInit() {
     initFlowbite();
   }
+
+  let autocomplete = new google.maps.places.Autocomplete(
+    document.querySelector("#ship-address"), {
+      componentRestrictions: { country: ["ca" , "us"] }
+      fields: ['address_components', 'geometry', 'name'],
+      types: ['address'],
+  });
 }

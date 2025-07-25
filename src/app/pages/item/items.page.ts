@@ -70,7 +70,6 @@ export class ItemsPage {
   // }
 
   addToCart (item: Item) {
-    console.log(item);
     this.cartService.addToCart(item);
   }
 

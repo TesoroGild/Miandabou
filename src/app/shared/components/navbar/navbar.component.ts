@@ -72,16 +72,17 @@ export class NavbarComponent {
   }
 
   logOut() {
+    console.log(this.userToDisplay);
     this.authService.logOut();
     this.cartService.emptyCart();
     this.userService.clearData();
   }
 
-  toogleProfileDropdown() {
+  toggleProfileDropdown() {
     this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
   }
 
-  toogleLanguagesDropdown() {
+  toggleLanguagesDropdown() {
     this.isLanguagesDropdownOpen = !this.isLanguagesDropdownOpen;
   }
 

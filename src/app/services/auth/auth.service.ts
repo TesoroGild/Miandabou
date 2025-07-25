@@ -39,24 +39,19 @@ export class AuthService {
   logIn(userToConnect: FormData) {
     //<LoginResponse>
     return this.http.post<any>(
-      `${environment.backendUrl}/api/login`, 
+      `${environment.backendUrl}/api/auth`, 
       userToConnect
     );
   }
 
-  // logOut() {
-  //   const qparams = { 'id': 0 };
-  //   return this.http.post<any>(
-  //     `${environment.backendUrl}/php/users/userLogout.php`, 
-  //     { /*params: qparams*/ }
-  //   );
-  // }
-
   logOut() {
     if (this.isLoggedIn()) {
       this.unsetUserToDisplay();
+      
+      if (this.isLoggedIn()) this.toastService.success("Déconnexion réussie!");
+      else this.toastService.warning("Erreur lors de la déconnection!");
+      
       this.router.navigate(['/home']);
-      console.log("LOGOUT: USER DISCONNECTED");
       
 
 
@@ -91,8 +86,6 @@ export class AuthService {
   }
 
   setSession(token: string, roles: string[]) {
-    console.log(roles);
-    console.log(token);
     localStorage.setItem(this.keyToken, token);
     localStorage.setItem(this.keyRole, JSON.stringify(roles));
     this.userIsLoggedIn.next(true);
@@ -112,8 +105,6 @@ export class AuthService {
     localStorage.clear();
     this.userIsLoggedIn.next(false);
     this.userIsAdmin.next(false);
-    if (this.isLoggedIn()) this.toastService.success("Déconnexion réussie!");
-    else this.toastService.warning("Erreur lors de la déconnection!");
   }
 
   getToken(): string | null {
@@ -125,7 +116,6 @@ export class AuthService {
     this.userToDisplay.next(user);
     this.setSession(token, user.roles);
     return this.userToDisplay.asObservable();
-    //console.log(this.userToDisplay);
   }
 
   unsetUserToDisplay() {
@@ -133,7 +123,6 @@ export class AuthService {
     this.userToDisplay.next({} as UserToDisplay);
     this.unsetSession();
     return this.userToDisplay.asObservable();
-    //console.log(this.userToDisplay);
   }
 
   getUserToDisplay() {

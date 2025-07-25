@@ -1,6 +1,6 @@
 export interface Coupon {
     name: string,
-    value: number,
+    value: string,
     rate: number,
-    expirationDate: string
+    expirationDate: Date
 }

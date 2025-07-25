@@ -27,7 +27,7 @@ export class HomePage {
     private emailService: EmailService,
     private toastService: ToastService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.alertForm = this.formBuilder.group({

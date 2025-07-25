@@ -30,6 +30,7 @@ export class CartService {
   private couponsSubject: BehaviorSubject<Coupon[]>;
   private couponsTotalSubject: BehaviorSubject<number>;
   private couponsCaisseTotalSubject: BehaviorSubject<number>;
+  testTotal: any;
 
   cart: ItemCart[] = [];
   caisse: ItemCaisse[] = [];
@@ -219,7 +220,8 @@ export class CartService {
   }
 
   totalCalculate () {
-    this.cartTotalSubject.next(this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal);
+    this.testTotal = Number((this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal).toFixed(2));
+    this.cartTotalSubject.next(this.testTotal);
   }
 
   totalCaisseCalculate () {
@@ -243,10 +245,10 @@ export class CartService {
         const coupon = this.coupons.find(c => c.name === selectedCoupon.name);
 
         if (coupon) {
-          if (coupon.value != 0) {
+          if (coupon.value != null) {
             this.couponTotal += Number(coupon.value);
           }
-          if (coupon.rate != 0) {
+          if (coupon.rate != null) {
             this.couponTotal += parseFloat((this.subTotal * (coupon.rate / 100)).toFixed(2));
           }
         }
@@ -266,10 +268,10 @@ export class CartService {
         const coupon = this.coupons.find(c => c.name === selectedCoupon.name);
 
         if (coupon) {
-          if (coupon.value != 0) {
+          if (coupon.value != null) {
             this.caisseCouponTotal += Number(coupon.value);
           }
-          if (coupon.rate != 0) {
+          if (coupon.rate != null) {
             this.caisseCouponTotal += parseFloat((this.subTotalCaisse * (coupon.rate / 100)).toFixed(2));
           }
         }
@@ -290,7 +292,7 @@ export class CartService {
 
   getCoupons () {
     this.http.get<any>(
-      `${environment.backendUrl}/php/coupons/couponsGet.php`
+      `${environment.backendUrl}/api/coupons`
     ).subscribe((couponsFounded: any) => {
       if (couponsFounded.coupons != null && couponsFounded.coupons != undefined)
         this.coupons = couponsFounded.coupons;
@@ -329,10 +331,11 @@ export class CartService {
   }
 
   totalCheckout () {
-    this.checkoutTotalSubject.next(this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal + this.delivery);
+    this.checkoutTotalSubject.next(this.testTotal + this.delivery);
   }
 
   getCheckoutTotal () {
+    this.totalCheckout();
     return this.checkoutTotalSubject.asObservable();
   }
 }

@@ -51,7 +51,6 @@ export class LoginComponent {
 
       if (emailValue != null && passwordValue != null) {
         this.authService.logIn(userToConnect).subscribe((userConnected: any) => {
-          console.log(userConnected.user);
           if (userConnected.user != null && userConnected.user != undefined) {
             this.authService.setUserToDisplay(userConnected.user, userConnected.token);
             this.toastService.success(userConnected.msg);
@@ -59,7 +58,7 @@ export class LoginComponent {
             const currentUrl = this.router.url;
             //remplacer true
             if (currentUrl != "/cart") this.router.navigate(['']);
-            else this.router.navigate(['/checkout'])
+            //else this.router.navigate(['/checkout'])
             console.log("LOGIN: USER CONNECTED");
           } else {
             this.toastService.error(userConnected.msg);

@@ -8,10 +8,11 @@ import { CartService } from '../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginComponent } from '../../shared/components/login/login.component';
+import { CouponsComponent } from '../../shared/components/coupons/coupons.component';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule, LoginComponent],
+  imports: [CommonModule, FormsModule, LoginComponent, CouponsComponent],
   templateUrl: './cart.page.html',
   styleUrl: './cart.page.scss'
 })
@@ -41,10 +42,10 @@ export class CartPage {
     this.cartService.getCouponTotal().subscribe(total => {
       this.couponsTotal = total;
     })
-    this.cartService.getCoupons().subscribe(coupons => {
-      this.coupons = coupons;
-      this.checkboxStates = this.coupons.map(() => false);
-    });
+    // this.cartService.getCoupons().subscribe(coupons => {
+    //   this.coupons = coupons;
+    //   this.checkboxStates = this.coupons.map(() => false);
+    // });
   }
 
   cart: ItemCart [] = [];
@@ -56,9 +57,9 @@ export class CartPage {
   couponsSelected: Coupon[] = [];
   couponsTotal: number = 0;
   paymentModal: boolean = false;
-  couponsModal: boolean = false;
   loginModal: boolean = false;
   checkboxStates: boolean[] = [];
+  showCouponsModal: boolean = false;
 
   cartEmpty() {
     if (this.cart.length != 0)
@@ -104,30 +105,30 @@ export class CartPage {
     return this.cartService.tpsCalculate();
   }
 
-  selectedAllCoupons () {
-    this.cartService.setAllCoupons();
-  }
+  // selectedAllCoupons () {
+  //   this.cartService.setAllCoupons();
+  // }
 
-  setCoupon (coupon: Coupon, index: number) {
-    this.checkboxStates[index] = !this.checkboxStates[index];
-    this.cartService.setCoupon(coupon);
-  }
+  // setCoupon (coupon: Coupon, index: number) {
+  //   this.checkboxStates[index] = !this.checkboxStates[index];
+  //   this.cartService.setCoupon(coupon);
+  // }
 
-  cancelCoupons () {
-    this.closeCouponsModal();
-    this.cartService.cancelCoupons();  
-  }
+  // cancelCoupons () {
+  //   this.closeCouponsModal();
+  //   this.cartService.cancelCoupons();  
+  // }
 
-  applyCoupons () {
-    this.closeCouponsModal();
-    return this.cartService.couponCalculate();
-  }
+  // applyCoupons () {
+  //   this.closeCouponsModal();
+  //   return this.cartService.couponCalculate();
+  // }
 
-  applyAllCoupons () {
-    this.closeCouponsModal();
-    this.selectedAllCoupons();
-    return this.cartService.couponCalculate();
-  }
+  // applyAllCoupons () {
+  //   this.closeCouponsModal();
+  //   this.selectedAllCoupons();
+  //   return this.cartService.couponCalculate();
+  // }
 
   totalCalculate () {
     return this.cartService.totalCalculate();
@@ -160,10 +161,10 @@ export class CartPage {
   }
 
   openCouponsModal () {
-    this.couponsModal = true;
+    this.showCouponsModal = true;
   }
 
   closeCouponsModal () {
-    this.couponsModal = false;
+    this.showCouponsModal = false;
   }
 }
