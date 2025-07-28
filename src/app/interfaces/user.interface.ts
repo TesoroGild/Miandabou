@@ -25,8 +25,8 @@ export interface UserToDisplay {
     roles: [string];
     department?: string;
     contenthash?: string;
-    status: string;
-    lastLogin: string;
-    token: string;
+    //status: string;
+    //lastLogin: string;
+    //token: string;
     //deliveryAddress: string;
 }

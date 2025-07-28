@@ -43,3 +43,9 @@ export interface ItemToAdd {
     price : string;
     qte: number;
 }
+
+export interface ItemToOrder {
+    itemId: string;
+    quantityBuy: number;
+    itemPrice: number;
+}

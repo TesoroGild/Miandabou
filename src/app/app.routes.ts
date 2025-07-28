@@ -9,6 +9,7 @@ import { AboutPage } from './pages/about/about.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { RegisterPage } from './pages/register/register.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
+import { BillsPage } from './pages/bills/bills.page';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'about',
         component: AboutPage
+    },
+    {
+        path: 'bills',
+        component: BillsPage
     },
     {
         path: 'cart',

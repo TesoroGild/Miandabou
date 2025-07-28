@@ -212,7 +212,7 @@ export class CartService {
   tpsCalculate () {
     this.tps = (this.subTotal * (this.tpsRate / 100)).toFixed(2);
     this.tpsSubject.next(parseFloat(this.tps));
-    this.couponCalculate();
+    this.totalCalculate();
   }
 
   getTps () {
@@ -222,6 +222,7 @@ export class CartService {
   totalCalculate () {
     this.testTotal = Number((this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal).toFixed(2));
     this.cartTotalSubject.next(this.testTotal);
+    return this.testTotal;
   }
 
   totalCaisseCalculate () {

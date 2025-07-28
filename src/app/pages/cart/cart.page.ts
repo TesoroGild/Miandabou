@@ -152,8 +152,8 @@ export class CartPage {
     this.loginModal = false;
   }
 
-  picture (item: ItemCart) {
-    return `${environment.backendUrl}/uploads/images/${item.item.contenthash}`
+  picture (contenthash: string) {
+    return `${environment.backendUrl}/uploads/images/${contenthash}`
   }
 
   checkoutPage() {

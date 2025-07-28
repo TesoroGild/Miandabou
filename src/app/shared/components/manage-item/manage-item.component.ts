@@ -20,7 +20,7 @@ export class ManageItemComponent {
 
   itemForm!: FormGroup;
   pictureTmp: FormControl= new FormControl('');
-  isImgExtension: boolean = true;
+  hasImgExtension: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -78,8 +78,8 @@ export class ManageItemComponent {
   loadPicture(event: any): void {
     this.pictureTmp.setValue(event.target.files![0]);
     if (!this.pictureTmp) return;
-    this.isImgExtension = this.pictureExtension(this.pictureTmp.value.name);
-    if (!this.isImgExtension) return;
+    this.hasImgExtension = this.pictureExtension(this.pictureTmp.value.name);
+    if (!this.hasImgExtension) return;
     console.log(this.pictureTmp.value);
     console.log(this.pictureTmp);
 
