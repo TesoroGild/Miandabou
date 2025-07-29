@@ -53,8 +53,6 @@ export class CartPage {
   subTotal: number = 0;
   tvq: number = 0;
   tps: number = 0;
-  coupons: Coupon[] = [];
-  couponsSelected: Coupon[] = [];
   couponsTotal: number = 0;
   paymentModal: boolean = false;
   loginModal: boolean = false;
@@ -88,10 +86,6 @@ export class CartPage {
   }
 
   subTotalCalculate () {
-    // this.subTotal = this.cart.reduce((subTotal, cartItem) => {
-    //   return subTotal + (Number(cartItem.item.price) * cartItem.quantityBuy);
-    // }, 0);
-    // return this.subTotal.toFixed(2);
     return this.cartService.subTotalCalculate();
   }
 

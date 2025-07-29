@@ -41,7 +41,6 @@ export class CheckoutPage {
 
 
   constructor (
-    //*private http: HttpClient,
     private router: Router,
     private cartService: CartService,
     private formBuilder: FormBuilder,
@@ -158,12 +157,6 @@ export class CheckoutPage {
     this.cartService.getDelivery().subscribe(delivery => {
       this.delivery = delivery;
     });
-    // this.checkoutForm.get('istermaccepted')?.valueChanges.subscribe(termvalue => {
-    //   console.log('Checkbox is checked:', termvalue);
-    // });
-    // this.checkoutForm.get('meansofcommunication')?.valueChanges.subscribe(communicationvalue => {
-    //   console.log('Selected option:', communicationvalue);
-    // });
   }
 
   mapItemsToOrder(items: ItemCart[]) {
@@ -266,10 +259,6 @@ export class CheckoutPage {
       });
       } else this.checkoutForm.markAllAsTouched();
     } //**else this.router.navigate(['/login']);
-  }
-
-  dateExpFormat() {
-
   }
 
   //phonenumber

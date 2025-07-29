@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { Address } from '../../interfaces/address.interface';
-import { Order } from '../../interfaces/order.interface';
 import { UserToDisplay } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth/auth.service';
 import { CartService } from '../../services/cart/cart.service';
-import { HttpClient } from '@angular/common/http';
 import { CheckoutService } from '../../services/checkout/checkout.service';
-import { ItemToOrder } from '../../interfaces/item.interface';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/dev.environment';
 import { Observable, Subscription } from 'rxjs';
@@ -36,8 +32,7 @@ export class BillsPage {
   constructor(
     private authService: AuthService, 
     private cartService: CartService, 
-    private checkoutService: CheckoutService, 
-    private http: HttpClient
+    private checkoutService: CheckoutService
   ) { 
     this.userToDisplay$ = this.authService.getUserToDisplay();
     this.userSubscription = this.userToDisplay$.subscribe((u) => {
