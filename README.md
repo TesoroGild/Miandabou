@@ -1,8 +1,10 @@
 # MiandabouAccessoires
+Application de e-commerce.
+
 Projet généré avec [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
 
 
-# Installation et mises à jour
+## Installation et mises à jour
 Angular : https://angular.dev/update-guide
 Docker : https://docs.docker.com/desktop/setup/install/windows-install/
 Node : https://nodejs.org/en/download.
@@ -12,18 +14,18 @@ npm install -g npm
 ```
 
 
-# Lancement du programme
-## Cloner le projet avec 
+## Lancement du programme
+Cloner le projet avec 
 ```bash
 git clone [lien_du_repo]
 ```
 
-## Entrer dans le repertoire MiandabouAccessoires
+Entrer dans le repertoire Miandabou
 ```bash
 cd Miandabou
 ```
 
-## Télécharger les dépendances
+Télécharger les dépendances
 ```bash
 npm install
 ```
