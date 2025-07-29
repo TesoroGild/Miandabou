@@ -170,6 +170,9 @@ export class CheckoutPage {
     items.forEach(item => {
       let ito = {
         itemId: item.item.id,
+        itemName: item.item.name,
+        itemPicture: item.item.picture,
+        itemContenthash: item.item.contenthash,
         quantityBuy: item.quantityBuy,
         itemPrice: this.cartService.itemTotal(item.item.id)
       }
@@ -204,7 +207,9 @@ export class CheckoutPage {
       let provinceValue = this.checkoutForm.get("province")?.value;
       let zipcodeValue = this.checkoutForm.get("zipcode")?.value;
       let countryValue = this.checkoutForm.get("country")?.value;
-      let suiteValue = this.checkoutForm.get("suite")?.value ?? "N/A";
+      let suiteValue:string = this.checkoutForm.get("suite")?.value;
+      if (suiteValue == null || suiteValue == undefined 
+        || suiteValue.trim().length == 0) suiteValue = "N/A";
       let meansofcommunicationValue = this.checkoutForm.get("meansofcommunication")?.value;
       let istermacceptedValue = this.checkoutForm.get("istermaccepted")?.value;
       let cardExpirationDateValue = this.checkoutForm.get("cardexpirationdate")?.value;
@@ -248,30 +253,17 @@ export class CheckoutPage {
         }
 
         this.checkoutService.checkout(checkoutDatas).subscribe({
-          next: (orderResponse: any) => {
-            console.log(orderResponse.order);
-            console.log(orderResponse.items);
-            console.log(orderResponse.address);
+          next: (res: any) => {
             this.checkoutForm.reset();
-            this.toastService.success(orderResponse.msg);
-            //**set order and items to the bill page
-            // this.checkoutService.setOrder(orderResponse.order);
-            // this.checkoutService.setOrderItems(orderResponse.items);
-            // this.checkoutService.setShippingAddress(orderResponse.shippingadress);
+            this.toastService.success(res.msg);
             this.router.navigate(['/bills']);
           },
           error: (err: any) => {
-            // if (err.status >= 404 && err.status < 500) {
-            //   this.toastService.error('Erreur : ' + err.msg);
-            // } else if (err.status >= 500 && err.status <= 511) {
-            //   this.toastService.warning('Erreur : ' + err.msg);
-            //   console.log(err.msg);
-            // } else {
-            //   this.toastService.warning('Erreur inconnue');
-            // }
             this.toastService.error(err.error.msg);
+            console.log(err.error.msg);
+            console.log(err.msg);
           }
-        });
+      });
       } else this.checkoutForm.markAllAsTouched();
     } //**else this.router.navigate(['/login']);
   }

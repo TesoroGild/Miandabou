@@ -96,39 +96,12 @@ export class CartPage {
   }
 
   tvqCalculate () {
-    //return (this.subTotal * (this.tvq / 100)).toFixed(2);
     return this.cartService.tvqCalculate();
   }
 
   tpsCalculate () {
-    //return (this.subTotal * (this.tps / 100)).toFixed(2);
     return this.cartService.tpsCalculate();
   }
-
-  // selectedAllCoupons () {
-  //   this.cartService.setAllCoupons();
-  // }
-
-  // setCoupon (coupon: Coupon, index: number) {
-  //   this.checkboxStates[index] = !this.checkboxStates[index];
-  //   this.cartService.setCoupon(coupon);
-  // }
-
-  // cancelCoupons () {
-  //   this.closeCouponsModal();
-  //   this.cartService.cancelCoupons();  
-  // }
-
-  // applyCoupons () {
-  //   this.closeCouponsModal();
-  //   return this.cartService.couponCalculate();
-  // }
-
-  // applyAllCoupons () {
-  //   this.closeCouponsModal();
-  //   this.selectedAllCoupons();
-  //   return this.cartService.couponCalculate();
-  // }
 
   totalCalculate () {
     return this.cartService.totalCalculate();

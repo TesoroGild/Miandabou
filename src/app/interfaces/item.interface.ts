@@ -46,6 +46,9 @@ export interface ItemToAdd {
 
 export interface ItemToOrder {
     itemId: string;
+    itemName: string;
+    itemPicture: string;
+    itemContenthash: string;
     quantityBuy: number;
     itemPrice: number;
 }

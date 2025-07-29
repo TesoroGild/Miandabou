@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/dev.environment';
-import { Item } from '../../interfaces/item.interface';
-import { Order } from '../../interfaces/order.interface';
-import { Address } from '../../interfaces/address.interface';
+import { catchError, map, throwError } from 'rxjs';
+import { jsPDF } from 'jspdf';
+import html2canvas from "html2canvas";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutService {
+  orderBill:any;
+  addressBill:any;
+  itemsBill:any[] = [];
+
   constructor(private http: HttpClient) { }
 
   checkout(orderToCreate: any) : any {
@@ -16,23 +20,35 @@ export class CheckoutService {
     return this.http.post<any>(
       `${environment.backendUrl}/api/checkout`, 
       jsonData
+    ).pipe(
+      map((res: any) => {
+        this.orderBill = res.order;
+        this.addressBill = res.address;
+        this.itemsBill = res.items;
+        return res;
+      }),
+      catchError((err: any) => {
+        return throwError(() => err);
+      })
     );
   }
 
-  setOrder(oder: Order) {
-    console.log("SET ORDER");
-    console.log(oder);
-  }
+  downloadBill () {
+    const elementToPrint = document.getElementById('invoice')!;
 
-  setOrderItems(orderItems: Item[]) {
-    console.log("SET ORDER ITEMS");
-    console.log(orderItems);
-  }
+    if (!elementToPrint) return;
 
-  setShippingAddress(shippingAdress: Address) {
-    console.log("SET SHIPPING ADDRESS");
-    console.log(shippingAdress);
-  }
+    html2canvas(elementToPrint, { scale: 2 }).then((canvas) => {
+      const pdf = new jsPDF();
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+      
+      pdf.setProperties({
+        title: 'Facture',
+        subject: 'Facture',
+        author: 'Miandabou Accessoires',
+      });
 
-  downloadBill () {}
+      pdf.save("miandabou-facture"+this.orderBill.ordercode+".pdf");
+    })
+  }
 }
