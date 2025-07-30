@@ -17,7 +17,25 @@ export class EmailService {
     )
   }
 
-  sendEmail (mail: any) {
-    
-  }
+  sendEmail (mail: any) {}
+
+   // async sendMail(email: string): Promise<any> {
+  //   this.MS.setApiKey(process.env.SENDGRID_API_KEY);
+  //   let retour: any;
+  //   try {
+  //     let data: Email = {
+  //       from: 'mail@to.test',
+  //       to: email,
+  //       subject: 'SSVE : Resultats de simulation',
+  //       text:
+  //         'Cher client,' +
+  //         '\n Merci de vous être abonné à notre infolettrage.\n'
+  //     };
+  //     retour = await this.MS.send(data);
+  //     return retour;
+  //   } catch (err) {
+  //     console.error(err);
+  //     throw new Error(err);
+  //   }
+  // }
 }
