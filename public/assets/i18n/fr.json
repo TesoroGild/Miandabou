@@ -1,4 +1,10 @@
 {
+    "LANG": {
+        "FR": "Français (FR)",
+        "EN": "Anglais (US)",
+        "ES": "Espagnol (ES)"
+    },
+
     "Envie d'un nouveau look?": "Envie d'un nouveau look?",
     "Nous avons ce qu'il vous faut.": "Nous avons ce qu'il vous faut.",
     "Jettez-y un coup d'oeil!": "Jettez-y un coup d'oeil!",
