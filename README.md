@@ -39,7 +39,7 @@ votre fichier doit ressembler à ceci
 ```typescript
 export const environment = {
   production: false,
-  backendUrl: [url]
+  backendUrl: 'http://localhost:8000'
 };
 ```
 
