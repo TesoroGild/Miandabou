@@ -9,10 +9,13 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { CartService } from '../../../services/cart/cart.service';
 import { UserService } from '../../../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../services/langages/langages.service';
+
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, TranslatePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -34,8 +37,11 @@ export class NavbarComponent {
     private router: Router, 
     public authService: AuthService,
     private userService: UserService,
-    private cartService: CartService
+    private cartService: CartService,
+    private translateService: TranslateService,
+    private langService: LangagesService
   ) { 
+    this.translateService.use(this.langService.initLangage());
     this.userToDisplay$ = this.authService.getUserToDisplay();
     this.userSubscription = this.userToDisplay$.subscribe((u) => {
       this.userToDisplay = u;
@@ -113,5 +119,13 @@ export class NavbarComponent {
 
   closeUpdateModal () {
     this.updateModal = false;
+  }
+
+  changeLanguage (lang: string) {
+    if (this.translateService.getCurrentLang() === lang) return;
+    localStorage.removeItem('lang');
+    localStorage.setItem('lang', lang);
+    this.translateService.use(lang);
+    this.isLanguagesDropdownOpen = false;
   }
 }

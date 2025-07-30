@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailService } from '../../services/email/email.service';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 
 //Reusable components
 import { ToastService } from '../../services/toast/toast.service';
@@ -9,10 +10,11 @@ import { ToastService } from '../../services/toast/toast.service';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LangagesService } from '../../services/langages/langages.service';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, TranslatePipe],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss'
 })
@@ -26,8 +28,12 @@ export class HomePage {
   constructor(
     private emailService: EmailService,
     private toastService: ToastService,
-    private formBuilder: FormBuilder
-  ) { }
+    private formBuilder: FormBuilder,
+    private translateService: TranslateService,
+    private langService: LangagesService
+  ) {
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.alertForm = this.formBuilder.group({
@@ -36,7 +42,7 @@ export class HomePage {
         [
           Validators.required,
           Validators.pattern('^[^\s@]+@[^\s@]+\.[^\s@]{2,}$'),
-          Validators.maxLength(50),
+          Validators.maxLength(60),
         ],
       ]
     });

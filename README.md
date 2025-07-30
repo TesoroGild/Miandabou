@@ -56,7 +56,6 @@ export const environment = {
     * Security
     * Double validation
     * Token expiration
-* Internalisation
 * Email
 * Stepper pour l'achat
 * Navbar pour la page actuelle.
