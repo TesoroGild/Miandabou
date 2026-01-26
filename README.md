@@ -40,14 +40,13 @@ symfony server:start
 
 ### Frontend
 **Etape 3** : Télecharger les dépendances.
-Entrer dans le repertoire backend_symfony
 ```bash
 cd frontend_angular
 npm install
 ```
 
 **Etape 4** : Variables d'environements
-Créer /environments/dev.environment.ts au même niveau que /src. votre fichier doit ressembler à ceci
+Créer /environments/dev.environment.ts au même niveau que /src/app. votre fichier doit ressembler à ceci
 ```typescript
 export const environment = {
   production: false,
