@@ -1,47 +1,21 @@
 # MiandabouAccessoires
 Application de e-commerce.
 
-Projet généré avec [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+# Architecture
 
 
-## Installation et mises à jour
-Angular : https://angular.dev/update-guide
-Docker : https://docs.docker.com/desktop/setup/install/windows-install/
-Node : https://nodejs.org/en/download.
-Npm : 
+# Build
+Les artefacts de compilation seront stockés dans le répertoire dist/. Pour compiler le projet
 ```bash
-npm install -g npm
+ng build
 ```
 
-
-## Lancement du programme
-Cloner le projet avec 
+# Tests
 ```bash
-git clone [lien_du_repo]
+ng test
 ```
 
-Entrer dans le repertoire Miandabou
-```bash
-cd Miandabou
-```
-
-Télécharger les dépendances
-```bash
-npm install
-```
-
-## Lancer le serveur
-Exécuter `ng serve`. L'application est accessible à cette adresse `http://localhost:4200/`. L'application se relance automatiquement lorsqu'un changement dans le code est effectué.
-
-## Variables d'environements
-Créer /environments/dev.environment.ts au même niveau que /app.
-votre fichier doit ressembler à ceci
-```typescript
-export const environment = {
-  production: false,
-  backendUrl: [url]
-};
-```
+# Troubbleshouting
 
 # TODO
 * CRUD items, user, coupons, address
