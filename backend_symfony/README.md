@@ -1,6 +1,8 @@
 # Miandabou Accessoire Backend App
 Backend permettant de gérer le prototype de e-commerce de l'application Miandabou.
 
+# Architecture
+
 # Rappels
 Télecharger les dépendances
 ```bash
