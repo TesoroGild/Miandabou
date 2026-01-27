@@ -45,16 +45,7 @@ cd frontend_angular
 npm install
 ```
 
-**Etape 4** : Variables d'environements
-Créer /environments/dev.environment.ts au même niveau que /src/app. votre fichier doit ressembler à ceci
-```typescript
-export const environment = {
-  production: false,
-  backendUrl: [url]
-};
-```
-
-**Etape 5** : Lancer le serveur.
+**Etape 4** : Lancer le serveur.
 ```bash
 ng serve
 ```

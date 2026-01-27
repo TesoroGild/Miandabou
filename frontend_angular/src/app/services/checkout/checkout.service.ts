@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 import { catchError, map, throwError } from 'rxjs';
 import { jsPDF } from 'jspdf';
 import html2canvas from "html2canvas";

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 import { Coupon } from '../../interfaces/coupon.interface';
 import { ItemCart, Item } from '../../interfaces/item.interface';
 import { AuthService } from '../../services/auth/auth.service';

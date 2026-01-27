@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserToDisplay } from '../../interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { ToastService } from '../toast/toast.service';
 import { Router } from '@angular/router';

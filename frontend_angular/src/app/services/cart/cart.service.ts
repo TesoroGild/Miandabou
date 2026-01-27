@@ -8,7 +8,7 @@ import { Item, ItemCaisse, ItemCart } from '../../interfaces/item.interface';
 //Services
 import { ItemService } from '../item/item.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

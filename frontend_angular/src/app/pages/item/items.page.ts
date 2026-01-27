@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 
 //Components
 import { ManageItemComponent } from '../../shared/components/manage-item/manage-item.component';

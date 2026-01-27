@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { CartService } from '../../services/cart/cart.service';
 import { CheckoutService } from '../../services/checkout/checkout.service';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { environment } from '../../../environments/dev.environment';
+import { environment } from '../../../environments/environment';
 import { Item } from '../../interfaces/item.interface';
 
 @Injectable({

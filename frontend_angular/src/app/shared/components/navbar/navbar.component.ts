@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { environment } from '../../../../environments/dev.environment';
+import { environment } from '../../../../environments/environment';
 import { Coupon } from '../../../interfaces/coupon.interface';
 import { ItemCaisse } from '../../../interfaces/item.interface';
 import { UserToDisplay } from '../../../interfaces/user.interface';
