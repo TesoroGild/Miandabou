@@ -1,5 +1,12 @@
 FROM php:8.4-apache
 
+ARG APP_ENV
+RUN echo "MA VAAAAAR " $APP_ENV
+ARG name1
+RUN echo "MA VAAAAAR " $DATABASE_URL
+ARG SYMFONY_DOTENV_PATH
+RUN echo "MA VAAAAAR " $SYMFONY_DOTENV_PATH
+
 # Installation extensions systeme
 RUN apt-get update && apt-get install -y \
     libpq-dev libicu-dev zip unzip git \
