@@ -12,6 +12,7 @@ WORKDIR /var/www/html
 ENV APP_ENV=prod
 ENV SYMFONY_DOTENV_PATH=not_needed
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV DATABASE_URL=postgresql://user:pass@localhost:5432/dbname
 
 # Installation dependances en ignorant les fichiers env
 COPY composer.json composer.lock ./
