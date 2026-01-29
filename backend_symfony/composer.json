@@ -78,7 +78,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.3.*"
+            "require": "7.3.*",
+            "runtime_dotenv": false
         }
     }
 }

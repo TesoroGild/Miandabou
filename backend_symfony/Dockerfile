@@ -15,11 +15,13 @@ WORKDIR /var/www/html
 # Installation dependances en ignorant les fichiers env
 COPY composer.json composer.lock ./
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
+ENV SYMFONY_DOTENV_PATH=not_needed
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV APP_ENV=prod
 RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
 
-RUN APP_ENV=prod php bin/console cache:clear
+RUN php bin/console cache:clear
 
 RUN chown -R www-data:www-data /var/www/html/var
