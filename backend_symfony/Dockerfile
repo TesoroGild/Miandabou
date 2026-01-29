@@ -12,11 +12,13 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 
 WORKDIR /var/www/html
 
+ENV APP_ENV=prod
+ENV SYMFONY_DOTENV_PATH=not_needed
+
 # Installation dependances en ignorant les fichiers env
 COPY composer.json composer.lock ./
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-#ENV APP_ENV=prod
 RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
@@ -24,5 +26,6 @@ COPY . .
 #RUN mkdir -p var/cache var/log && chown -R www-data:www-data var
 #RUN su -s /bin/sh -c "APP_ENV=prod php bin/console cache:clear --no-warmup" www-data
 RUN echo "APP_ENV=prod" > .env
-RUN SYMFONY_DOTENV_PATH=not_needed APP_ENV=prod php bin/console cache:clear --no-warmup
+RUN mkdir -p var/cache var/log && chown -R www-data:www-data var
+RUN php bin/console cache:clear --no-warmup
 RUN mkdir -p var && chown -R www-data:www-data var
