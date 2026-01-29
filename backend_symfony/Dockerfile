@@ -20,5 +20,6 @@ COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
-RUN APP_ENV=prod php bin/console cache:clear --no-warmup
-RUN mkdir -p var && chown -R www-data:www-data var
+RUN ls -la
+RUN mkdir -p var/cache var/log && chown -R www-data:www-data var
+RUN su -s /bin/sh -c "APP_ENV=prod php bin/console cache:clear --no-warmup" www-data
