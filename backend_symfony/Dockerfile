@@ -13,15 +13,12 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 WORKDIR /var/www/html
 
 # Installation dependances en ignorant les fichiers env
-COPY composer.json composer.lock ./
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
-ENV SYMFONY_DOTENV_PATH=not_needed
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APP_ENV=prod
+COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
-
-RUN php bin/console cache:clear
 
 RUN chown -R www-data:www-data /var/www/html/var
