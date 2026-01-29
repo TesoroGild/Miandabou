@@ -16,7 +16,7 @@ WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
 
