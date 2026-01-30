@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 WORKDIR /var/www/html
 
-#ENV APP_ENV=prod
-#ENV SYMFONY_DOTENV_PATH=not_needed
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Installation dependances en ignorant les fichiers env
@@ -23,9 +21,6 @@ COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --no-scripts --optimize-autoloader
 
 COPY . .
-#RUN ls -la
-#RUN mkdir -p var/cache var/log && chown -R www-data:www-data var
-#RUN su -s /bin/sh -c "APP_ENV=prod php bin/console cache:clear --no-warmup" www-data
 RUN echo "APP_ENV=prod" > .env
 RUN mkdir -p var/cache var/log && chown -R www-data:www-data var
 RUN php bin/console cache:clear --no-warmup
