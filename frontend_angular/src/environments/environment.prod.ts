@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: '/api'
+  backendUrl: 'https://miandabou.onrender.com'
 };
