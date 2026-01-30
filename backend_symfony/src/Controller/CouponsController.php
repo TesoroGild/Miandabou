@@ -9,10 +9,13 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Repository\CouponsRepository;
 use Symfony\Component\HttpFoundation\Request;
+use OpenApi\Attributes as OA;
 
 final class CouponsController extends AbstractController
 {
     #[Route('/api/coupons', name: 'list_coupons', methods: ['GET'])]
+    #[OA\Response(response: 201, description: 'Afficher les coupons.')]
+    #[OA\Tag(name: 'Coupons')]
     public function getCoupons(CouponsRepository $couponsRepository): JsonResponse
     {
         $coupons = $couponsRepository->findAll();
@@ -24,6 +27,8 @@ final class CouponsController extends AbstractController
     }
 
     #[Route('/api/coupons', name: 'create_coupon', methods: ['POST'])]
+    #[OA\Response(response: 201, description: 'Créer un coupon.')]
+    #[OA\Tag(name: 'Coupons')]
     public function createCoupon(Request $request): JsonResponse
     {
         return $this->json([

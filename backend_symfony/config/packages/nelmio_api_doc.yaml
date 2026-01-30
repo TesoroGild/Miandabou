@@ -1,0 +1,12 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: MiandabouAccessoires
+            description: |
+                Application e-commerce complète permettant la gestion des produits, du panier et des commandes. 
+                Backend Symfony (API REST), Frontend Angular (UI responsive), et base de données PostgreSQL. 
+                L’objectif est de présenter mes compétences en conception de systèmes, gestion des données et développement d’interfaces interactives.
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

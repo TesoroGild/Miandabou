@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use OpenApi\Attributes as OA;
 
 //Application
 use App\Entity\Items;
@@ -22,6 +23,8 @@ final class ItemsController extends AbstractController
 {
     //CREATE
     #[Route('/api/items', name: 'create_items', methods: ['POST'])]
+    #[OA\Response(response: 201, description: 'Créer un article.')]
+    #[OA\Tag(name: 'Items')]
     public function createItem(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService): JsonResponse
     {
@@ -81,8 +84,9 @@ final class ItemsController extends AbstractController
     }
 
     //READ
-
     #[Route('/api/items', name: 'list_items', methods: ['GET'])]
+    #[OA\Response(response: 201, description: 'Afficher les articles.')]
+    #[OA\Tag(name: 'Items')]
     public function getItems(ItemsRepository $itemsRepository, LoggerInterface $logger): JsonResponse
     {
         try {

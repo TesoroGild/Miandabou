@@ -23,10 +23,13 @@ use App\Dto\ItemsDto;
 use App\Dto\AddressesDto;
 use App\Service\MappingService;
 use App\Dto\ItemsOrderedDto;
+use OpenApi\Attributes as OA;
 
 final class CheckoutController extends AbstractController
 {
     #[Route('/api/checkout', name: 'app_checkout', methods: ['POST'])]
+    #[OA\Response(response: 201, description: 'Créer un bon de commande')]
+    #[OA\Tag(name: 'Checkout')]
     public function setuporder(Request $request, LoggerInterface $logger,
         EntityManagerInterface $entityManager, UsersRepository $usersRepository,
         AddressRepository $addressRepository, OrdersRepository $ordersRepository,

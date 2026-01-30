@@ -9,10 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use OpenApi\Attributes as OA;
 
 final class OrdersController extends AbstractController
 {
     #[Route('/api/orders', name: 'create_orders', methods: ['POST'])]
+    #[OA\Response(response: 201, description: 'Créer un ordre.')]
+    #[OA\Tag(name: 'Order')]
     public function createOrder(): JsonResponse
     {
         return $this->json([

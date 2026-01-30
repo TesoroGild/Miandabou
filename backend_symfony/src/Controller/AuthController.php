@@ -12,10 +12,13 @@ use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Firebase\JWT\JWT;
 use App\Dto\UsersDto;
+use OpenApi\Attributes as OA;
 
 final class AuthController extends AbstractController
 {
     #[Route('/api/auth', name: 'app_auth', methods: ['POST'])]
+    #[OA\Response(response: 200, description: 'Connecter un utilisateur')]
+    #[OA\Tag(name: 'Auth')]
     public function logIn(Request $request, LoggerInterface $logger,
             UserPasswordHasherInterface $passwordHasher, UsersRepository $usersRepository): JsonResponse
     {

@@ -14,10 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Service\UploadService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Firebase\JWT\JWT;
+use OpenApi\Attributes as OA;
 
 final class UserController extends AbstractController
 {
     #[Route('/api/users', name: 'create_user', methods: ['POST'])]
+    #[OA\Response(response: 201, description: 'Créer un utilisateur.')]
+    #[OA\Tag(name: 'User')]
     public function createUser(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService,
         UserPasswordHasherInterface $passwordHasher, UsersRepository $usersRepository): JsonResponse
@@ -99,6 +102,8 @@ final class UserController extends AbstractController
     }
 
     #[Route('/api/users', name: 'list_users', methods: ['GET'])]
+    #[OA\Response(response: 201, description: 'Afficher les articles.')]
+    #[OA\Tag(name: 'User')]
     public function getUsers(UsersRepository $usersRepository, LoggerInterface $logger): JsonResponse
     {
         try {
