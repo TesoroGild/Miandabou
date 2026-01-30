@@ -5,9 +5,13 @@ ARG DATABASE_URL
 ARG SYMFONY_DOTENV_PATH
 
 # Installation extensions systeme
-RUN apt-get update && apt-get install -y \
-    libpq-dev libicu-dev zip unzip git \
-    && docker-php-ext-install pdo pdo_pgsql intl
+ADD https://github.com /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions pdo_pgsql intl zip opcache
+# RUN apt-get update && apt-get install -y \
+#     libpq-dev libicu-dev zip unzip git \
+#     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+#     && docker-php-ext-install pdo pdo_pgsql intl
 
 # Apache
 RUN a2enmod rewrite
