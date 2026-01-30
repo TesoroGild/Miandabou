@@ -18,7 +18,7 @@ Pour rouler le programme localement, vous aurez besoin des ressources suivantes 
 * [Php] (https://www.php.net/downloads.php)
 * [Composer] (https://getcomposer.org/download/)
 * [Symfony] (https://symfony.com/download)
-* [Docker postgressql] (https://youtu.be/Hs9Fh1fr5s8?si=XVC_kOeVtB-s379w)
+* [Docker postgresql] (https://youtu.be/Hs9Fh1fr5s8?si=XVC_kOeVtB-s379w)
 
 ## Lancement du programme
 Cloner le projet 

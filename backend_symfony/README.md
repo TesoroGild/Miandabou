@@ -67,6 +67,16 @@ symfony console d:m:m
 ```
 
 ## Docker
+Se connecter à la bd postgres docker
+```bash
+psql -U [utilsiateur] -d [nom_de_la_bd]
+``` 
+
+Lister les tables
+```bash
+\dt [nom_de_la_table]
+```
+
 Voir les containers
 ```bash
 docker container ls
