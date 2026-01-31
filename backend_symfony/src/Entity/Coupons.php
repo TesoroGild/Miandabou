@@ -6,7 +6,9 @@ use App\Repository\CouponsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: CouponsRepository::class)]
+
 class Coupons
 {
     #[ORM\Id]

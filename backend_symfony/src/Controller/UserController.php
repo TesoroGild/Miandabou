@@ -19,7 +19,51 @@ use OpenApi\Attributes as OA;
 final class UserController extends AbstractController
 {
     #[Route('/api/users', name: 'create_user', methods: ['POST'])]
-    #[OA\Response(response: 201, description: 'Créer un utilisateur.')]
+    #[OA\RequestBody(
+        description: 'Informations du client pour créer le profil.',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'email', type: 'string'),
+                new OA\Property(property: 'password', type: 'string'),
+                new OA\Property(property: 'lastname', type: 'string'),
+                new OA\Property(property: 'firstname', type: 'string'),
+                new OA\Property(property: 'isActive', type: 'string'),
+                new OA\Property(property: 'role', type: 'string'),
+                new OA\Property(property: 'dateOfBirth', type: 'string'),
+                new OA\Property(property: 'picture', type: 'string')
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Création du compte utilisateur réussie; Retourne les informations de l\'utilisateur et le token.',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'token', type: 'string'),
+                new OA\Property(
+                    property: 'user', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'id', type: 'string'),
+                        new OA\Property(property: 'username', type: 'string'),
+                        new OA\Property(property: 'firstname', type: 'string'),
+                        new OA\Property(property: 'lastname', type: 'string'),
+                        new OA\Property(property: 'email', type: 'string'),
+                        new OA\Property(property: 'phonenumber', type: 'string'),
+                        new OA\Property(
+                            property: 'roles',
+                            type: 'array',
+                            items: new OA\Items(type: 'string')
+                        ),
+                        new OA\Property(property: 'picture', type: 'string'),
+                        new OA\Property(property: 'contenthash', type: 'string')
+                    ]
+                ),
+                new OA\Property(property: 'msg', type: 'string')
+            ]
+        )
+    )]
     #[OA\Tag(name: 'User')]
     public function createUser(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService,
@@ -102,7 +146,43 @@ final class UserController extends AbstractController
     }
 
     #[Route('/api/users', name: 'list_users', methods: ['GET'])]
-    #[OA\Response(response: 201, description: 'Afficher les articles.')]
+    #[OA\Response(
+        response: 200, 
+        description: 'Afficher les utilisateurs.',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'users',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'object',
+                        properties: [
+                            new OA\Property(property: 'id', type: 'string'),
+                            new OA\Property(property: 'username', type: 'string'),
+                            new OA\Property(property: 'firstname', type: 'string'),
+                            new OA\Property(property: 'lastname', type: 'string'),
+                            new OA\Property(property: 'email', type: 'string'),
+                            new OA\Property(property: 'phonenumber', type: 'string'),
+                            new OA\Property(
+                                property: 'roles', 
+                                type: 'array',
+                                items: new OA\Items(type: 'string')
+                            ),
+                            new OA\Property(property: 'picture', type: 'string'),
+                            new OA\Property(property: 'contenthash', type: 'string'),
+                            new OA\Property(property: 'timecreated', type: 'datetime'),
+                            new OA\Property(property: 'timemodified', type: 'datetime'),
+                            new OA\Property(property: 'lastlogin', type: 'datetime'),
+                            new OA\Property(property: 'dateOfBirth', type: 'datetime'),
+                            new OA\Property(property: 'isActive', type: 'boolean'),
+                            new OA\Property(property: 'bills', type: 'object'),
+                            new OA\Property(property: 'address', type: 'object')
+                        ]
+                    )
+                )
+            ]
+        )
+    )]
     #[OA\Tag(name: 'User')]
     public function getUsers(UsersRepository $usersRepository, LoggerInterface $logger): JsonResponse
     {

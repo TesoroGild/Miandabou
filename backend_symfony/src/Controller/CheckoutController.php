@@ -28,7 +28,105 @@ use OpenApi\Attributes as OA;
 final class CheckoutController extends AbstractController
 {
     #[Route('/api/checkout', name: 'app_checkout', methods: ['POST'])]
-    #[OA\Response(response: 201, description: 'Créer un bon de commande')]
+    #[OA\RequestBody(
+        description: 'Les informations de la commande.',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'order', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'userEmail', type: 'string'),
+                        new OA\Property(property: 'total', type: 'number'),
+                    ]),
+                new OA\Property(
+                    property: 'address', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'city', type: 'string'),
+                        new OA\Property(property: 'totprovinceal', type: 'string'),
+                        new OA\Property(property: 'zipcode', type: 'string'),
+                        new OA\Property(property: 'totcountryal', type: 'string'),
+                        new OA\Property(property: 'fulladdress', type: 'string'),
+                        new OA\Property(property: 'appnumber', type: 'string')
+                    ]),
+                new OA\Property(
+                    property: 'items',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'object',
+                        properties: [
+                            new OA\Property(property: 'itemId', type: 'string'),
+                            new OA\Property(property: 'itemName', type: 'string'),
+                            new OA\Property(property: 'itemPicture', type: 'string'),
+                            new OA\Property(property: 'itemContenthash', type: 'string'),
+                            new OA\Property(property: 'quantityBuy', type: 'number'),
+                            new OA\Property(property: 'appnumbeitemPricer', type: 'number')
+                        ])
+                    ),
+                new OA\Property(
+                    property: 'cardInfos', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'cardexpirationdate', type: 'string'),
+                        new OA\Property(property: 'cvv', type: 'string'),
+                        new OA\Property(property: 'cardowner', type: 'string'),
+                        new OA\Property(property: 'cardnumber', type: 'string')
+                    ]),
+                new OA\Property(
+                    property: 'additionalInfos', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'meansofcommunication', type: 'string'),
+                        new OA\Property(property: 'phonenumber', type: 'string')
+                    ]),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Commande réussie; Retourne la facture, les articles et l\'adresse de livraison',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'order', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'ordercode', type: 'string'),
+                        new OA\Property(property: 'total', type: 'string'),
+                        new OA\Property(property: 'expecteddateshipping', type: 'string'),
+                        new OA\Property(property: 'communicationchannel', type: 'string')
+                    ]
+                ),
+                new OA\Property(
+                    property: 'items', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'id', type: 'string'),
+                        new OA\Property(property: 'name', type: 'string'),
+                        new OA\Property(property: 'price', type: 'string'),
+                        new OA\Property(property: 'quantity', type: 'string'),
+                        new OA\Property(property: 'picture', type: 'string'),
+                        new OA\Property(property: 'contenthash', type: 'string')
+                    ]
+                ),
+                new OA\Property(
+                    property: 'address', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'city', type: 'string'),
+                        new OA\Property(property: 'province', type: 'string'),
+                        new OA\Property(property: 'zipcode', type: 'string'),
+                        new OA\Property(property: 'country', type: 'string'),
+                        new OA\Property(property: 'fulladdress', type: 'string'),
+                        new OA\Property(property: 'appnumber', type: 'string')
+                    ]
+                ),
+                new OA\Property(property: 'msg', type: 'string', example: 'Commande passée avec succès!'),
+            ]
+        )
+    )]
     #[OA\Tag(name: 'Checkout')]
     public function setuporder(Request $request, LoggerInterface $logger,
         EntityManagerInterface $entityManager, UsersRepository $usersRepository,

@@ -23,7 +23,25 @@ final class ItemsController extends AbstractController
 {
     //CREATE
     #[Route('/api/items', name: 'create_items', methods: ['POST'])]
-    #[OA\Response(response: 201, description: 'Créer un article.')]
+    #[OA\RequestBody(
+        description: 'Informations du client pour créer le profil.',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string'),
+                new OA\Property(
+                    property: 'category', 
+                    type: 'string',
+                    enum: ['dress', 'pant', 'necklaces', 'shoes', 'hat', 'bag', 'earrings', 'watch']
+                ),
+                new OA\Property(property: 'price', type: 'string'),
+                new OA\Property(property: 'qte', type: 'string'),
+                new OA\Property(property: 'picture', type: 'string')
+            ]
+        )
+    )]
+    #[OA\Response(response: 201, description: 'Article créé; Retourne un message de succès.')]
     #[OA\Tag(name: 'Items')]
     public function createItem(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService): JsonResponse
@@ -85,7 +103,39 @@ final class ItemsController extends AbstractController
 
     //READ
     #[Route('/api/items', name: 'list_items', methods: ['GET'])]
-    #[OA\Response(response: 201, description: 'Afficher les articles.')]
+    #[OA\Response(
+        response: 200, 
+        description: 'Afficher les articles.',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'items',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'object',
+                        properties: [
+                            new OA\Property(property: 'id', type: 'string'),
+                            new OA\Property(property: 'name', type: 'string'),
+                            new OA\Property(property: 'description', type: 'string'),
+                            new OA\Property(
+                                property: 'category', 
+                                type: 'string',
+                                enum: ['dress', 'pant', 'necklaces', 'shoes', 'hat', 'bag', 'earrings', 'watch']
+                            ),
+                            new OA\Property(property: 'price', type: 'string'),
+                            new OA\Property(property: 'quantity', type: 'string'),
+                            new OA\Property(property: 'picture', type: 'string'),
+                            new OA\Property(property: 'contenthash', type: 'string'),
+                            new OA\Property(property: 'video', type: 'string'),
+                            new OA\Property(property: 'timecreated', type: 'datetime'),
+                            new OA\Property(property: 'timemodified', type: 'datetime'),
+                            new OA\Property(property: 'ordersItems', type: 'object')
+                        ]
+                    )
+                )
+            ]
+        )
+    )]
     #[OA\Tag(name: 'Items')]
     public function getItems(ItemsRepository $itemsRepository, LoggerInterface $logger): JsonResponse
     {

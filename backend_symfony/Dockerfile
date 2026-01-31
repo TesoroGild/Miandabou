@@ -7,10 +7,6 @@ ARG SYMFONY_DOTENV_PATH
 # Installation extensions systeme
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions pdo_pgsql intl zip opcache
-# RUN apt-get update && apt-get install -y \
-#     libpq-dev libicu-dev libzip-dev zip unzip git \
-#     && docker-php-ext-install pdo pdo_pgsql intl zip opcache \
-#     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Apache
 RUN a2enmod rewrite

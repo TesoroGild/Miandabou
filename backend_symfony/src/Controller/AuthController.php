@@ -17,7 +17,45 @@ use OpenApi\Attributes as OA;
 final class AuthController extends AbstractController
 {
     #[Route('/api/auth', name: 'app_auth', methods: ['POST'])]
-    #[OA\Response(response: 200, description: 'Connecter un utilisateur')]
+    #[OA\RequestBody(
+        description: 'Credentials',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'email', type: 'string'),
+                new OA\Property(property: 'password', type: 'string')
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Authentification réussie, retourne les informations de l\'utilisateur et le token JWT',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'token', type: 'string'),
+                new OA\Property(
+                    property: 'user', 
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'id', type: 'string'),
+                        new OA\Property(property: 'username', type: 'string'),
+                        new OA\Property(property: 'firstname', type: 'string'),
+                        new OA\Property(property: 'lastname', type: 'string'),
+                        new OA\Property(property: 'email', type: 'string'),
+                        new OA\Property(property: 'phonenumber', type: 'string'),
+                        new OA\Property(
+                            property: 'roles',
+                            type: 'array',
+                            items: new OA\Items(type: 'string')
+                        ),
+                        new OA\Property(property: 'picture', type: 'string'),
+                        new OA\Property(property: 'contenthash', type: 'string')
+                    ]
+                ),
+                new OA\Property(property: 'msg', type: 'string')
+            ]
+        )
+    )]
     #[OA\Tag(name: 'Auth')]
     public function logIn(Request $request, LoggerInterface $logger,
             UserPasswordHasherInterface $passwordHasher, UsersRepository $usersRepository): JsonResponse

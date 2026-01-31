@@ -10,8 +10,22 @@ use OpenApi\Attributes as OA;
 final class EmailController extends AbstractController
 {
     #[Route('/api/email', name: 'add_email')]
-    #[OA\Response(response: 200, description: 'Envoyer un mail.')]
-    #[OA\Tag(name: 'Mail')]
+    // #[OA\RequestBody(
+    //     description: 'L\'email à ajouter',
+    //     required: true,
+    //     content: new OA\JsonContent(
+    //         properties: [
+    //             new OA\Property(
+    //                 property: 'mailToAlert', 
+    //                 type: 'string'
+    //             )
+    //         ]
+    //     )
+    // )]
+    // #[OA\Response(
+    //     response: 200, 
+    //     description: 'Ajouter un mail à la newsletter.')]
+    // #[OA\Tag(name: 'Mail')]
     public function addEmail(): JsonResponse
     {
         return $this->json([
