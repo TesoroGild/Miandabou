@@ -41,7 +41,11 @@ final class ItemsController extends AbstractController
             ]
         )
     )]
-    #[OA\Response(response: 201, description: 'Article créé; Retourne un message de succès.')]
+    #[OA\Response(
+        response: 201, 
+        description: 'Article créé; Retourne un message de succès.',
+        content: new OA\JsonContent(properties: [new OA\Property(property: 'msg', type: 'string')])
+    )]
     #[OA\Tag(name: 'Items')]
     public function createItem(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService): JsonResponse
