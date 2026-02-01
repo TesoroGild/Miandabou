@@ -6,6 +6,7 @@ import { CheckoutService } from '../../services/checkout/checkout.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bills',
@@ -32,7 +33,8 @@ export class BillsPage {
   constructor(
     private authService: AuthService, 
     private cartService: CartService, 
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private router: Router
   ) { 
     this.userToDisplay$ = this.authService.getUserToDisplay();
     this.userSubscription = this.userToDisplay$.subscribe((u) => {
@@ -83,5 +85,13 @@ export class BillsPage {
     else if (communicationchannel == "phonecommunication") return "Nous converserons avec vous via ce numéro de téléphone {{ displayMessage(order.communicationchannel) }} pour toutes mises à jour.";
     else if (communicationchannel == "nonecommunication") return "Nous ne communiquerons pas avec vous conformement à votre choix.";
     else return null;
+  }
+
+  homePage() {
+    this.router.navigate(['/checkout']);
+  }
+
+  articlesPage() {
+    this.router.navigate(['/checkout']);
   }
 }
