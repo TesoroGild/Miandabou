@@ -12,7 +12,8 @@ use OpenApi\Attributes as OA;
 class SecurityController extends AbstractController
 {
     #[Route('/api/login', name: 'app_login', methods: ['POST'])]
-    #[OA\Tag(name: 'Hidden')]
+    #[OA\Tag(name: 'Auth')]
+    #[OA\RequestBody(description: 'Not Implemented yet')]
     public function login(AuthenticationUtils $authenticationUtils): null
     {
         // if ($this->getUser()) {
@@ -29,7 +30,8 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/api/logout', name: 'app_logout', methods: ['POST'])]
-    #[OA\Tag(name: 'Hidden')]
+    #[OA\Tag(name: 'Auth')]
+    #[OA\RequestBody(description: 'Not Implemented yet')]
     public function logout(): null
     {
         // return $this->json([
