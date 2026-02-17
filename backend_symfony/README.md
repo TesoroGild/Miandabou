@@ -72,9 +72,11 @@ Se connecter à la bd postgres docker
 psql -U [utilsiateur] -d [nom_de_la_bd]
 ``` 
 
-Lister les tables
+Lister les tables; Voir les colonnes; Voir une table
 ```bash
-\dt [nom_de_la_table]
+\dt
+\d [nom_table];
+SELECT * FROM [nom_table];
 ```
 
 Voir les containers

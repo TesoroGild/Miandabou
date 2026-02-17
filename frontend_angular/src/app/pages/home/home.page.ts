@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailService } from '../../services/email/email.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { Router, RouterModule } from '@angular/router';
 
 //Reusable components
 import { ToastService } from '../../services/toast/toast.service';
@@ -14,7 +15,7 @@ import { LangagesService } from '../../services/langages/langages.service';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, TranslatePipe],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, TranslatePipe, RouterModule],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss'
 })
@@ -24,6 +25,29 @@ export class HomePage {
   showToastWarning = false;
 
   alertForm!: FormGroup;
+
+  couponFound = {
+    rate : "20",
+    value: "N/A",
+    expiration_date: "2026-12-31",
+    name: "THISISATEST"
+  }
+
+  testimonial = {
+    rating: 4,
+    text: `Flowbite is just awesome. It contains tons of predesigned components...`,
+    author: "The Godfather",
+    role: "An anonymous client.",
+    avatar: "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+  };
+
+  feature = {
+    title: "Une efficacité inégalée",
+    description: "Avec Miandabou, consommez local. Satisfait ou remboursé sous 30 jours. Les meilleurs prix du marché."
+  };
+
+  currentIndex = 0;
+  slides = ['carousel-item-1', 'carousel-item-2', 'carousel-item-3'];
 
   constructor(
     private emailService: EmailService,
@@ -46,6 +70,7 @@ export class HomePage {
         ],
       ]
     });
+    this.showSlide(this.currentIndex);
   }
 
   ngOnDestroy() {}
@@ -90,5 +115,39 @@ export class HomePage {
       this.alertForm.controls[field].hasError(error) &&
       (this.alertForm.controls[field].dirty || this.alertForm.controls[field].touched)
     );
+  }
+
+  //Carousel
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    this.showSlide(this.currentIndex);
+  }
+
+  prev() {
+    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.showSlide(this.currentIndex);
+  }
+
+  goTo(index: number) {
+    this.currentIndex = index;
+    this.showSlide(this.currentIndex);
+  }
+
+  private showSlide(index: number) {
+    // cache tous les slides
+    this.slides.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('hidden', i !== index);
+      }
+    });
+  }
+
+  calculateDiscount () {
+    if (this.couponFound.rate != undefined && this.couponFound.rate != "N/A" && this.couponFound.rate != "")
+      return this.couponFound.rate + "%";
+    else if (this.couponFound.value != undefined && this.couponFound.value != "N/A" && this.couponFound.value != "")
+      return this.couponFound.value + "$";
+    else return "0$";
   }
 }

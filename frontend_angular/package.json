@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "all": "cd ../backend_symfony && start symfony server:start && timeout /t 5 && cd ../frontend_angular && ng serve"
   },
   "prettier": {
     "overrides": [

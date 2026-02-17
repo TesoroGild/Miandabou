@@ -3,6 +3,9 @@ Application de e-commerce.
 
 # Architecture
 
+# Tips
+
+
 # Build
 Les artefacts de compilation seront stockés dans le répertoire dist/. Pour compiler le projet
 ```bash
