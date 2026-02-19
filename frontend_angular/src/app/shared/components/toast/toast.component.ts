@@ -21,6 +21,7 @@ export class ToastComponent {
   constructor(private toastService: ToastService) {}
 
   ngOnInit() {
+    console.log("SUIS JE APPELE")
     this.toastService.toast$.subscribe(({message, type}) => {
       this.message = message;
       this.type = type;

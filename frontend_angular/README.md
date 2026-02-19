@@ -4,6 +4,7 @@ Application de e-commerce.
 # Architecture
 
 # Tips
+## Création de composants
 
 
 # Build

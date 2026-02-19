@@ -35,6 +35,24 @@ class ItemsRepository extends ServiceEntityRepository
         }, $items);
     }
 
+    public function findItems(): array
+    {
+        $items = $this->findBy(['isActive' => true]);
+        return array_map(function ($item) {
+            return new ItemsDto(
+                $item->getId(),
+                $item->getName(),
+                $item->getCategory()?->value,
+                $item->getDescription(),
+                $item->getPrice(),
+                $item->getQuantity(),
+                $item->getVideo(),
+                $item->getPicture(),
+                $item->getContenthash()
+            );
+        }, $items);
+    }
+
 //    /**
 //     * @return Items[] Returns an array of Items objects
 //     */

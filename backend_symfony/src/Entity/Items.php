@@ -56,9 +56,19 @@ class Items
     #[ORM\OneToMany(targetEntity: OrdersItems::class, mappedBy: 'items')]
     private Collection $ordersItems;
 
+    #[ORM\Column]
+    private ?bool $isActive = null;
+
+    /**
+     * @var Collection<int, Coupons>
+     */
+    #[ORM\ManyToMany(targetEntity: Coupons::class, mappedBy: 'items')]
+    private Collection $coupons;
+
     public function __construct()
     {
         $this->ordersItems = new ArrayCollection();
+        $this->coupons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -211,6 +221,45 @@ class Items
             if ($ordersItem->getItems() === $this) {
                 $ordersItem->setItems(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): static
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Coupons>
+     */
+    public function getCoupons(): Collection
+    {
+        return $this->coupons;
+    }
+
+    public function addCoupon(Coupons $coupon): static
+    {
+        if (!$this->coupons->contains($coupon)) {
+            $this->coupons->add($coupon);
+            $coupon->addItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoupon(Coupons $coupon): static
+    {
+        if ($this->coupons->removeElement($coupon)) {
+            $coupon->removeItem($this);
         }
 
         return $this;

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CouponsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,6 +32,20 @@ class Coupons
 
     #[ORM\Column]
     private ?\DateTime $timecreated = null;
+
+    #[ORM\Column(length: 25)]
+    private ?string $code = null;
+
+    /**
+     * @var Collection<int, items>
+     */
+    #[ORM\ManyToMany(targetEntity: Items::class, inversedBy: 'coupons')]
+    private Collection $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -92,6 +108,42 @@ class Coupons
     public function setTimecreated(\DateTime $timecreated): static
     {
         $this->timecreated = $timecreated;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): static
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, items>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(items $item): static
+    {
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(items $item): static
+    {
+        $this->items->removeElement($item);
 
         return $this;
     }

@@ -4,16 +4,16 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ItemService } from '../../../services/item/item.service';
-import { ToastService } from '../../../services/toast/toast.service';
+import { ItemService } from '../../../../services/item/item.service';
+import { ToastService } from '../../../../services/toast/toast.service';
 
 @Component({
-  selector: 'app-manage-item',
+  selector: 'app-add-item',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './manage-item.component.html',
-  styleUrl: './manage-item.component.scss'
+  templateUrl: './add-item.component.html',
+  styleUrl: './add-item.component.scss'
 })
-export class ManageItemComponent {
+export class AddItemComponent {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
@@ -71,7 +71,7 @@ export class ManageItemComponent {
     });
   }
 
-  closeModal() {
+  closeAddModal() {
     this.close.emit();
   }
 
@@ -186,9 +186,4 @@ export class ManageItemComponent {
       });
     }
   }
-
-  /*TODO*/
-  updateItem() {}
-
-  deleteItem() {}
 }

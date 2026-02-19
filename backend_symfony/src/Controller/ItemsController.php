@@ -144,7 +144,7 @@ final class ItemsController extends AbstractController
     public function getItems(ItemsRepository $itemsRepository, LoggerInterface $logger): JsonResponse
     {
         try {
-            $items = $itemsRepository->findAll();
+            $items = $itemsRepository->findItems();
             
             return $this->json([
                 'items' => $items,
@@ -162,4 +162,34 @@ final class ItemsController extends AbstractController
     //UPDATE
 
     //DELETE
+    #[Route('/api/items/{id}', name: 'item_detail', methods: ['PATCH'])]
+    #[OA\Response(
+        response: 201, 
+        description: 'Article suppprimé; Retourne un message de succès.',
+        content: new OA\JsonContent(properties: [new OA\Property(property: 'msg', type: 'string')])
+    )]
+    #[OA\Tag(name: 'Items')]
+    public function deleteItem(int $id, ItemsRepository $itemsRepository, LoggerInterface $logger, EntityManagerInterface $entityManager): JsonResponse
+    {
+        try {
+            $itemToDelete = $itemsRepository->findItem($id);
+
+            if (!$itemToDelete) {
+                return $this->json(['msg' => 'Article introuvable'], 404);
+            }
+
+            $itemToDelete->setIsActive(false);
+            $entityManager->flush();
+
+            return $this->json([
+                'msg' => 'Article supprimé avec succès.'
+            ], Response::HTTP_OK);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur getitems: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }

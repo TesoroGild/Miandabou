@@ -48,8 +48,8 @@ export class AuthService {
     if (this.isLoggedIn()) {
       this.unsetUserToDisplay();
       
-      if (this.isLoggedIn()) this.toastService.success("Déconnexion réussie!");
-      else this.toastService.warning("Erreur lors de la déconnection!");
+      if (this.isLoggedIn()) this.toastService.warning("Erreur lors de la déconnection!");
+      else this.toastService.success("Déconnexion réussie!");
       
       this.router.navigate(['/home']);
       

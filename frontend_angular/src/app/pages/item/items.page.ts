@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 //Components
-import { ManageItemComponent } from '../../shared/components/manage-item/manage-item.component';
+import { AddItemComponent } from '../../shared/components/manage-item/add/add-item.component';
 
 //Interfaces
 import { Item } from '../../interfaces/item.interface';
@@ -17,11 +17,13 @@ import { CartService } from '../../services/cart/cart.service';
 import { ItemService } from '../../services/item/item.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { FormsModule } from '@angular/forms';
+import { DeleteItemComponent } from "../../shared/components/manage-item/delete-item/delete-item.component";
+import { UpdateItemComponent } from "../../shared/components/manage-item/update-item/update-item.component";
 
 const SORT_KEY = 'sort-key';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, ManageItemComponent, RouterModule, FormsModule],
+  imports: [CommonModule, AddItemComponent, RouterModule, FormsModule, DeleteItemComponent, UpdateItemComponent],
   templateUrl: './items.page.html',
   styleUrl: './items.page.scss'
 })
@@ -31,8 +33,11 @@ export class ItemsPage {
   items: Item[] = [];
   quantityBuy: number = 0;
   showAddItemModal: boolean = false;
+  showDeleteItemModal: boolean = false;
+  showUpdateItemModal: boolean = false;
   filterSelect: string;
   itemsToDisplay: Item[] = [];
+  selectedItem: any;
 
   constructor (
     private cartService: CartService,
@@ -89,8 +94,26 @@ export class ItemsPage {
     this.showAddItemModal = true
   }
 
-  closeModal() {
+  closeAddModal() {
     this.showAddItemModal = false
+  }
+
+  openDeleteItemModal(item: any) {
+    this.showDeleteItemModal = true;
+    this.selectedItem = item;
+  }
+
+  closeDeleteModal() {
+    this.showDeleteItemModal = false;
+    this.selectedItem = null;
+  }
+
+  openUpdateItemModal() {
+    this.showUpdateItemModal = true;
+  }
+
+  closeUpdateModal() {
+    this.showUpdateItemModal = false;
   }
 
   showItemDetails(id: string) {

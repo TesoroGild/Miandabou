@@ -41,6 +41,12 @@ export class ItemService {
     );
   }
 
+  deleteItem (id: number) {
+    return this.http.patch<any>(
+      `${environment.backendUrl}/api/items/${id}`, {}
+    );
+  }
+
   // setItemsToDisplay (items: Item[]) {
     
   // }
