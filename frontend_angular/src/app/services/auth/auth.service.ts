@@ -72,15 +72,6 @@ export class AuthService {
     }
   }
 
-  // isUserLoggedIn() {
-  //   this.authService.userIsLoggedIn.subscribe({
-  //     next: (result)=> {
-  //       this.userIsLoggedIn = result;
-  //     }
-  //   })
-  //   return this.userIsLoggedIn; 
-  // }
-
   isAdmin() {
     return localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN") != -1;
   }
@@ -102,7 +93,7 @@ export class AuthService {
   unsetSession() {
     localStorage.removeItem(this.keyToken);
     localStorage.removeItem(this.keyRole);
-    localStorage.clear();
+    //localStorage.clear();
     this.userIsLoggedIn.next(false);
     this.userIsAdmin.next(false);
   }

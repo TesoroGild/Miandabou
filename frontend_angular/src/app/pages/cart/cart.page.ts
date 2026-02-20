@@ -69,8 +69,8 @@ export class CartPage {
     this.cartService.addToCart(item);
   }
 
-  removeFromCart (item: Item) {
-    this.cartService.removeFromCart(item);
+  decraseQuantityInCart (item: Item) {
+    this.cartService.decraseQuantityInCart(item);
   }
 
   deleteFromCart (item: Item) {

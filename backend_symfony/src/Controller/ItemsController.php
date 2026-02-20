@@ -159,10 +159,67 @@ final class ItemsController extends AbstractController
         }
     }
 
+    #[Route('/api/items/{id}', name: 'item_details', methods: ['GET'])]
+    #[OA\Response(
+        response: 200, 
+        description: 'Afficher les articles.',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(
+                    property: 'items',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'object',
+                        properties: [
+                            new OA\Property(property: 'id', type: 'string'),
+                            new OA\Property(property: 'name', type: 'string'),
+                            new OA\Property(property: 'description', type: 'string'),
+                            new OA\Property(
+                                property: 'category', 
+                                type: 'string',
+                                enum: ['dress', 'pant', 'necklaces', 'shoes', 'hat', 'bag', 'earrings', 'watch']
+                            ),
+                            new OA\Property(property: 'price', type: 'string'),
+                            new OA\Property(property: 'quantity', type: 'string'),
+                            new OA\Property(property: 'picture', type: 'string'),
+                            new OA\Property(property: 'contenthash', type: 'string'),
+                            new OA\Property(property: 'video', type: 'string'),
+                            new OA\Property(property: 'timecreated', type: 'datetime'),
+                            new OA\Property(property: 'timemodified', type: 'datetime'),
+                            new OA\Property(property: 'ordersItems', type: 'object')
+                        ]
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Tag(name: 'Items')]
+    public function getItem(int $id, ItemsRepository $itemsRepository, LoggerInterface $logger): JsonResponse
+    {
+        try {
+            $itemDetails = $itemsRepository->findItem($id);
+
+            if (!$itemDetails) {
+                return $this->json(['msg' => 'Article introuvable'], 404);
+            }
+
+            return $this->json([
+                'items' => $itemDetails,
+                'msg' => 'Détails!'
+            ], Response::HTTP_OK);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur getitem: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     //UPDATE
 
     //DELETE
-    #[Route('/api/items/{id}', name: 'item_detail', methods: ['PATCH'])]
+    #[Route('/api/items/{id}', name: 'item_deletion', methods: ['PATCH'])]
     #[OA\Response(
         response: 201, 
         description: 'Article suppprimé; Retourne un message de succès.',

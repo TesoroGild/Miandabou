@@ -5,7 +5,9 @@ Application de e-commerce.
 
 # Tips
 ## Création de composants
-
+```bash
+ng g c [nom] --type={page/component/service}
+```
 
 # Build
 Les artefacts de compilation seront stockés dans le répertoire dist/. Pour compiler le projet

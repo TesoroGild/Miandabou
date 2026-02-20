@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './pages/home/home.page';
-import { ItemsPage } from './pages/item/items.page';
+import { ItemsPage } from './pages/items/items.page';
 import { CartPage } from './pages/cart/cart.page';
 import { CheckoutPage } from './pages/checkout/checkout.page';
 import { LoginPage } from './pages/login/login.page';
@@ -10,6 +10,7 @@ import { ContactPage } from './pages/contact/contact.page';
 import { RegisterPage } from './pages/register/register.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { BillsPage } from './pages/bills/bills.page';
+import { ItemDetailsPage } from './pages/items/item-details/item-details.page';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,10 @@ export const routes: Routes = [
     {
         path: 'items',
         component: ItemsPage
+    },
+    {
+        path: 'items/:name',
+        component: ItemDetailsPage
     },
     {
         path: 'login',

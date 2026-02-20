@@ -104,7 +104,7 @@ export class CartService {
     this.subTotalCalculate();
   }
 
-  removeFromCart (itemToRemove: Item) {
+  decraseQuantityInCart (itemToRemove: Item) {
     const index = this.cart.findIndex(item => item.item.id === itemToRemove.id);
     if (index !== -1) {
       if (this.cart[index].quantityBuy > 1) {
@@ -124,16 +124,21 @@ export class CartService {
   }
 
   updateQuantity(itemToModify: Item, qte: number) {
-    console.log(qte);
     const index = this.cart.findIndex(item => item.item.id === itemToModify.id);
     if (index !== -1) {
       if (qte > 0) {
-        this.cart[index].quantityBuy = qte;
-      } else {
-        this.cart[index].quantityBuy = 0;
+        this.cart[index].quantityBuy += qte;
+      } else if (qte) {
+        this.deleteFromCart(itemToModify);
       }
       this.itemsCartSubject.next(this.cart);
       this.subTotalCalculate();
+    } else {
+      if (qte > 0) {
+        this.cart.push({ item: itemToModify, quantityBuy: qte });
+        this.itemsCartSubject.next(this.cart);
+        this.subTotalCalculate();
+      }
     }
   }
 

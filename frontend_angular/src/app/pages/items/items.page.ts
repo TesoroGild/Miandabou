@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 //Components
-import { AddItemComponent } from '../../shared/components/manage-item/add/add-item.component';
+import { AddItemComponent } from '../../shared/components/manage-item/add-item/add-item.component';
 
 //Interfaces
 import { Item } from '../../interfaces/item.interface';
@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 ///Services
 import { CartService } from '../../services/cart/cart.service';
 import { ItemService } from '../../services/item/item.service';
-import { ToastService } from '../../services/toast/toast.service';
 import { FormsModule } from '@angular/forms';
 import { DeleteItemComponent } from "../../shared/components/manage-item/delete-item/delete-item.component";
 import { UpdateItemComponent } from "../../shared/components/manage-item/update-item/update-item.component";
@@ -42,8 +41,7 @@ export class ItemsPage {
   constructor (
     private cartService: CartService,
     private router: Router, 
-    private itemService: ItemService,
-    private toasttest: ToastService
+    private itemService: ItemService
   ) { 
     this.filterSelect = this.loadFilterSelection();
   }
@@ -78,8 +76,8 @@ export class ItemsPage {
     this.cartService.addToCart(item);
   }
 
-  removeFromCart (item: Item) {
-    this.cartService.removeFromCart(item);
+  decraseQuantityInCart (item: Item) {
+    this.cartService.decraseQuantityInCart(item);
   }
 
   getQuantityInCart (id: string) {
@@ -116,9 +114,9 @@ export class ItemsPage {
     this.showUpdateItemModal = false;
   }
 
-  showItemDetails(id: string) {
-    var idToSearch : number = +id;
-    console.log("TODO : " + idToSearch);
+  showItemDetails(item: Item) {
+    const urlFriendlyName = item.name.replace(/\s+/g, '-').toLowerCase();
+    this.router.navigate(['/items', item.id + "-" + urlFriendlyName], { state: { data: item } })
   }
 
   filterItems() {

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
-  private toastSubject = new Subject<{ message: string; type: 'success' | 'error' | 'warning' }>();
+  private toastSubject = new Subject<{ message: string; type: 'success' | 'error' | 'warning' | 'info' }>();
   toast$ = this.toastSubject.asObservable();
 
   success(message: string) {
@@ -18,5 +18,9 @@ export class ToastService {
 
   warning(message: string) {
     this.toastSubject.next({ message, type: 'warning' });
+  }
+
+  info(message: string) {
+    this.toastSubject.next({ message, type: 'info' });
   }
 }
