@@ -13,6 +13,7 @@ class ItemsDto
         public readonly int $quantity,
         public readonly? string $video,
         public readonly? string $picture,
-        public readonly? string $contenthash
+        public readonly? string $contenthash,
+        public readonly bool $isActive
     ) {}
 }

@@ -20,6 +20,16 @@ export class ItemService {
     this.bestItemsSold = new BehaviorSubject<Item[]>([]);
   }
 
+  getActiveItems () {
+    this.http.get<any>(
+      `${environment.backendUrl}/api/items?active=true`
+    ).subscribe((response: any) => {
+      if (response.items != null && response.items != undefined)
+        this.itemsToDisplay.next(response.items);
+      return this.itemsToDisplay.asObservable();
+    });
+  }
+
   getItems () {
     this.http.get<any>(
       `${environment.backendUrl}/api/items`
@@ -47,13 +57,16 @@ export class ItemService {
 
   deleteItem (id: number) {
     return this.http.patch<any>(
-      `${environment.backendUrl}/api/items/${id}`, {}
+      `${environment.backendUrl}/api/items/${id}/delete`, {}
     );
   }
 
-  // setItemsToDisplay (items: Item[]) {
-    
-  // }
+  updateItem (id: number, item: FormData) : any {
+    return this.http.post<any>(
+      `${environment.backendUrl}/api/items/${id}/edit`,
+      item
+    );
+  }
 
   // getItemsToDisplay () {
   //   return this.itemsToDisplay.asObservable();

@@ -4,6 +4,7 @@ Backend permettant de gérer le prototype de e-commerce de l'application Miandab
 # Architecture
 
 # Rappels
+## Synfony
 Télecharger les dépendances
 ```bash
 composer install

@@ -17,7 +17,7 @@ class ItemsRepository extends ServiceEntityRepository
         parent::__construct($registry, Items::class);
     }
 
-    public function findAll(): array
+    public function findItems(): array
     {
         $items = $this->findBy([]);
         return array_map(function ($item) {
@@ -30,12 +30,13 @@ class ItemsRepository extends ServiceEntityRepository
                 $item->getQuantity(),
                 $item->getVideo(),
                 $item->getPicture(),
-                $item->getContenthash()
+                $item->getContenthash(),
+                $item->isActive()
             );
         }, $items);
     }
 
-    public function findItems(): array
+    public function findActiveItems(): array
     {
         $items = $this->findBy(['isActive' => true]);
         return array_map(function ($item) {
@@ -48,7 +49,8 @@ class ItemsRepository extends ServiceEntityRepository
                 $item->getQuantity(),
                 $item->getVideo(),
                 $item->getPicture(),
-                $item->getContenthash()
+                $item->getContenthash(),
+                $item->isActive()
             );
         }, $items);
     }

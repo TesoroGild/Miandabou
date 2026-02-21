@@ -1,9 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { ToastService } from '../../../../services/toast/toast.service';
-import { Item } from '../../../../interfaces/item.interface';
 import { environment } from '../../../../../environments/environment';
 import { ItemService } from '../../../../services/item/item.service';
 
@@ -19,7 +16,6 @@ export class DeleteItemComponent {
   @Output() close = new EventEmitter<void>();
 
   constructor(
-    //private router: Router,
     private toastService: ToastService,
     private itemService: ItemService,
   ) {

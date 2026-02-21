@@ -11,6 +11,7 @@ import { RegisterPage } from './pages/register/register.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { BillsPage } from './pages/bills/bills.page';
 import { ItemDetailsPage } from './pages/items/item-details/item-details.page';
+import { StockPage } from './pages/stock/stock.page';
 
 export const routes: Routes = [
     {
@@ -61,6 +62,10 @@ export const routes: Routes = [
     {
         path: 'register',
         component: RegisterPage
+    },
+    {
+        path: 'stock',
+        component: StockPage
     },
     {
         path: '**',

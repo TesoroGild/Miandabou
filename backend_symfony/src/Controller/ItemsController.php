@@ -24,7 +24,7 @@ final class ItemsController extends AbstractController
     //CREATE
     #[Route('/api/items', name: 'create_items', methods: ['POST'])]
     #[OA\RequestBody(
-        description: 'Informations du client pour créer le profil.',
+        description: 'Informations pour créer l\'article.',
         required: true,
         content: new OA\JsonContent(
             properties: [
@@ -36,7 +36,7 @@ final class ItemsController extends AbstractController
                     enum: ['dress', 'pant', 'necklaces', 'shoes', 'hat', 'bag', 'earrings', 'watch']
                 ),
                 new OA\Property(property: 'price', type: 'string'),
-                new OA\Property(property: 'qte', type: 'string'),
+                new OA\Property(property: 'quantity', type: 'string'),
                 new OA\Property(property: 'picture', type: 'string')
             ]
         )
@@ -50,7 +50,7 @@ final class ItemsController extends AbstractController
     public function createItem(Request $request, EntityManagerInterface $entityManager, 
         LoggerInterface $logger, UploadService $uploadService): JsonResponse
     {
-        //try {
+        try {
             $item = new Items();
             $category = ItemCategory::from($request->request->get('category'));
             $item->setName($request->request->get('name'));
@@ -96,20 +96,20 @@ final class ItemsController extends AbstractController
             //     'msg' => 'Article ajouté!', 
             //     'item' => $itemCreated
             // ], Response::HTTP_CREATED);
-        // } catch (\Throwable $t) {//\Exception $e
-        //     $logger->error('Erreur : ' . $t->getMessage());
-        //     return $this->json(
-        //         ['msg' => $t->getMessage()],
-        //         Response::HTTP_INTERNAL_SERVER_ERROR
-        //     );
-        // }
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur : ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     //READ
     #[Route('/api/items', name: 'list_items', methods: ['GET'])]
     #[OA\Response(
         response: 200, 
-        description: 'Afficher les articles.',
+        description: 'Récupérer les articles.',
         content: new OA\JsonContent(
             properties: [
                 new OA\Property(
@@ -136,16 +136,22 @@ final class ItemsController extends AbstractController
                             new OA\Property(property: 'ordersItems', type: 'object')
                         ]
                     )
-                )
+                ),
+                new OA\Property(property: 'msg', type: 'string'),
             ]
         )
     )]
     #[OA\Tag(name: 'Items')]
-    public function getItems(ItemsRepository $itemsRepository, LoggerInterface $logger): JsonResponse
+    public function getItems(ItemsRepository $itemsRepository, LoggerInterface $logger, Request $request): JsonResponse
     {
         try {
-            $items = $itemsRepository->findItems();
-            
+            $isActive= $request->query->getBoolean('active', false);
+
+            if ($isActive) {
+                $items = $itemsRepository->findActiveItems();
+            } else { 
+                $items = $itemsRepository->findItems();
+            }
             return $this->json([
                 'items' => $items,
                 'msg' => 'Liste des articles!'
@@ -160,16 +166,15 @@ final class ItemsController extends AbstractController
     }
 
     #[Route('/api/items/{id}', name: 'item_details', methods: ['GET'])]
+    #[OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"), description: "ID article")]
     #[OA\Response(
         response: 200, 
-        description: 'Afficher les articles.',
+        description: 'Récupérer un article.',
         content: new OA\JsonContent(
             properties: [
                 new OA\Property(
-                    property: 'items',
-                    type: 'array',
-                    items: new OA\Items(
-                        type: 'object',
+                    property: 'item',
+                    type: 'object',
                         properties: [
                             new OA\Property(property: 'id', type: 'string'),
                             new OA\Property(property: 'name', type: 'string'),
@@ -188,8 +193,8 @@ final class ItemsController extends AbstractController
                             new OA\Property(property: 'timemodified', type: 'datetime'),
                             new OA\Property(property: 'ordersItems', type: 'object')
                         ]
-                    )
-                )
+                ),
+                new OA\Property(property: 'msg', type: 'string'),
             ]
         )
     )]
@@ -217,9 +222,97 @@ final class ItemsController extends AbstractController
     }
 
     //UPDATE
+    #[Route('/api/items/{id}/edit', name: 'item_update', methods: ['POST'])]
+    #[OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"), description: "ID article")]
+    #[OA\RequestBody(
+        description: 'Informations de l\'article à modifier.',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string'),
+                new OA\Property(
+                    property: 'category', 
+                    type: 'string',
+                    enum: ['dress', 'pant', 'necklaces', 'shoes', 'hat', 'bag', 'earrings', 'watch']
+                ),
+                new OA\Property(property: 'price', type: 'string'),
+                new OA\Property(property: 'picture', type: 'string')
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200, 
+        description: 'Article modifié; Retourne un message de succès.',
+        content: new OA\JsonContent(properties: [new OA\Property(property: 'msg', type: 'string')])
+    )]
+    #[OA\Tag(name: 'Items')]
+    public function updateItem(int $id, ItemsRepository $itemsRepository, LoggerInterface $logger, 
+        EntityManagerInterface $entityManager, Request $request, UploadService $uploadService): JsonResponse
+    {
+        try {
+            $item = $itemsRepository->findItem($id);
+
+            if (!$item) {
+                return $this->json(['msg' => 'Article introuvable'], 404);
+            }
+
+            if ($request->request->get('category')) {
+                $category = ItemCategory::from($request->request->get('category'));
+                $item->setCategory($category);
+            }
+            if ($request->request->get('name'))
+                $item->setName($request->request->get('name'));
+            if ($request->request->get('description'))
+                $item->setDescription($request->request->get('description'));
+            if ($request->request->get('price'))
+                $item->setPrice($request->request->get('price'));
+            if ($request->request->get('video'))
+                $item->setVideo($request->request->get('video'));
+            $file = $request->files->get('picture');
+
+            if ($file) {
+                $uploadInfo = $uploadService->handleImageUpload($file);
+                $item->setPicture($uploadInfo['filename']);
+                $item->setContenthash($uploadInfo['hash']);
+            }
+
+            $item->setTimemodified(new \DateTime());
+            $entityManager->flush();
+
+            return $this->json([
+                'msg' => 'Article modifié avec succès.'
+            ], Response::HTTP_OK);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur updateitem: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    #[Route('/api/items/{id}/qty', name: 'item_update_quantity', methods: ['PATCH'])]
+    #[OA\Tag(name: 'Items')]
+    public function updateQuantity(int $id, ItemsRepository $itemsRepository, LoggerInterface $logger, 
+        EntityManagerInterface $entityManager, Request $request, UploadService $uploadService): JsonResponse
+    {
+        try {
+            return $this->json([
+                'msg' => 'Quantité modifiée avec succès.'
+            ], Response::HTTP_OK);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur updatequantity: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 
     //DELETE
-    #[Route('/api/items/{id}', name: 'item_deletion', methods: ['PATCH'])]
+    #[Route('/api/items/{id}/delete', name: 'item_deletion', methods: ['PATCH'])]
+    #[OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"), description: "ID article")]
     #[OA\Response(
         response: 201, 
         description: 'Article suppprimé; Retourne un message de succès.',
@@ -236,6 +329,7 @@ final class ItemsController extends AbstractController
             }
 
             $itemToDelete->setIsActive(false);
+            $itemToDelete->setTimemodified(new \DateTime());
             $entityManager->flush();
 
             return $this->json([

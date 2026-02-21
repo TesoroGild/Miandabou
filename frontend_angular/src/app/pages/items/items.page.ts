@@ -3,9 +3,6 @@ import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-//Components
-import { AddItemComponent } from '../../shared/components/manage-item/add-item/add-item.component';
-
 //Interfaces
 import { Item } from '../../interfaces/item.interface';
 
@@ -16,13 +13,11 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart/cart.service';
 import { ItemService } from '../../services/item/item.service';
 import { FormsModule } from '@angular/forms';
-import { DeleteItemComponent } from "../../shared/components/manage-item/delete-item/delete-item.component";
-import { UpdateItemComponent } from "../../shared/components/manage-item/update-item/update-item.component";
 
 const SORT_KEY = 'sort-key';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, AddItemComponent, RouterModule, FormsModule, DeleteItemComponent, UpdateItemComponent],
+  imports: [CommonModule, RouterModule, FormsModule, ],
   templateUrl: './items.page.html',
   styleUrl: './items.page.scss'
 })
@@ -52,7 +47,7 @@ export class ItemsPage {
   }
 
   refreshItems() {
-    this.getItems();
+    this.getActiveItems();
     this.items$ = this.itemService.getAllItems();
     this.itemsSubscription = this.items$.subscribe((i) => {
       this.items = i;
@@ -60,11 +55,11 @@ export class ItemsPage {
     });
   }
 
-  getItems () {
-    this.itemService.getItems();
+  getActiveItems () {
+    this.itemService.getActiveItems();
   }
-  // getItems () {
-  //   this.itemService.getItems().subscribe(items => {
+  // getActiveItems () {
+  //   this.itemService.getActiveItems().subscribe(items => {
   //     if (items.items != null && items.items != undefined) {
   //       this.items = items.items;
   //       this.itemService.setItemsToDisplay(this.items);

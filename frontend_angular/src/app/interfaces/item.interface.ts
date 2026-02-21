@@ -9,7 +9,7 @@ export interface Item {
     contenthash : string;
     video : string;
     price : string;
-    qte: string;
+    quantity: string;
     quantityS: number;
     quantityM: number;
     quantityL: number;
@@ -19,6 +19,7 @@ export interface Item {
     //penser a faire un tableau de rate car ce n'est pas une seule personne qui note le produit
     rate: number;
     totalSell: number;
+    isActive: boolean
 }
 
 export interface ItemCaisse {

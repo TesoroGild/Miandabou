@@ -23,7 +23,7 @@ export class ItemDetailsPage {
     contenthash : "",
     video : "",
     price : "",
-    qte: "",
+    quantity: "",
     quantityS: 0,
     quantityM: 0,
     quantityL: 0,
@@ -33,6 +33,7 @@ export class ItemDetailsPage {
     //penser a faire un tableau de rate car ce n'est pas une seule personne qui note le produit
     rate: 0,
     totalSell: 0,
+    isActive: false
   };
   tmpItemToDetail: any;
 

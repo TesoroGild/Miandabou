@@ -25,7 +25,6 @@ export class AddItemComponent {
   constructor(
     private formBuilder: FormBuilder,
     private itemService: ItemService,
-    private router: Router,
     private toastService: ToastService
   ) { }
 
@@ -166,6 +165,7 @@ export class AddItemComponent {
           this.toastService.success(res.msg);
           this.itemForm.reset();
           this.resetPicture();
+          this.closeAddModal();
         },
         error: (err: any) => {
           if (err.status >= 404 && err.status < 500) {
