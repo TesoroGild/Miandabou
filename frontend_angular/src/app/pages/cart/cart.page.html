@@ -2,7 +2,7 @@
 <section class="py-12 relative">
     <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
 
-        <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Votre Panier d'achat
+        <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black dark:text-white">Votre Panier d'achat
         </h2>
         
         <div class="col mb-4" *ngFor="let item of cart">
@@ -58,25 +58,25 @@
             </div>
         </div>
         
-        <div class="bg-gray-50 rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">
             <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
                 <p class="font-normal text-xl leading-8 text-gray-400">Sous Total</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900">${{ subTotal }}</h6>
+                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ subTotal }}</h6>
             </div>
             <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
                 <p class="font-normal text-xl leading-8 text-gray-400">Tps</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900">${{ tps }}</h6>
+                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ tps }}</h6>
             </div>
             <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
                 <p class="font-normal text-xl leading-8 text-gray-400">Tvq</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900">${{ tvq }}</h6>
+                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ tvq }}</h6>
             </div>
             <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
                 <p class="font-normal text-xl leading-8 text-gray-400">Coupon</p>
                 <h6 class="font-semibold text-xl leading-8 text-red-500">-${{ couponsTotal }}</h6>
             </div>
             <div class="flex items-center justify-between w-full py-6">
-                <p class="font-manrope font-medium text-2xl leading-9 text-gray-900">Total</p>
+                <p class="font-manrope font-medium text-2xl leading-9 text-gray-100">Total</p>
                 <h6 class="font-manrope font-medium text-2xl leading-9 text-indigo-500">${{ total }}</h6>
             </div>
         </div>

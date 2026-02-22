@@ -121,12 +121,17 @@ export class NavbarComponent {
     this.isLanguagesDropdownOpen = !this.isLanguagesDropdownOpen;
   }
 
-  @ViewChild('dropdownWrapper') dropdownWrapper!: ElementRef;
+  @ViewChild('dropdownLangageWrapper') dropdownLangageWrapper!: ElementRef;
+  @ViewChild('dropdownProfileWrapper') dropdownProfileWrapper!: ElementRef;
   @HostListener('document:click', ['$event'])
-  clickout(event: any) {
-    // Si l'élément cliqué n'est pas contenu dans le dropdownWrapper
-    if (this.dropdownWrapper && !this.dropdownWrapper.nativeElement.contains(event.target)) {
+  clickLangageOut(event: any) {
+    // Si l'élément cliqué n'est pas contenu dans le dropdownLangageWrapper
+    if (this.dropdownLangageWrapper && !this.dropdownLangageWrapper.nativeElement.contains(event.target)) {
       this.isLanguagesDropdownOpen = false;
+    }
+
+    if (this.dropdownProfileWrapper && !this.dropdownProfileWrapper.nativeElement.contains(event.target)) {
+      this.isProfileDropdownOpen = false;
     }
   }
 

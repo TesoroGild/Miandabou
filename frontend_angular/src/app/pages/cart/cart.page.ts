@@ -42,10 +42,10 @@ export class CartPage {
     this.cartService.getCouponTotal().subscribe(total => {
       this.couponsTotal = total;
     })
-    // this.cartService.getCoupons().subscribe(coupons => {
-    //   this.coupons = coupons;
-    //   this.checkboxStates = this.coupons.map(() => false);
-    // });
+    this.cartService.getCoupons().subscribe(coupons => {
+      this.coupons = coupons;
+      this.checkboxStates = this.coupons.map(() => false);
+    });
   }
 
   cart: ItemCart [] = [];
@@ -58,6 +58,7 @@ export class CartPage {
   loginModal: boolean = false;
   checkboxStates: boolean[] = [];
   showCouponsModal: boolean = false;
+  coupons: Coupon[] = [];
 
   cartEmpty() {
     if (this.cart.length != 0)

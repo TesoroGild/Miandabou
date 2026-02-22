@@ -30,7 +30,7 @@ export class CartService {
   private couponsSubject: BehaviorSubject<Coupon[]>;
   private couponsTotalSubject: BehaviorSubject<number>;
   private couponsCaisseTotalSubject: BehaviorSubject<number>;
-  testTotal: any;
+  total: number = 0;
 
   cart: ItemCart[] = [];
   caisse: ItemCaisse[] = [];
@@ -57,17 +57,46 @@ export class CartService {
       this.items = i;
     });
     this.itemsCartSubject = new BehaviorSubject<ItemCart[]>([]);
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+      this.itemsCartSubject.next(JSON.parse(savedCart));
+    }
     this.itemsCaisseSubject = new BehaviorSubject<ItemCaisse[]>([]); 
     this.cartTotalSubject = new BehaviorSubject<number>(0);
+    const savedTotal = localStorage.getItem("total");
+    if (savedTotal) {
+      this.cartTotalSubject.next(JSON.parse(savedTotal));
+    }
     this.caisseTotalSubject = new BehaviorSubject<number>(0);
     this.checkoutTotalSubject = new BehaviorSubject<number>(0);
     this.subTotalSubject = new BehaviorSubject<number>(0);
+    const savedSubTotal = localStorage.getItem("subTotal");
+    if (savedSubTotal) {
+      this.subTotalSubject.next(JSON.parse(savedSubTotal));
+    }
     this.subTotalCaisseSubject = new BehaviorSubject<number>(0);
     this.tvqSubject = new BehaviorSubject<number>(0);
+    const savedTvq = localStorage.getItem("tvq");
+    if (savedTvq) {
+      this.tvqSubject.next(JSON.parse(savedTvq));
+    }
     this.tpsSubject = new BehaviorSubject<number>(0);
+    const savedTps = localStorage.getItem("tps");
+    if (savedTps) {
+      this.tpsSubject.next(JSON.parse(savedTps));
+    }
+    const savedTestTotal = localStorage.getItem("total");
+    if (savedTestTotal) {
+      this.total = +savedTestTotal;
+    }
     this.couponsTotalSubject = new BehaviorSubject<number>(0);
     this.couponsCaisseTotalSubject = new BehaviorSubject<number>(0);
     this.couponsSubject = new BehaviorSubject<Coupon[]>([]);
+    const savedCoupons = localStorage.getItem("coupons");
+    if (savedCoupons) {
+      this.couponsSubject.next(JSON.parse(savedCoupons));
+    }
     this.deliverySubject = new BehaviorSubject<number>(50);
   }
 
@@ -102,6 +131,11 @@ export class CartService {
     }
     this.itemsCartSubject.next(this.cart);
     this.subTotalCalculate();
+    this.saveCartToLocalStorage();
+  }
+
+  saveCartToLocalStorage () {
+    localStorage.setItem("cart", JSON.stringify(this.cart));
   }
 
   decraseQuantityInCart (itemToRemove: Item) {
@@ -114,6 +148,7 @@ export class CartService {
       }
       this.itemsCartSubject.next(this.cart);
       this.subTotalCalculate();
+      this.saveCartToLocalStorage();
     }
   }
 
@@ -121,6 +156,7 @@ export class CartService {
     this.cart = this.cart.filter(item => item.item.id !== itemToDelete.id);
     this.itemsCartSubject.next(this.cart);
     this.subTotalCalculate();
+    this.saveCartToLocalStorage();
   }
 
   updateQuantity(itemToModify: Item, qte: number) {
@@ -133,11 +169,13 @@ export class CartService {
       }
       this.itemsCartSubject.next(this.cart);
       this.subTotalCalculate();
+      this.saveCartToLocalStorage();
     } else {
       if (qte > 0) {
         this.cart.push({ item: itemToModify, quantityBuy: qte });
         this.itemsCartSubject.next(this.cart);
         this.subTotalCalculate();
+        this.saveCartToLocalStorage();
       }
     }
   }
@@ -182,7 +220,12 @@ export class CartService {
       return subTotal + (Number(cartItem.item.price) * cartItem.quantityBuy);
     }, 0);
     this.subTotalSubject.next(parseFloat(this.subTotal.toFixed(2)));
+    this.saveSubTotalToLocalStorage();
     this.tvqCalculate();
+  }
+
+  saveSubTotalToLocalStorage() {
+    localStorage.setItem("subTotal", JSON.stringify(this.subTotal));
   }
 
   subTotalCaisseCalculate () {
@@ -207,7 +250,12 @@ export class CartService {
   tvqCalculate () {
     this.tvq = (this.subTotal * (this.tvqRate / 100)).toFixed(2);
     this.tvqSubject.next(parseFloat(this.tvq));
+    this.saveTvqToLocalStorage();
     this.tpsCalculate();
+  }
+
+  saveTvqToLocalStorage() {
+    localStorage.setItem("tvq", JSON.stringify(this.tvq));
   }
 
   getTvq () {
@@ -217,7 +265,12 @@ export class CartService {
   tpsCalculate () {
     this.tps = (this.subTotal * (this.tpsRate / 100)).toFixed(2);
     this.tpsSubject.next(parseFloat(this.tps));
+    this.saveTpsToLocalStorage();
     this.totalCalculate();
+  }
+
+  saveTpsToLocalStorage() {
+    localStorage.setItem("tps", JSON.stringify(this.tps));
   }
 
   getTps () {
@@ -225,9 +278,15 @@ export class CartService {
   }
 
   totalCalculate () {
-    this.testTotal = Number((this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal).toFixed(2));
-    this.cartTotalSubject.next(this.testTotal);
-    return this.testTotal;
+    console.log("JE SUIS CIIIIIII")
+    this.total = Number((this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal).toFixed(2));
+    this.cartTotalSubject.next(this.total);
+    this.saveTotalToLocalStorage();
+    return this.total;
+  }
+
+  saveTotalToLocalStorage() {
+    localStorage.setItem("total", JSON.stringify(this.total));
   }
 
   totalCaisseCalculate () {
@@ -303,10 +362,16 @@ export class CartService {
       if (couponsFounded.coupons != null && couponsFounded.coupons != undefined)
         this.coupons = couponsFounded.coupons;
 
+      this.saveCouponsToLocalStorage();
       this.couponsSubject.next(this.coupons);
       return this.couponsSubject.asObservable();
     });
+    this.saveCouponsToLocalStorage();
     return this.couponsSubject.asObservable();
+  }
+
+  saveCouponsToLocalStorage() {
+    localStorage.setItem("coupons", JSON.stringify(this.coupons));
   }
 
   setAllCoupons () {
@@ -337,7 +402,7 @@ export class CartService {
   }
 
   totalCheckout () {
-    this.checkoutTotalSubject.next(this.testTotal + this.delivery);
+    this.checkoutTotalSubject.next(this.total + this.delivery);
   }
 
   getCheckoutTotal () {
