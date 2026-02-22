@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../services/toast/toast.service';
@@ -13,6 +13,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  @Input() isOpen = false;
+  @Output() close = new EventEmitter<void>();
+
   loginForm!: FormGroup;
   userIsLoggedIn: boolean = false;
 
@@ -58,6 +61,7 @@ export class LoginComponent {
             const currentUrl = this.router.url;
             //remplacer true
             if (currentUrl != "/cart") this.router.navigate(['']);
+            this.closeLoginModal()
             //else this.router.navigate(['/checkout'])
             console.log("LOGIN: USER CONNECTED");
           } else {
@@ -101,5 +105,9 @@ export class LoginComponent {
       this.loginForm.controls[field].hasError(error) &&
       (this.loginForm.controls[field].dirty || this.loginForm.controls[field].touched)
     );
+  }
+
+  closeLoginModal() {
+    this.close.emit();
   }
 }

@@ -55,7 +55,7 @@ export class CartPage {
   tps: number = 0;
   couponsTotal: number = 0;
   paymentModal: boolean = false;
-  loginModal: boolean = false;
+  showLoginModal: boolean = false;
   checkboxStates: boolean[] = [];
   showCouponsModal: boolean = false;
   coupons: Coupon[] = [];
@@ -113,11 +113,11 @@ export class CartPage {
   }
 
   openLoginModal() {
-    this.loginModal = true;
+    this.showLoginModal = true;
   }
 
   closeLoginModal() {
-    this.loginModal = false;
+    this.showLoginModal = false;
   }
 
   picture (contenthash: string) {

@@ -118,8 +118,8 @@
 </section>
 
 <!-- Login Modal -->
-<div *ngIf="loginModal" class="bg-black opacity-70 fixed inset-0 z-5"></div>
-<div *ngIf="loginModal" id="loginModal" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center min-h-screen">
+<div *ngIf="showLoginModal" class="bg-black opacity-70 fixed inset-0 z-5"></div>
+<div *ngIf="showLoginModal" id="loginModal" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center min-h-screen">
     <div class="bg-gray-50 dark:bg-gray-900 w-1/4 px-6 pt-6 rounded shadow-md">
         <!-- Modal header -->
         <div class="flex items-center justify-between px-4 md:px-5 border-b rounded-t dark:border-gray-600">
@@ -133,7 +133,7 @@
             </button>
         </div>
         <!-- Modal body -->
-        <app-login-comp></app-login-comp>
+        <app-login-comp [isOpen]="showLoginModal" (close)="closeLoginModal()"></app-login-comp>
         <!-- Modal footer -->
         <div class="flex items-center px-4 pt-2 md:px-5 md:pt-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <button (click)="closeLoginModal()"
