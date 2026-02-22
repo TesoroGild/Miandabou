@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -97,6 +97,11 @@ export class NavbarComponent {
     return this.authService.isAdmin();
   }
 
+  navigateToItems() {
+    if (this.isAdmin()) {this.router.navigate(['/stock']); console.log("hein")}
+    else this.router.navigate(['/items']);
+  }
+
   isLoggedIn () {
     return this.authService.isLoggedIn();
   }
@@ -114,6 +119,15 @@ export class NavbarComponent {
 
   toggleLanguagesDropdown() {
     this.isLanguagesDropdownOpen = !this.isLanguagesDropdownOpen;
+  }
+
+  @ViewChild('dropdownWrapper') dropdownWrapper!: ElementRef;
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    // Si l'élément cliqué n'est pas contenu dans le dropdownWrapper
+    if (this.dropdownWrapper && !this.dropdownWrapper.nativeElement.contains(event.target)) {
+      this.isLanguagesDropdownOpen = false;
+    }
   }
 
   picture() {

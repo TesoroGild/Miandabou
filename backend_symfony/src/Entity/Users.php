@@ -162,18 +162,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getRole(): ?UserStatus
-    // {
-    //     return $this->role;
-    // }
-
-    // public function setRole(UserStatus $role): static
-    // {
-    //     $this->role = $role;
-
-    //     return $this;
-    // }
-
     public function getRoles(): array
     {
         $roles = $this->roles;

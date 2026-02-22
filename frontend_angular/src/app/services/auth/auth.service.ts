@@ -73,7 +73,8 @@ export class AuthService {
   }
 
   isAdmin() {
-    return localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN") != -1;
+    if (localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN")) return true;
+    else return false;
   }
 
   setSession(token: string, roles: string[]) {

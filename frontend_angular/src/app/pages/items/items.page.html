@@ -1,24 +1,22 @@
-<div class="flex justify-end">
-    <select
+<div class="flex justify-end dark:text-white text-gray-700 bg-inherit pt-2"> 
+    <p class="flex items-center">Trier par : </p>&nbsp;&nbsp;
+    <select id="filter"
         title="selection"
-        class="bg-inherit w-50 mt-2 mr-16"
+        class="w-50 mt-2 mr-16 rounded-sm bg-inherit"
         [(ngModel)]="filterSelect"
         (change)="filterItems()"
     >
-        <option value="default">
-            <strong>Par défaut</strong>
+        <option value="sortByPriceAsc" class="dark:text-white dark:bg-[#111827] bg-white text-gray-700">
+            Par prix croissant
         </option>
-        <option value="sortByPriceAsc">
-            <strong>Par prix croissant</strong>
+        <option value="sortByPriceDesc" class="dark:text-white dark:bg-[#111827] bg-white text-gray-700">
+            Par prix décroissant
         </option>
-        <option value="sortByPriceDesc">
-            <strong>Par prix décroissant</strong>
+        <option value="sortByNameAsc" class="dark:text-white dark:bg-[#111827] bg-white text-gray-700">
+            Par nom croissant
         </option>
-        <option value="sortByNameAsc">
-            <strong>Par nom croissant</strong>
-        </option>
-        <option value="sortByNameDesc">
-            <strong>Par nom décroissant</strong>
+        <option value="sortByNameDesc" class="dark:text-white dark:bg-[#111827] bg-white text-gray-700">
+            Par nom décroissant
         </option>
     </select>
 </div>
@@ -28,7 +26,7 @@
         <div *ngFor="let item of itemsToDisplay" class="h-[50vh] p-4 flex">
             <div
                 class="h-full w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div (click)="showItemDetails(item)" class="h-[70%]">
+                <div (click)="showItemDetails(item)" class="h-[70%] w-full">
                     <img 
                         class="rounded-t-lg w-full h-full object-contain" 
                         src="{{ picture(item.contenthash) }}" 
@@ -47,8 +45,8 @@
                         </div>
                         <div class="w-full flex">
                             <button (click)="decraseQuantityInCart(item)"
-                                class="group rounded-l-full px-3 pt-[5px] pb-[7px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
+                                class="group rounded-l-full px-3 pt-[5px] pb-[7px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-300 dark:hover:bg-white">
+                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black dark:stroke-white dark:group-hover:stroke-black"
                                     xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
                                     fill="none">
                                     <path d="M16.5 11H5.5" stroke="" stroke-width="1.6" stroke-linecap="round" />
@@ -58,13 +56,13 @@
                                         stroke-linecap="round" />
                                 </svg>
                             </button>
-                            <div class="cursor-not-allowed disabled border-y border-gray-200 outline-none text-gray-600 py-[3px] max-w-[118px] placeholder:text-gray-900 text-center bg-transparent w-3/10"
+                            <div class="flex items-center justify-center cursor-not-allowed disabled border-y border-gray-200 outline-none text-gray-900 dark:text-white py-[3px] max-w-[118px] w-3/10"
                                 placeholder="0">
                                 {{ getQuantityInCart(item.id) }}
                             </div>
                             <button (click)="addToCart(item)"
-                                class="group rounded-r-full px-3 py-[4px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
+                                class="group rounded-r-full px-3 py-[4px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-300 dark:hover:bg-white">
+                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black dark:stroke-white dark:group-hover:stroke-black"
                                     xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
                                     fill="none">
                                     <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-width="1.6"
