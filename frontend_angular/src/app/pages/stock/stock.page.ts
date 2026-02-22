@@ -25,7 +25,6 @@ const SORT_KEY = 'sort-key';
   styleUrl: './stock.page.scss'
 })
 export class StockPage {
-  items$!: Observable<Item[]>;
   itemsSubscription!: Subscription;
   items: Item[] = [];
   quantityBuy: number = 0;
@@ -46,13 +45,11 @@ export class StockPage {
 
   ngOnInit() {
       this.refreshItems();
-      //this.filterItems();
     }
   
     refreshItems() {
-      this.getItems();
-      this.items$ = this.itemService.getAllItems();
-      this.itemsSubscription = this.items$.subscribe((i) => {
+      this.itemService.getItems();
+      this.itemsSubscription = this.itemService.getItems().subscribe((i) => {
         this.items = i;
         this.filterItems();
       });
@@ -61,14 +58,6 @@ export class StockPage {
     getItems () {
       this.itemService.getItems();
     }
-    // getItems () {
-    //   this.itemService.getItems().subscribe(items => {
-    //     if (items.items != null && items.items != undefined) {
-    //       this.items = items.items;
-    //       this.itemService.setItemsToDisplay(this.items);
-    //     }
-    //   });
-    // }
   
     picture (contenthash: any) {
       return `${environment.backendUrl}/uploads/images/${contenthash}`

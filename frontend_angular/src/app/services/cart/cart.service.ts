@@ -52,7 +52,7 @@ export class CartService {
     private itemService: ItemService,
     private http: HttpClient
   ) {
-    this.items$ = this.itemService.getAllItems();
+    this.items$ = this.itemService.getItems();
     this.itemsSubscription = this.items$.subscribe((i) => {
       this.items = i;
     });

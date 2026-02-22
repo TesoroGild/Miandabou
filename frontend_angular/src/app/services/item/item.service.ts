@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Item } from '../../interfaces/item.interface';
@@ -30,7 +30,7 @@ export class ItemService {
     });
   }
 
-  getItems () {
+  getAllItems () {
     this.http.get<any>(
       `${environment.backendUrl}/api/items`
     ).subscribe((response: any) => {
@@ -40,7 +40,7 @@ export class ItemService {
     });
   }
 
-  getAllItems () {
+  getItems () {
     return this.itemsToDisplay.asObservable();
   }
 

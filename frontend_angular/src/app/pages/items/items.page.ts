@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
+import { map, startWith, catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 //Interfaces
@@ -22,7 +23,7 @@ const SORT_KEY = 'sort-key';
   styleUrl: './items.page.scss'
 })
 export class ItemsPage {
-  items$!: Observable<Item[]>;
+  itemsState$!: Observable<{ loading: boolean, data?: any[], error?: any }>;
   itemsSubscription!: Subscription;
   items: Item[] = [];
   quantityBuy: number = 0;
@@ -32,6 +33,7 @@ export class ItemsPage {
   filterSelect: string;
   itemsToDisplay: Item[] = [];
   selectedItem: any;
+  isLoading: boolean = false;
 
   constructor (
     private cartService: CartService,
@@ -42,30 +44,30 @@ export class ItemsPage {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.refreshItems();
-    //this.filterItems();
   }
 
   refreshItems() {
-    this.getActiveItems();
-    this.items$ = this.itemService.getAllItems();
-    this.itemsSubscription = this.items$.subscribe((i) => {
-      this.items = i;
-      this.filterItems();
-    });
-  }
-
-  getActiveItems () {
     this.itemService.getActiveItems();
+    // this.itemsSubscription = this.itemService.getItems().subscribe((i) => {
+    //   this.items = i;
+    //   this.filterItems();
+    // })
+    this.itemsSubscription = this.itemService.getItems().subscribe({
+      next: (data) => {
+        this.items = data;
+        this.filterItems();
+        //Not the best solution but...
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      },
+      error: (err) => {
+        this.isLoading = false;
+      }
+    })
   }
-  // getActiveItems () {
-  //   this.itemService.getActiveItems().subscribe(items => {
-  //     if (items.items != null && items.items != undefined) {
-  //       this.items = items.items;
-  //       this.itemService.setItemsToDisplay(this.items);
-  //     }
-  //   });
-  // }
 
   addToCart (item: Item) {
     this.cartService.addToCart(item);
