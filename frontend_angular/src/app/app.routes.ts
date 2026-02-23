@@ -9,9 +9,11 @@ import { AboutPage } from './pages/about/about.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { RegisterPage } from './pages/register/register.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
-import { BillsPage } from './pages/bills/bills.page';
+//import { BillsPage } from './pages/bills/bills.page';
 import { ItemDetailsPage } from './pages/items/item-details/item-details.page';
 import { StockPage } from './pages/stock/stock.page';
+import { authGuard } from './auth-guard';
+import { adminGuard, commisGuard } from './admin-guard';
 
 export const routes: Routes = [
     {
@@ -25,15 +27,18 @@ export const routes: Routes = [
     },
     {
         path: 'bills',
-        component: BillsPage
+        canMatch: [authGuard],
+        loadComponent: () => import('./pages/bills/bills.page').then(m => m.BillsPage)
     },
     {
         path: 'cart',
-        component: CartPage
+        canMatch: [authGuard],
+        loadComponent: () => import('./pages/cart/cart.page').then(m => m.CartPage)
     },
     {
         path: 'checkout',
-        component: CheckoutPage
+        canMatch: [authGuard],
+        loadComponent: () => import('./pages/checkout/checkout.page').then(m => m.CheckoutPage)
     },
     {
         path: 'contact',
@@ -65,7 +70,8 @@ export const routes: Routes = [
     },
     {
         path: 'stock',
-        component: StockPage
+        canMatch: [commisGuard],
+        loadComponent: () => import('./pages/stock/stock.page').then(m => m.StockPage)
     },
     {
         path: '**',

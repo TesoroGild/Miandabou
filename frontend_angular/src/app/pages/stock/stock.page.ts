@@ -16,6 +16,7 @@ import { Item } from '../../interfaces/item.interface';
 import { CartService } from '../../services/cart/cart.service';
 import { ItemService } from '../../services/item/item.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 
 const SORT_KEY = 'sort-key';
 @Component({
@@ -35,13 +36,16 @@ export class StockPage {
   itemsToDisplay: Item[] = [];
   selectedItem: any;
   isLoading: boolean = false;
+  isAdmin: boolean = false;
 
   constructor (
     private cartService: CartService,
     private router: Router, 
-    private itemService: ItemService
+    private itemService: ItemService,
+    private authService: AuthService
   ) { 
     this.filterSelect = this.loadFilterSelection();
+    this.isAdmin = authService.isAdmin();
   }
 
   ngOnInit() {

@@ -106,8 +106,10 @@
           </td>
         </ng-template>
         <td *ngIf="item.isActive; else noaction" class="p-4 text-sm text-slate-600 font-medium">
-          <button (click)="openUpdateItemModal(item)" class="cursor-pointer text-blue-600 font-medium mr-4">Edit</button>
-          <button (click)="openDeleteItemModal(item)" class="cursor-pointer text-red-600 font-medium">Delete</button>
+          <button (click)="openUpdateItemModal(item)" class="cursor-pointer text-blue-600 font-medium mr-4">Modifier</button>
+          @if(isAdmin) {
+            <button (click)="openDeleteItemModal(item)" class="cursor-pointer text-red-600 font-medium">Supprimer</button>
+          }
         </td>
         <ng-template #noaction>
           <td #inactive class="px-4 py-3 text-sm text-slate-600 font-medium"></td>
@@ -122,7 +124,7 @@
                 <svg class="w-3 h-3 text-heading" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/></svg>
             </button>
           </div>
-          <button (click)="updateProductQuantity()" class="cursor-pointer text-yellow-300 text-sm text-slate-600 font-medium ml-4">Add</button>
+          <button (click)="updateProductQuantity()" class="cursor-pointer text-yellow-300 text-sm text-slate-600 font-medium ml-4">Ajouter</button>
         </td>
       </tr>
     </tbody>

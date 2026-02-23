@@ -97,8 +97,13 @@ export class NavbarComponent {
     return this.authService.isAdmin();
   }
 
+  isEmployee() {
+    return this.authService.isEmployee();
+  }
+
   navigateToItems() {
-    if (this.isAdmin()) this.router.navigate(['/stock']);
+    console.log(this.isEmployee())
+    if (this.isEmployee()) this.router.navigate(['/stock']);
     else this.router.navigate(['/items']);
   }
 

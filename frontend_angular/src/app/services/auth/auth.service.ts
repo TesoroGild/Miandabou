@@ -16,6 +16,18 @@ export class AuthService {
   userIsLoggedIn = new BehaviorSubject<boolean>(false);
   userIsAdmin = new BehaviorSubject<boolean>(false);
   userToDisplay = new BehaviorSubject<UserToDisplay>({} as UserToDisplay);
+  emptyUser: UserToDisplay = {
+    id: "",
+    email: "", 
+    lastname: "",
+    firstname: "",
+    username: "",
+    dateOfBirth: "",
+    tel: "",
+    roles: [""],
+    department: "",
+    contenthash: "",
+  };
 
   userConnected: UserToDisplay = { } as UserToDisplay;
 
@@ -28,14 +40,14 @@ export class AuthService {
     if (savedUserConnected) {
       this.userToDisplay.next(JSON.parse(savedUserConnected));
     }
-    const token = localStorage.getItem('token');
-    const admin = localStorage.getItem('role');
+    const token = localStorage.getItem(this.keyToken);
+    const admin = localStorage.getItem(this.keyRole);
     this.userIsLoggedIn.next(!!token);
     this.userIsAdmin.next(!!admin);
   }
 
   isLoggedIn() {
-    return localStorage.getItem('token') != null;
+    return localStorage.getItem(this.keyToken) != null;
   }
 
   logIn(userToConnect: FormData) {
@@ -79,6 +91,11 @@ export class AuthService {
     else return true;
   }
 
+  isEmployee() {
+    if (localStorage.getItem(this.keyRole)?.search("ROLE_EMP") === -1) return false;
+    else return true;
+  }
+
   setSession(token: string, user: UserToDisplay) {
     localStorage.setItem(this.keyToken, token);
     localStorage.setItem(this.keyUser, JSON.stringify(user));
@@ -97,9 +114,11 @@ export class AuthService {
   unsetSession() {
     localStorage.removeItem(this.keyToken);
     localStorage.removeItem(this.keyRole);
+    localStorage.removeItem(this.keyUser);
     //localStorage.clear();
     this.userIsLoggedIn.next(false);
     this.userIsAdmin.next(false);
+    this.userToDisplay.next(this.emptyUser);
   }
 
   getToken(): string | null {
@@ -120,5 +139,19 @@ export class AuthService {
 
   getUserToDisplay() {
     return this.userToDisplay.asObservable();
+  }
+
+  getUserRoles(): string[] {
+    const token = localStorage.getItem(this.keyToken);
+    if (!token) return [];
+
+    try {
+      const payloadBase64 = token.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson);
+      return payload.roles || [];
+    } catch (e) {
+      return [];
+    }
   }
 }
