@@ -12,9 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   keyRole: string = 'role';
   keyToken: string = 'token';
-
-  //userToDisplay: UserToDisplay = { } as UserToDisplay;
-
+  keyUser: string = 'user';
   userIsLoggedIn = new BehaviorSubject<boolean>(false);
   userIsAdmin = new BehaviorSubject<boolean>(false);
   userToDisplay = new BehaviorSubject<UserToDisplay>({} as UserToDisplay);
@@ -26,6 +24,10 @@ export class AuthService {
     private toastService: ToastService,
     private router: Router
   ) { 
+    const savedUserConnected = localStorage.getItem('user');
+    if (savedUserConnected) {
+      this.userToDisplay.next(JSON.parse(savedUserConnected));
+    }
     const token = localStorage.getItem('token');
     const admin = localStorage.getItem('role');
     this.userIsLoggedIn.next(!!token);
@@ -73,13 +75,14 @@ export class AuthService {
   }
 
   isAdmin() {
-    if (localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN")) return true;
-    else return false;
+    if (localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN") === -1) return false;
+    else return true;
   }
 
-  setSession(token: string, roles: string[]) {
+  setSession(token: string, user: UserToDisplay) {
     localStorage.setItem(this.keyToken, token);
-    localStorage.setItem(this.keyRole, JSON.stringify(roles));
+    localStorage.setItem(this.keyUser, JSON.stringify(user));
+    localStorage.setItem(this.keyRole, JSON.stringify(user.roles));
     this.userIsLoggedIn.next(true);
 
     // envoyer le token JWT dans l'en-tête d'autorisation des requêtes HTTP
@@ -104,14 +107,12 @@ export class AuthService {
   }
 
   setUserToDisplay(user: UserToDisplay, token: string) {
-    //this.userToDisplay = user;
     this.userToDisplay.next(user);
-    this.setSession(token, user.roles);
+    this.setSession(token, user);
     return this.userToDisplay.asObservable();
   }
 
   unsetUserToDisplay() {
-    //this.userToDisplay = user;
     this.userToDisplay.next({} as UserToDisplay);
     this.unsetSession();
     return this.userToDisplay.asObservable();

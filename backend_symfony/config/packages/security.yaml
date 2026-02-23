@@ -35,12 +35,19 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    role_hierarchy:
+        ROLE_CLIENT:        ROLE_USER
+        ROLE_EMP:           ROLE_CLIENT
+        ROLE_ADMIN:         ROLE_EMP
+        # Easy way to control access for large sections of your site
+        # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/items/\d+/edit$, roles: ROLE_EMP, methods: [POST] }
+        - { path: ^/api/items/\d+/qty$, roles: ROLE_EMP, methods: [PATCH] }
+        - { path: ^/api/items/\d+/delete$, roles: ROLE_ADMIN, methods: [PATCH] }
+        - { path: ^/api/items$, roles: ROLE_EMP, methods: [POST] }
+        - { path: ^/api/checkout, roles: ROLE_CLIENT }
+        - { path: ^/api/users$, roles: ROLE_ADMIN }
 
 when@test:
     security:

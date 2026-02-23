@@ -52,6 +52,7 @@ final class ItemsController extends AbstractController
     {
         try {
             $item = new Items();
+            $this->denyAccessUnlessGranted('POST_CREATE', $item);
             $category = ItemCategory::from($request->request->get('category'));
             $item->setName($request->request->get('name'));
             $item->setCategory($category);
@@ -257,6 +258,8 @@ final class ItemsController extends AbstractController
                 return $this->json(['msg' => 'Article introuvable'], 404);
             }
 
+            $this->denyAccessUnlessGranted('POST_EDIT', $item);
+
             if ($request->request->get('category')) {
                 $category = ItemCategory::from($request->request->get('category'));
                 $item->setCategory($category);
@@ -328,6 +331,7 @@ final class ItemsController extends AbstractController
                 return $this->json(['msg' => 'Article introuvable'], 404);
             }
 
+            $this->denyAccessUnlessGranted('POST_DELETE', $itemToDelete);
             $itemToDelete->setIsActive(false);
             $itemToDelete->setTimemodified(new \DateTime());
             $entityManager->flush();

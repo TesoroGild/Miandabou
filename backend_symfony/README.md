@@ -4,6 +4,9 @@ Backend permettant de gérer le prototype de e-commerce de l'application Miandab
 # Architecture
 
 # Rappels
+## Aide
+Cette [chaine] (https://www.youtube.com/playlist?list=PLBq3aRiVuwywmwPHz0BzPFvH0P-37mH8K) vous sera très utilise pour comprendre Symfony.
+
 ## Synfony
 Télecharger les dépendances
 ```bash

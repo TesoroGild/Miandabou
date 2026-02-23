@@ -95,7 +95,7 @@ final class AuthController extends AbstractController
             //$userToConnect->setLastLogin(new \DateTime());
 
             $userToConnect = new UsersDto (
-                $userToCheck->getId(),
+                0,
                 $userToCheck->getusername(),
                 $userToCheck->getFirstname(),
                 $userToCheck->getLastname(),

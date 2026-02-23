@@ -98,7 +98,7 @@ export class NavbarComponent {
   }
 
   navigateToItems() {
-    if (this.isAdmin()) {this.router.navigate(['/stock']); console.log("hein")}
+    if (this.isAdmin()) this.router.navigate(['/stock']);
     else this.router.navigate(['/items']);
   }
 
@@ -107,7 +107,6 @@ export class NavbarComponent {
   }
 
   logOut() {
-    console.log(this.userToDisplay);
     this.authService.logOut();
     this.cartService.emptyCart();
     this.userService.clearData();
