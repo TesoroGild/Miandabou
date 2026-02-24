@@ -5,10 +5,12 @@ import { ItemService } from '../../../services/item/item.service';
 import { environment } from '../../../../environments/environment';
 import { CartService } from '../../../services/cart/cart.service';
 import { ToastService } from '../../../services/toast/toast.service';
+import { ReviewFormComponent } from "../../../shared/components/reviews/review-form/review-form.component";
+import { ReviewsListComponent } from '../../../shared/components/reviews/reviews-list/reviews-list.component';
 
 @Component({
   selector: 'app-item-details',
-  imports: [],
+  imports: [ReviewFormComponent, ReviewsListComponent],
   templateUrl: './item-details.page.html',
   styleUrl: './item-details.page.scss'
 })
@@ -36,6 +38,8 @@ export class ItemDetailsPage {
     isActive: false
   };
   tmpItemToDetail: any;
+  showReviewsModal: boolean = false;
+  showReviewFormModal: boolean = false;
 
   constructor ( 
     private route: ActivatedRoute, 
@@ -68,5 +72,21 @@ export class ItemDetailsPage {
   addToCart(item: Item, qte: number) {
     this.cartService.updateQuantity(item, qte);
     this.toastService.info("Voir le panier");
+  }
+
+  openReviewsModal() {
+    this.showReviewsModal = true
+  }
+
+  closeReviewsModal() {
+    this.showReviewsModal = false
+  }
+
+  openReviewFormModal() {
+    this.showReviewFormModal = true
+  }
+
+  closeReviewFormModal() {
+    this.showReviewFormModal = false
   }
 }

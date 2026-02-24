@@ -65,10 +65,17 @@ class Items
     #[ORM\ManyToMany(targetEntity: Coupons::class, mappedBy: 'items')]
     private Collection $coupons;
 
+    /**
+     * @var Collection<int, Reviews>
+     */
+    #[ORM\OneToMany(targetEntity: Reviews::class, mappedBy: 'items')]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->ordersItems = new ArrayCollection();
         $this->coupons = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,6 +267,36 @@ class Items
     {
         if ($this->coupons->removeElement($coupon)) {
             $coupon->removeItem($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reviews>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Reviews $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setItems($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Reviews $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getItems() === $this) {
+                $review->setItems(null);
+            }
         }
 
         return $this;

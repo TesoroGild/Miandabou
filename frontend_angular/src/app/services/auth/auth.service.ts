@@ -87,12 +87,12 @@ export class AuthService {
   }
 
   isAdmin() {
-    if (localStorage.getItem(this.keyRole)?.search("ROLE_ADMIN") === -1) return false;
+    if ((localStorage.getItem(this.keyRole)  ?? '').search("ROLE_ADMIN") === -1) return false;
     else return true;
   }
 
   isEmployee() {
-    if (localStorage.getItem(this.keyRole)?.search("ROLE_EMP") === -1) return false;
+    if ((localStorage.getItem(this.keyRole) ?? '').search("ROLE_EMP") === -1) return false;
     else return true;
   }
 

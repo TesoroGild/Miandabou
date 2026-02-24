@@ -58,3 +58,9 @@ ng serve
 ### Modifier le panier
 ### Passer une commande
 ### Recevoir une notification
+### Télecharger la facture
+
+## Should have
+* Logique avec les coupons.
+* Commentaires et notes.
+* Couleur et taille des articles.
