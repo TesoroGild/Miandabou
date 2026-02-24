@@ -61,10 +61,6 @@ export const routes: Routes = [
         component: LoginPage
     },
     {
-        path: 'notfound',
-        component: NotFoundPage
-    },
-    {
         path: 'register',
         component: RegisterPage
     },
@@ -72,6 +68,10 @@ export const routes: Routes = [
         path: 'stock',
         canMatch: [commisGuard],
         loadComponent: () => import('./pages/stock/stock.page').then(m => m.StockPage)
+    },
+    {
+        path: 'notfound',
+        component: NotFoundPage
     },
     {
         path: '**',
