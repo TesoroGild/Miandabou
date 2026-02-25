@@ -31,8 +31,8 @@ export class ReviewsService {
 
   }
 
-  getItemReviews() {
-
+  getItemReviews(id: number) {
+    return this.http.get<any>(`${environment.backendUrl}/api/reviews/${id}`);
   }
 
   getUserReviews() {

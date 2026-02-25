@@ -65,6 +65,7 @@ export class ReviewFormComponent {
             next: (res: any) => {
               this.toastService.success(res.msg);
               this.reviewForm.reset();
+              this.reviewsService.getItemReviews(+id);
               //const currentUrl = this.router.url;
               //remplacer true
               //if (currentUrl != "/cart") this.router.navigate(['']);

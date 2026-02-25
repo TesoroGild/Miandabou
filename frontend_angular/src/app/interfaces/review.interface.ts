@@ -3,8 +3,8 @@ export interface Review {
     rating: number;
     content: string;
     updatedtime: Date;
-    user: any;
-    item: any;
+    user: string;
+    item: string;
 }
 
 export interface ReviewCreated {
