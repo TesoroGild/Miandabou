@@ -13,6 +13,13 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_users_provider
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
+            entry_point: App\Security\AuthenticationEntryPoint
         main:
             lazy: true
             provider: users_in_memory
@@ -48,6 +55,7 @@ security:
         - { path: ^/api/items$, roles: ROLE_EMP, methods: [POST] }
         - { path: ^/api/checkout, roles: ROLE_CLIENT }
         - { path: ^/api/users$, roles: ROLE_ADMIN }
+        - { path: ^/api/reviews$, roles: ROLE_CLIENT, methods: [POST] }
 
 when@test:
     security:

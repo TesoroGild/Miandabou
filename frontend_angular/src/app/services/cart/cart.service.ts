@@ -278,7 +278,6 @@ export class CartService {
   }
 
   totalCalculate () {
-    console.log("JE SUIS CIIIIIII")
     this.total = Number((this.subTotal + Number(this.tvq) + Number(this.tps) - this.couponTotal).toFixed(2));
     this.cartTotalSubject.next(this.total);
     this.saveTotalToLocalStorage();

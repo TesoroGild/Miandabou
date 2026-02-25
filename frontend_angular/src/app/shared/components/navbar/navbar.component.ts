@@ -102,7 +102,6 @@ export class NavbarComponent {
   }
 
   navigateToItems() {
-    console.log(this.isEmployee())
     if (this.isEmployee()) this.router.navigate(['/stock']);
     else this.router.navigate(['/items']);
   }

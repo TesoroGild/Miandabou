@@ -92,7 +92,8 @@ export class AuthService {
   }
 
   isEmployee() {
-    if ((localStorage.getItem(this.keyRole) ?? '').search("ROLE_EMP") === -1) return false;
+    if ((localStorage.getItem(this.keyRole) ?? '').search("ROLE_EMP") === -1 
+      && (localStorage.getItem(this.keyRole) ?? '').search("ROLE_ADMIN") === -1) return false;
     else return true;
   }
 

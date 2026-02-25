@@ -28,6 +28,12 @@ class Reviews
     #[ORM\Column]
     private ?int $rating = null;
 
+    #[ORM\Column]
+    private ?\DateTime $timecreated = null;
+
+    #[ORM\Column]
+    private ?\DateTime $updatedtime = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +83,30 @@ class Reviews
     public function setRating(int $rating): static
     {
         $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getTimecreated(): ?\DateTime
+    {
+        return $this->timecreated;
+    }
+
+    public function setTimecreated(\DateTime $timecreated): static
+    {
+        $this->timecreated = $timecreated;
+
+        return $this;
+    }
+
+    public function getUpdatedtime(): ?\DateTime
+    {
+        return $this->updatedtime;
+    }
+
+    public function setUpdatedtime(\DateTime $updatedtime): static
+    {
+        $this->updatedtime = $updatedtime;
 
         return $this;
     }
