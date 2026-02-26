@@ -22,6 +22,7 @@ export class ReviewsListComponent {
   totalReviews: number = 0;
   showEditForm: boolean = false;
   hideDelete: boolean = true;
+  reviewToEdit!: Review;
 
   constructor (
     private route: ActivatedRoute,
@@ -71,12 +72,18 @@ export class ReviewsListComponent {
     this.close.emit();
   }
 
-  openEditForm() {
+  openEditForm(review: Review) {
     this.showEditForm = true;
+    this.reviewToEdit = review;
   }
 
   closeEditForm() {
     this.showEditForm = false;
+  }
+
+  reviewUpdated() {
+    this.showEditForm = false;
+    this.getReviews();
   }
 
   showDeletePopup() {

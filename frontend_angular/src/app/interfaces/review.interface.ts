@@ -4,7 +4,9 @@ export interface Review {
     content: string;
     updatedtime: Date;
     user: string;
+    //userId: number;
     item: string;
+    itemId: number;
 }
 
 export interface ReviewCreated {

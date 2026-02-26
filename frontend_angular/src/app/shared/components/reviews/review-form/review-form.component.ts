@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReviewsService } from '../../../../services/reviews/reviews.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { Review, ReviewCreated } from '../../../../interfaces/review.interface';
@@ -15,22 +15,34 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ReviewFormComponent {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
+  @Output() saved = new EventEmitter<void>();
+  @Input() forCreation = true;
+  @Input() set reviewToEdit(val: any) {
+    if (val) {
+      this.reviewForm.patchValue(val);
+      this.reviewFormBasedDatas = val;
+      this.reviewId = val.id;
+    }
+  }
+  reviewForm: FormGroup;
+  reviewId: number = 0;
+  reviewFormBasedDatas: any;
 
   constructor (
     private route: ActivatedRoute,
     private reviewsService: ReviewsService,
     private toastService: ToastService,
-    private router: Router,
+    private formBuilder: FormBuilder
   ) {
-    
+    this.reviewForm = this.formBuilder.group({
+      rating: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(5)]),
+      content: new FormControl(null, Validators.required),
+    });
   }
 
-  ngOnInit() { }
-
-  reviewForm = new FormGroup({
-    rating: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
-    content: new FormControl('', Validators.required),
-  });
+  ngOnInit() { 
+    
+  }
 
   stars = [1, 2, 3, 4, 5];
 
@@ -45,49 +57,60 @@ export class ReviewFormComponent {
 
   submit() {
     const slug = this.route.snapshot.paramMap.get('name');
+    let id = "";
 
-    if (slug) {
-      const id = slug.split('-')[0];
+    if (this.forCreation)
+      if (slug) id = slug.split('-')[0];
+      else return;
+    else id = this.reviewFormBasedDatas.itemId+"";
+    
+    if (this.reviewForm.valid) {
+      let ratingValue = this.reviewForm.get("rating")!.value;
+      let contentValue = this.reviewForm.get("content")!.value;
 
-      if (this.reviewForm.valid) {
-        let ratingValue = this.reviewForm.get("rating")!.value;
-        let contentValue = this.reviewForm.get("content")!.value;
-
-        if (ratingValue != null &&
-            contentValue != null
-        ) {
-          const reviewToAdd: ReviewCreated = {
-            item_id: +id,
-            rating: ratingValue,
-            content: contentValue
-          }
-          this.reviewsService.createReview(reviewToAdd).subscribe({
+      if (ratingValue != null &&
+          contentValue != null
+      ) {
+        const rv: ReviewCreated = {
+          item_id: +id,
+          rating: ratingValue,
+          content: contentValue
+        }
+        
+        if (this.forCreation) {
+          this.reviewsService.createReview(rv).subscribe({
             next: (res: any) => {
               this.toastService.success(res.msg);
               this.reviewForm.reset();
-              this.reviewsService.getItemReviews(+id);
-              //const currentUrl = this.router.url;
-              //remplacer true
-              //if (currentUrl != "/cart") this.router.navigate(['']);
               this.closeReviewFormModal();
-              //console.log(res)
             },
             error: (err: any) => {
               if (err.status >= 404 && err.status < 500) {
-                this.toastService.error('Erreur : ' + err.msg);
+                this.toastService.error('Erreur : ' + err.error.msg);
               } else if (err.status >= 500 && err.status <= 511) {
-                this.toastService.warning('Erreur : ' + err.msg);
-                console.log(err.msg);
+                this.toastService.warning('Erreur : ' + err.error.msg);
               } else {
                 this.toastService.warning('Erreur inconnue');
               }
             }
-              //est-ce que on doit actualiser la page en fond (item) et garder le modal ouvert?
-                // const currentUrl = this.router.url;
-                // //remplacer true
-                // if (currentUrl != "/cart") this.router.navigate(['']);
-                // else this.router.navigate(['/checkout'])
-                // console.log("LOGIN: USER CONNECTED");
+          });
+        } else {
+          this.reviewsService.updateReview(rv, this.reviewId).subscribe({
+            next: (res: any) => {
+              this.toastService.success(res.msg);
+              this.reviewForm.reset();
+              this.saved.emit();
+              //this.closeReviewFormModal();
+            },
+            error: (err: any) => {
+              if (err.status >= 404 && err.status < 500) {
+                this.toastService.error('Erreur : ' + err.error.msg);
+              } else if (err.status >= 500 && err.status <= 511) {
+                this.toastService.warning('Erreur : ' + err.error.msg);
+              } else {
+                this.toastService.warning('Erreur inconnue');
+              }
+            }
           });
         }
       }
@@ -95,6 +118,7 @@ export class ReviewFormComponent {
   }
 
   closeReviewFormModal() {
+    this.reviewForm.patchValue(this.reviewFormBasedDatas);
     this.close.emit();
   }
 }

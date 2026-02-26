@@ -42,10 +42,8 @@ export class LoginComponent {
 
   async login() {
     if(this.isUserLoggedIn()) {
-      console.log("LOGIN: USER CONNECTED");
       this.toastService.warning('Un utilisateur est déjà connecté!');
     } else {
-      console.log("LOGIN: USER NONCONNECTED");
       let emailValue = this.loginForm.get("email")?.value;
       let passwordValue = this.loginForm.get("password")?.value;
       const userToConnect = new FormData();
@@ -63,7 +61,6 @@ export class LoginComponent {
             if (currentUrl != "/cart") this.router.navigate(['']);
             this.closeLoginModal()
             //else this.router.navigate(['/checkout'])
-            console.log("LOGIN: USER CONNECTED");
           } else {
             this.toastService.error(userConnected.msg);
             this.loginForm.reset();

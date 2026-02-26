@@ -20,7 +20,7 @@ use OpenApi\Attributes as OA;
 final class ReviewsController extends AbstractController
 {
     //Create
-    #[Route('/api/reviews', name: 'app_reviews', methods:['POST'])]
+    #[Route('/api/reviews', name: 'app_reviews_create', methods:['POST'])]
     #[OA\RequestBody(
         description: 'Informations pour un avis client.',
         required: true,
@@ -42,14 +42,6 @@ final class ReviewsController extends AbstractController
         ItemsRepository $itemsRepository): Response
     {
         try {
-            // $existingReview = $reviewRepository->findOneBy([
-            //     'user' => $user,
-            //     'product' => $product // (que tu récupères dans ton JSON)
-            // ]);
-
-            // if ($existingReview) {
-            //     throw new AccessDeniedException("Tu as déjà noté ce produit !");
-            // }
             $this->denyAccessUnlessGranted('ROLE_CLIENT');
             $data = json_decode($request->getContent(), true);
             $review = new Reviews();
@@ -161,6 +153,67 @@ final class ReviewsController extends AbstractController
     }
 
     //Update
+    #[Route('/api/reviews/{id}', name: 'app_reviews_update', methods:['POST'])]
+    #[OA\RequestBody(
+        description: 'Informations pour un avis client.',
+        required: true,
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'user_id', type: 'integer'),
+                new OA\Property(property: 'item_id', type: 'integer'),
+                new OA\Property(property: 'rating', type: 'integer'),
+                new OA\Property(property: 'content', type: 'text')
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201, 
+        description: 'Avis modifié; Retourne un message de succès.',
+        content: new OA\JsonContent(properties: [new OA\Property(property: 'msg', type: 'string')])
+    )]
+    public function updateReview(int $id, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger,
+        ItemsRepository $itemsRepository, ReviewsRepository $reviewsRepository): Response
+    {
+        $logger->error("STEP inf");
+        try {
+            $logger->error("STEP 0");
+            $existingReview = $reviewsRepository->findReviewBy($id);
+$logger->error("STEP 1");
+            if (!$existingReview) {
+                return $this->json(['msg' => 'Article, utilisateur ou avi non trouvé.'], 404);
+            }
+            $logger->error("STEP 2");
+            $this->denyAccessUnlessGranted('POST_EDIT', $existingReview);
+            $logger->error("STEP 3");
+            $data = json_decode($request->getContent(), true);
+            $user = $this->getUser();
+            $logger->error("itemid ".$data['item_id']);
+            $item = $itemsRepository->findItem($data['item_id']);
+            $logger->error("item ".$item->getName());
+            if (!$user || !$item) {
+                return $this->json(['msg' => 'Articles, utilisateur ou avis non trouvé.'], 404);
+            }
+$logger->error("STEP 4");
+            $existingReview->setRating($data['rating']);
+            $existingReview->setContent($data['content']);
+            $existingReview->setUpdatedtime(new \DateTime());
+            $entityManager->flush();
+
+            return $this->json([
+                'msg' => 'Avis modifié!'
+            ], Response::HTTP_CREATED);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur updatereview: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 
     //Delete
+    public function deleteReview() 
+    {
+
+    }
 }

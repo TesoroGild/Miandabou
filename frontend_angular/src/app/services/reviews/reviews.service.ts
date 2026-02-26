@@ -23,8 +23,13 @@ export class ReviewsService {
     );
   }
 
-  updateReview() {
-
+  updateReview(reviewToEdit: ReviewCreated, id: number) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.post<any>(
+      `${environment.backendUrl}/api/reviews/${id}`,
+      reviewToEdit,
+      { headers }
+    );
   }
 
   deleteReview() {

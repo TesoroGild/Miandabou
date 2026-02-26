@@ -52,7 +52,7 @@ final class ItemsController extends AbstractController
     {
         try {
             $item = new Items();
-            $this->denyAccessUnlessGranted('POST_CREATE', $item);
+            $this->denyAccessUnlessGranted('ROLE_EMP');
             $category = ItemCategory::from($request->request->get('category'));
             $item->setName($request->request->get('name'));
             $item->setCategory($category);

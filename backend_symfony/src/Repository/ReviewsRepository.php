@@ -20,7 +20,7 @@ class ReviewsRepository extends ServiceEntityRepository
     public function findItemReviews($id): array
     {
         return $this->createQueryBuilder('r')
-            ->select('new App\Dto\ReviewsDto(r.id, u.username, i.name, r.rating, r.content, r.updatedtime)')
+            ->select('new App\Dto\ReviewsDto(r.id, u.username, i.name, i.id, r.rating, r.content, r.updatedtime)')
             ->join('r.users', 'u')
             ->join('r.items', 'i')
             ->andWhere('r.items = :id')
@@ -32,12 +32,22 @@ class ReviewsRepository extends ServiceEntityRepository
     public function findUserReviews($user): array
     {
         return $this->createQueryBuilder('r')
-            ->select('new App\Dto\ReviewsDto(r.id, u.username, i.name, r.rating, r.content, r.updatedtime)')
+            ->select('new App\Dto\ReviewsDto(r.id, u.username, i.name, i.id, r.rating, r.content, r.updatedtime)')
             ->join('r.users', 'u')
             ->join('r.items', 'i')
             ->andWhere('r.users = :userObj')
             ->setParameter('userObj', $user)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findReviewBy($id) : Reviews
+    {
+        return $this->createQueryBuilder('r')
+               ->andWhere('r.id = :id')
+               ->setParameter('id', $id)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
     }
 }

@@ -94,10 +94,8 @@ export class RegisterPage {
 
   async register() {
     if(this.isUserLoggedIn()) {
-      console.log("REGISTER: USER CONNECTED");
       this.toastService.warning("Vous devez d'abord vous déconnecter!");
     } else {
-      console.log("REGISTER: USER NONCONNECTED");
       let emailValue = this.registerForm.get("email")!.value;
       let passwordValue = this.registerForm.get("password")!.value;
       let lastnameValue =  this.registerForm.get("lastname")!.value;
@@ -135,9 +133,6 @@ export class RegisterPage {
           if (userCreated.user!= null && userCreated.user != undefined) {
             //CAS ou c'est le user qui fait le register
             //CAS ou c'est l'admin qui fait le register
-            console.log(userCreated.user);
-            console.log(userCreated.token);
-            console.log(userCreated.user.roles);
             this.authService.setUserToDisplay(userCreated.user, userCreated.token);
             this.toastService.success(userCreated.msg);
             this.registerForm.reset();
@@ -146,7 +141,6 @@ export class RegisterPage {
             //else if (userCreated.role == "admin") this.router.navigate(['/adminhome']);
             //else console.log("TU T'ES PLANTE")
             this.router.navigate(['/home']);
-            console.log("REGISTER: USER CREATE");
           } else {
             this.toastService.error(userCreated.msg);
           }

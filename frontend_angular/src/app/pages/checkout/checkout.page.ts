@@ -194,7 +194,6 @@ export class CheckoutPage {
 
   pay () {
     if (this.isUserLoggedIn()) {
-      console.log("CHECKOUT: USER IS LOGGED IN");
       let addressValue = this.checkoutForm.get("address")?.value;
       let cityValue = this.checkoutForm.get("city")?.value;
       let provinceValue = this.checkoutForm.get("province")?.value;
@@ -253,8 +252,6 @@ export class CheckoutPage {
           },
           error: (err: any) => {
             this.toastService.error(err.error.msg);
-            console.log(err.error.msg);
-            console.log(err.msg);
           }
       });
       } else this.checkoutForm.markAllAsTouched();

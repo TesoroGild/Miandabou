@@ -24,11 +24,8 @@ export class FilesService {
     if (!this.pictureTmp) return;
     this.hasImgExtension = this.pictureExtension(this.pictureTmp.value.name);
     if (!this.hasImgExtension) return;
-    console.log(this.pictureTmp.value);
-    console.log(this.pictureTmp);
 
     const output = document.getElementById('preview_img') as HTMLImageElement;
-    console.log(output);
     output.src = URL.createObjectURL(this.pictureTmp.value);
     output.onload = () => {
         URL.revokeObjectURL(output.src); // free memory
@@ -40,11 +37,7 @@ export class FilesService {
     if (!this.pictureTmp) return;
     this.hasUserExtension = this.pictureExtension(this.pictureTmp.value.name);
     if (!this.hasUserExtension) return;
-    console.log(this.pictureTmp.value);
-    console.log(this.pictureTmp);
-
     const output = document.getElementById('preview_img') as HTMLImageElement;
-    console.log(output);
     output.src = URL.createObjectURL(this.pictureTmp.value);
     output.onload = () => {
         URL.revokeObjectURL(output.src); // free memory

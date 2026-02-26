@@ -58,8 +58,6 @@ export class ItemDetailsPage {
         const id = slug.split('-')[0];
         this.itemService.getItemById(+id).subscribe(( res: any) => {
           this.tmpItemToDetail = res;
-          console.log(this.tmpItemToDetail);
-          console.log(res);
         });
       }
     }

@@ -79,11 +79,8 @@ export class AddItemComponent {
     if (!this.pictureTmp) return;
     this.hasImgExtension = this.pictureExtension(this.pictureTmp.value.name);
     if (!this.hasImgExtension) return;
-    console.log(this.pictureTmp.value);
-    console.log(this.pictureTmp);
 
     const output = document.getElementById('preview_img') as HTMLImageElement;
-    console.log(output);
     output.src = URL.createObjectURL(this.pictureTmp.value);
     output.onload = () => {
         URL.revokeObjectURL(output.src); // free memory
@@ -169,10 +166,9 @@ export class AddItemComponent {
         },
         error: (err: any) => {
           if (err.status >= 404 && err.status < 500) {
-            this.toastService.error('Erreur : ' + err.msg);
+            this.toastService.error('Erreur : ' + err.error.msg);
           } else if (err.status >= 500 && err.status <= 511) {
-            this.toastService.warning('Erreur : ' + err.msg);
-            console.log(err.msg);
+            this.toastService.warning('Erreur : ' + err.error.msg);
           } else {
             this.toastService.warning('Erreur inconnue');
           }

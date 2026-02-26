@@ -76,14 +76,12 @@ export class HomePage {
   ngOnDestroy() {}
 
   subscribeNewsLetter () {
-    console.log("ENABLE ALERTS");
     let emailValue = this.alertForm.get("email")?.value;
     const mailToAlert = new FormData();
     mailToAlert.append("email", this.alertForm.get("email")?.value);
       
     if (emailValue != null && emailValue != "") {
       this.emailService.addEmail(mailToAlert).subscribe((mailAdded: any) => {
-        console.log(mailAdded.mail);
         if (mailAdded.mail != null && mailAdded.mail != undefined) {
           this.emailService.sendEmail(mailAdded.mail);
           this.toastService.success('Mail ajouté!');

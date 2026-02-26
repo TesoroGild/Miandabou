@@ -200,7 +200,6 @@ export class CartService {
   removeOnCaisse (id: string) {
     const index = this.items.findIndex(item => item.id === id);
     if (index !== -1) {
-      console.log("TU RETIRES QUOI DU PANIER LA")
     } else {
       this.caisse.splice(index, 1);
     }
@@ -302,7 +301,6 @@ export class CartService {
 
   couponCalculate () {
     this.couponTotal = 0;
-    console.log("TEST COUPON CALCUL")
     
     if (this.couponsSelected.length !== 0) {
       this.couponsSelected.forEach(selectedCoupon => {
@@ -325,7 +323,6 @@ export class CartService {
 
   caisseCouponCalculate () {
     this.caisseCouponTotal = 0;
-    console.log("TEST COUPON CAISSE CALCUL")
     
     if (this.couponsSelected.length !== 0) {
       this.couponsSelected.forEach(selectedCoupon => {
