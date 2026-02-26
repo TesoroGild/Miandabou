@@ -36,6 +36,10 @@ export class ReviewsService {
   }
 
   getUserReviews() {
-
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.get<any>(
+      `${environment.backendUrl}/api/reviews`,
+      { headers }
+    );
   }
 }

@@ -6,7 +6,7 @@
     </a>
     <!--Langages -->
     <div #dropdownLangageWrapper class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
-        <button (click)="toggleLanguagesDropdown()" type="button"
+        <button (click)="toggleLanguagesDropdown()"
           class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           
         >
@@ -114,14 +114,14 @@
     <!-- User mini menu -->
     <div #dropdownProfileWrapper *ngIf="isLoggedIn()"
       class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" (click)="toggleProfileDropdown()"
+        <button (click)="toggleProfileDropdown()"
           class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only" >{{ 'Ouvrir le menu utilisateur' | translate }}</span>
           <img class="w-8 h-8 rounded-full" src="{{ picture() }}" alt="user picture">
         </button>
         <!-- Dropdown menu -->
         <div class="absolute mt-70 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600" 
-          id="user-dropdown" [ngClass]="{ 'hidden': !isProfileDropdownOpen }"
+          [ngClass]="{ 'hidden': !isProfileDropdownOpen }"
         >
           <div class="px-4 py-3">
             <span class="block text-sm text-gray-900 dark:text-white">{{ userToDisplay.username }}</span>
@@ -129,16 +129,16 @@
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li>
-              <a [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Tableau de bord' | translate }}</a>
+              <a (click)="closeProfileDropdown()" [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Tableau de bord' | translate }}</a>
             </li>
             <li>
-              <a [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Paramètres' | translate }}</a>
+              <a (click)="closeProfileDropdown()" [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Paramètres' | translate }}</a>
             </li>
             <li>
-              <a [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Messagerie' | translate }}</a>
+              <a (click)="closeProfileDropdown()" [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Messagerie' | translate }}</a>
             </li>
             <li>
-              <a [routerLink]="['#']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Mes avis' | translate }}</a>
+              <a (click)="closeProfileDropdown()" [routerLink]="['/reviews']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Mes avis' | translate }}</a>
             </li>
             <li>
               <a (click)="logOut()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >{{ 'Déconnexion' | translate }}</a>

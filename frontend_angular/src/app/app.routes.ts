@@ -69,6 +69,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/stock/stock.page').then(m => m.StockPage)
     },
     {
+        path: 'reviews',
+        canMatch: [authGuard],
+        loadComponent: () => import('./pages/reviews/reviews.page').then(m => m.ReviewsPage)
+    },
+    {
         path: 'notfound',
         component: NotFoundPage
     },

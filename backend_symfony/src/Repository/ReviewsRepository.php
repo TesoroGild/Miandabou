@@ -28,4 +28,16 @@ class ReviewsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findUserReviews($user): array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('new App\Dto\ReviewsDto(r.id, u.username, i.name, r.rating, r.content, r.updatedtime)')
+            ->join('r.users', 'u')
+            ->join('r.items', 'i')
+            ->andWhere('r.users = :userObj')
+            ->setParameter('userObj', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reviews;
 use App\Repository\ItemsRepository;
 use App\Repository\ReviewsRepository;
+use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -108,10 +109,10 @@ final class ReviewsController extends AbstractController
     public function getItemReviews(int $id, ReviewsRepository $reviewsRepository, LoggerInterface $logger) 
     {
         try {
-            $logger->info("LAAAA");
             $reviews = $reviewsRepository->findItemReviews($id);
-$logger->info("LBBBB");
-            if (!$reviews) {
+            
+            if (!$reviews) 
+            {
                 return $this->json(['msg' => 'Aucun avis sur cet article.'], 404);
             }
 
@@ -129,9 +130,34 @@ $logger->info("LBBBB");
     }
 
     #[Route('/api/reviews', name: 'app_user_reviews', methods:['GET'])]
-    public function getUserReviews(ReviewsRepository $reviewsRepository, LoggerInterface $logger) 
+    public function getUserReviews(ReviewsRepository $reviewsRepository, UsersRepository $usersRepository, LoggerInterface $logger) 
     {
+        try {
+            $user = $this->getUser();
+            
+            if (!$user) 
+            {
+                return $this->json(['msg' => 'Accès refusé.'], 401);
+            }
 
+            $reviews = $reviewsRepository->findUserReviews($user);
+
+            if (!$reviews) 
+            {
+                return $this->json(['msg' => 'Aucun avis pour cet utilsiateur.'], 404);
+            }
+
+            return $this->json([
+                'reviews' => $reviews,
+                'msg' => 'Avis d\'un article.'
+            ], Response::HTTP_OK);
+        } catch (\Throwable $t) {//\Exception $e
+            $logger->error('Erreur getuserreviews: ' . $t->getMessage());
+            return $this->json(
+                ['msg' => $t->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     //Update

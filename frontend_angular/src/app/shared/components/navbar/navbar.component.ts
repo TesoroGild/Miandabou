@@ -13,6 +13,7 @@ import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { LangagesService } from '../../../services/langages/langages.service';
 
 
+
 @Component({
   selector: 'app-navbar',
   imports: [RouterModule, CommonModule, TranslatePipe],
@@ -114,6 +115,7 @@ export class NavbarComponent {
     this.authService.logOut();
     this.cartService.emptyCart();
     this.userService.clearData();
+    this.closeProfileDropdown();
   }
 
   toggleProfileDropdown() {
@@ -127,7 +129,7 @@ export class NavbarComponent {
   @ViewChild('dropdownLangageWrapper') dropdownLangageWrapper!: ElementRef;
   @ViewChild('dropdownProfileWrapper') dropdownProfileWrapper!: ElementRef;
   @HostListener('document:click', ['$event'])
-  clickLangageOut(event: any) {
+  clickDropdownsOut(event: any) {
     // Si l'élément cliqué n'est pas contenu dans le dropdownLangageWrapper
     if (this.dropdownLangageWrapper && !this.dropdownLangageWrapper.nativeElement.contains(event.target)) {
       this.isLanguagesDropdownOpen = false;
@@ -136,6 +138,10 @@ export class NavbarComponent {
     if (this.dropdownProfileWrapper && !this.dropdownProfileWrapper.nativeElement.contains(event.target)) {
       this.isProfileDropdownOpen = false;
     }
+  }
+
+  closeProfileDropdown() {
+    this.isProfileDropdownOpen = false;
   }
 
   picture() {

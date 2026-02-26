@@ -13,10 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './review-form.component.scss'
 })
 export class ReviewFormComponent {
-  @Input() itemToDelete: any;
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
-  createUpdate:boolean = true;
 
   constructor (
     private route: ActivatedRoute,
@@ -26,6 +24,8 @@ export class ReviewFormComponent {
   ) {
     
   }
+
+  ngOnInit() { }
 
   reviewForm = new FormGroup({
     rating: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(5)]),
