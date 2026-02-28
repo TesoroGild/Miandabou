@@ -5,10 +5,12 @@ import { ReviewsService } from '../../../../services/reviews/reviews.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { Review, ReviewCreated } from '../../../../interfaces/review.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-review-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './review-form.component.html',
   styleUrl: './review-form.component.scss'
 })
@@ -29,11 +31,14 @@ export class ReviewFormComponent {
   reviewFormBasedDatas: any;
 
   constructor (
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private route: ActivatedRoute,
     private reviewsService: ReviewsService,
     private toastService: ToastService,
     private formBuilder: FormBuilder
   ) {
+    this.translateService.use(this.langService.initLangage());
     this.reviewForm = this.formBuilder.group({
       rating: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(5)]),
       content: new FormControl(null, Validators.required),
@@ -100,7 +105,6 @@ export class ReviewFormComponent {
               this.toastService.success(res.msg);
               this.reviewForm.reset();
               this.saved.emit();
-              //this.closeReviewFormModal();
             },
             error: (err: any) => {
               if (err.status >= 404 && err.status < 500) {

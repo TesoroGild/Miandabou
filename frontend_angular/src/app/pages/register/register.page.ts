@@ -5,10 +5,12 @@ import { AuthService } from '../../services/auth/auth.service';
 import { UserService } from '../../services/user/user.service';
 import { ToastService } from '../../services/toast/toast.service';
 import { CommonModule } from '@angular/common';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, TranslatePipe],
   templateUrl: './register.page.html',
   styleUrl: './register.page.scss'
 })
@@ -24,12 +26,16 @@ export class RegisterPage {
   cpassword: any = null;
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
     private toastService: ToastService
-  ) { }
+  ) {
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

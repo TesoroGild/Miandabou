@@ -12,10 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LangagesService } from '../../services/langages/langages.service';
+import { OnSaleComponent } from "../../shared/components/on-sale/on-sale.component";
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, TranslatePipe, RouterModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, TranslatePipe, RouterModule, OnSaleComponent],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss'
 })
@@ -27,6 +28,7 @@ export class HomePage {
   alertForm!: FormGroup;
 
   couponFound = {
+    id: 1,
     rate : "20",
     value: "N/A",
     expiration_date: "2026-12-31",
@@ -36,9 +38,7 @@ export class HomePage {
   testimonial = {
     rating: 4,
     text: `Flowbite is just awesome. It contains tons of predesigned components...`,
-    author: "The Godfather",
-    role: "An anonymous client.",
-    avatar: "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+    author: "The Godfather"
   };
 
   feature = {
@@ -48,6 +48,8 @@ export class HomePage {
 
   currentIndex = 0;
   slides = ['carousel-item-1', 'carousel-item-2', 'carousel-item-3'];
+  showItemsOnSaleComp: boolean = false;
+  stars = [1, 2, 3, 4, 5];
 
   constructor(
     private emailService: EmailService,
@@ -141,11 +143,19 @@ export class HomePage {
     });
   }
 
-  calculateDiscount () {
+  displayDiscount () {
     if (this.couponFound.rate != undefined && this.couponFound.rate != "N/A" && this.couponFound.rate != "")
       return this.couponFound.rate + "%";
     else if (this.couponFound.value != undefined && this.couponFound.value != "N/A" && this.couponFound.value != "")
       return this.couponFound.value + "$";
     else return "0$";
+  }
+
+  openItemsOnSale() {
+    this.showItemsOnSaleComp = true;
+  }
+
+  closeItemsOnSale() {
+    this.showItemsOnSaleComp = false;
   }
 }

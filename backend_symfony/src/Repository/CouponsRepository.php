@@ -30,6 +30,20 @@ class CouponsRepository extends ServiceEntityRepository
         }, $coupons);
     }
 
+    public function findItemsAssociateToCoupon(): array
+    {
+        $coupons = $this->findBy([]);
+        return array_map(function ($coupons) {
+            return [
+                'id' => $coupons->getId(),
+                'name' => $coupons->getName(),
+                'value' => $coupons->getValue(),
+                'rate' => $coupons->getRate(),
+                'expirationDate' => $coupons->getExpirationDate()
+            ];
+        }, $coupons);
+    }
+
     //    /**
     //     * @return Coupons[] Returns an array of Coupons objects
     //     */

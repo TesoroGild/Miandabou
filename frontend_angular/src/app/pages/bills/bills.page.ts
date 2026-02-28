@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 @Component({
   selector: 'app-bills',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './bills.page.html',
   styleUrl: './bills.page.scss'
 })
@@ -31,11 +33,14 @@ export class BillsPage {
   tps: number = 0;
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private authService: AuthService, 
     private cartService: CartService, 
     private checkoutService: CheckoutService,
     private router: Router
   ) { 
+    this.translateService.use(this.langService.initLangage());
     this.userToDisplay$ = this.authService.getUserToDisplay();
     this.userSubscription = this.userToDisplay$.subscribe((u) => {
       this.userToDisplay = u;

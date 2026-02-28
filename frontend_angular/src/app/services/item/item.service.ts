@@ -48,6 +48,10 @@ export class ItemService {
     return this.http.get<any>(`${environment.backendUrl}/api/items/${id}`);
   }
 
+  getItemsOnSale(id: number) {
+    return this.http.get<any>(`${environment.backendUrl}/api/coupons/${id}/items`);
+  }
+
   addItem (item: FormData) : any {
     return this.http.post<any>(
       `${environment.backendUrl}/api/items`,

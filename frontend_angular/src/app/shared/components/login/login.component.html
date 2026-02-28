@@ -1,11 +1,11 @@
 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-        Connectez-vous
+        {{'Connectez-vous' | translate}}
     </h1>
 
     <!--Sign in section-->
     <div class="flex flex-row items-center justify-center lg:justify-start">
-        <p class="mb-0 me-4 text-lg text-black dark:text-white">Connection avec</p>
+        <p class="mb-0 me-4 text-lg text-black dark:text-white">{{'Connection avec' | translate}}</p>
     
         <!-- Facebook -->
         <button type="button" data-twe-ripple-init data-twe-ripple-color="light"
@@ -52,7 +52,7 @@
     <div
         class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
         <p class="mx-4 mb-0 text-center font-semibold dark:text-white">
-            Ou
+            {{'Ou' | translate}}
         </p>
     </div>
 
@@ -73,27 +73,33 @@
             <span *ngIf="emailEmpty()" 
                 class="text-xs font-light text-red-500" 
                 style="margin: 0px;"
-            >Veuillez saisir un email.</span>
+            >
+                {{'Veuillez saisir un email' | translate}}.
+            </span>
             <span *ngIf="emailFormat()" 
                 class="text-xs font-light text-red-500" 
                 style="margin: 0px;"
-            >Format email invalid!</span>
+            >
+                {{'Format email invalid' | translate}}!
+            </span>
             <span *ngIf="emailLength()"
                 class="text-xs font-light text-red-500" 
                 style="margin: 0px;"
-            >Vous avez dépassé la taille maximale de 35 caractères.</span>
+            >
+                {{'Vous avez dépassé la taille maximale de 35 caractères' | translate}}.
+            </span>
         </div>
 
         <!--  PASSWORD -->
         <div>
             <label for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{'Mot de passe' | translate}}</label>
             <input type="password" name="password" id="password" placeholder="••••••••"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 formControlName="password">
                 <span *ngIf="passwordEmpty()" 
                     class="text-xs font-light text-red-500" 
-                    style="margin: 0px;">Veuillez saisir le mot de passe.
+                    style="margin: 0px;">{{'Veuillez saisir le mot de passe' | translate}}.
                 </span>
         </div>
 
@@ -105,21 +111,21 @@
                         required="">
                 </div>
                 <div class="ml-3 text-sm">
-                    <label for="remember" class="text-gray-500 dark:text-gray-300">Se souvenir de moi</label>
+                    <label for="remember" class="text-gray-500 dark:text-gray-300">{{'Se souvenir de moi' | translate}}</label>
                 </div>
             </div>
             <a href="#"
-                class="text-sm font-medium text-[#af8124] hover:underline dark:text-[#e7cc96]">Mot de passse oublié?</a>
+                class="text-sm font-medium text-[#af8124] hover:underline dark:text-[#e7cc96]">{{'Mot de passse oublié' | translate}}?</a>
         </div>
         <button 
             type="submit"
             class="w-full text-white bg-[#e7cc96] disabled:hover:bg-[#e7cc96] hover:bg-[#e7cc96]  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#e7cc96] dark:hover:bg-[#e7cc96] dark:focus:ring-primary-800 disabled:opacity-50"
-        >Connection
+        >{{'Connection' | translate}}
         </button>
         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Vous n’avez pas de compte? 
-            <a [routerLink]="['/register']" class="font-medium text-[#af8124] hover:underline dark:text-primary-500">Créez</a>
-            en un!
+            {{'Vous n\'avez pas de compte' | translate}}? 
+            <a [routerLink]="['/register']" class="font-medium text-[#af8124] hover:underline dark:text-primary-500">{{'Créez' | translate}}</a>
+            {{'en un' | translate}}!
         </p>
     </form>
 </div>

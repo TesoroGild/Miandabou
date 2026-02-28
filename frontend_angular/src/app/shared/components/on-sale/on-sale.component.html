@@ -1,0 +1,73 @@
+@if(isOpen) {
+    <div class="fixed inset-0 z-10 bg-black opacity-70"></div>
+
+    
+    <div class="mt-24 overflow-y-auto overflow-x-hidden fixed z-20 flex justify-center items-start w-full md:inset-0 h-9/10 max-h-full">
+        <div class="max-w-6xl mx-auto bg-gray-900 w-8/10">
+            <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 dark:border-gray-700 md:p-5">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white !leading-tight">{{'Articles en rabais'}} : {{ displayDiscount() }} {{'de moins j\'usqu\'au'}} {{ displayDate() }}</h3>
+                <button (click)="closeItemsOnSale()" class="right-5 top-5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editReviewModal">
+                    <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            
+            @if (true) {
+                <div class="relative overflow-x-auto shadow-xs rounded-base border border-default">
+                    <table class="w-full text-sm text-left rtl:text-right text-body my-4">
+                        <thead class="text-sm text-body border-b border-gray-200">
+                            <tr class="text-slate-900 dark:text-gray-300">
+                                <th scope="col" class="px-6 py-3 font-medium">
+                                    {{'Nom' | translate}}
+                                </th>
+                                <th scope="col" class="px-6 py-3 font-medium">
+                                    {{'Pix de base' | translate}}
+                                </th>
+                                <th scope="col" class="px-6 py-3 font-medium">
+                                    {{'Prix actuel' | translate}}
+                                </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            @if (itemsOnSale.length > 0) {
+                                @for (item of itemsOnSale; track item.id; let i = $index) {
+                                    <tr class="border-b border-b-black text-slate-900 dark:text-white hover:bg-gray-600">
+                                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                                            {{ item.name }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {{ item.price }}$
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ calculateSalePrice(+item.price) }}$
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            @else {
+                                <tr class="text-slate-900 dark:text-white">
+                                    <td colspan="3" class="text-center py-4">
+                                        @if (isLoading) {
+                                            <div class="flex justify-center items-center h-20">
+                                                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-700"></div>
+                                            </div>
+                                        }
+                                        @else {
+                                            {{'Aucun article trouvé' | translate}}.
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @else {
+                <div class="justify-self-center my-8 text-slate-900 text-xl font-semibold dark:text-white">{{'Aucun article en rabais' | translate}}.</div>
+            }
+        </div>
+    </div>
+}

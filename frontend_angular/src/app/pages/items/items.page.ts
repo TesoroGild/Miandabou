@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { map, startWith, catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 //Interfaces
 import { Item } from '../../interfaces/item.interface';
@@ -18,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 const SORT_KEY = 'sort-key';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, RouterModule, FormsModule, ],
+  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   templateUrl: './items.page.html',
   styleUrl: './items.page.scss'
 })
@@ -36,10 +38,13 @@ export class ItemsPage {
   isLoading: boolean = false;
 
   constructor (
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private cartService: CartService,
     private router: Router, 
     private itemService: ItemService
   ) { 
+    this.translateService.use(this.langService.initLangage());
     this.filterSelect = this.loadFilterSelection();
   }
 

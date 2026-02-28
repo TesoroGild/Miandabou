@@ -5,16 +5,23 @@
         "ES": "Espagnol (ES)"
     },
 
+
+
     "Envie d'un nouveau look?": "Envie d'un nouveau look?",
     "Nous avons ce qu'il vous faut.": "Nous avons ce qu'il vous faut.",
     "Jettez-y un coup d'oeil!": "Jettez-y un coup d'oeil!",
     "Recevoir nos dernières nouvelles": "Recevoir nos dernières nouvelles",
     "Rejoindre": "Rejoindre",
     "Veuillez saisir un email.": "Veuillez saisir un email.",
-    "Format email invalide!": "Format email invalide!",
+    "Format email invalid!": "Format email invalid!",
     "Vous avez dépassé la taille maximale de 60 caractères.": "Vous avez dépassé la taille maximale de 60 caractères.",
+    "Réduction temporaire": "Réduction temporaire",
+    "Obtenez": "Obtenez",
+    "de réduction sur votre prochain achat en utilisant le code": "de réduction sur votre prochain achat en utilisant le code",
+    "Articles concernés": "Articles concernés",
     
-    
+
+
     " Français (FR) ": " Français (FR) ",
     " Anglais (EN) ": " Anglais (EN) ",
     " Espagnol (ES) ": " Espagnol (ES) ",
@@ -31,5 +38,230 @@
     "Panier": "Panier",
     "A propos": "A propos",
     "Contact": "Contact",
-    "Mes avis": "Mes avis"
+    "Mes avis": "Mes avis",
+
+
+
+    "Merci pour votre achat chez Miandabou Accessoires. Voici le numero de votre commande": "Merci pour votre achat chez Miandabou Accessoires. Voici le numero de votre commande",
+    "Nous converserons avec vous via": "Nous converserons avec vous via",
+    "pour toutes mises à jour": "pour toutes mises à jour",
+    "Le colis sera livré au": "Le colis sera livré au",
+    "Date estimée de livraison": "Date estimée de livraison",
+    "entre 8am et 5pm": "entre 8am et 5pm",
+    "Résumé de la commande": "Résumé de la commande",
+    "Prix original": "Prix original",
+    "Rabais": "Rabais",
+    "Ramassage en magasin": "Ramassage en magasin",
+    "Télécharger la facture": "Télécharger la facture",
+    "Retour à l'écran d'acceuil": "Retour à l'écran d'acceuil",
+    "Retourner à la liste des articles": "Retourner à la liste des articles",
+
+
+
+    "Votre Panier d'achat": "Votre Panier d'achat",
+    "Sous Total": "Sous Total",
+    "Coupon": "Coupon",
+    "Total": "Total",
+    "Ajouter des coupons": "Ajouter des coupons",
+    "Commander": "Commander",
+    "Connectez-vous pour poursuivre votre achat": "Connectez-vous pour poursuivre votre achat",
+    "Fermer": "Fermer",
+
+
+
+    "Utilisez une adresse où vous pouvez recevoir votre commande.": "Utilisez une adresse où vous pouvez recevoir votre commande.",
+    "Téléphone": "Téléphone",
+    "Mauvais format": "Mauvais format",
+    "Numéro de téléphone requis": "Numéro de téléphone requis",
+    "Addresse": "Addresse",
+    "Ville": "Ville",
+    "Etat / Province": "Etat / Province",
+    "ZIP / Code postal": "ZIP / Code postal",
+    "Pays": "Pays",
+    "Notifications": "Notifications",
+    "Comment voulez-vous recevoir les mises à jour concernant votre commande?": "Comment voulez-vous recevoir les mises à jour concernant votre commande?",
+    "Email": "Email",
+    "Pas de notifications": "Pas de notifications",
+    "Informations de paiement": "Informations de paiement",
+    "Nom du titulaire": "Nom du titulaire",
+    "Numéro de carte": "Numéro de carte",
+    "Date d'expiration": "Date d'expiration",
+    "CVV": "CVV",
+    "Les 3 derniers chiffres au dos de la carte": "Les 3 derniers chiffres au dos de la carte",
+    "Payer avec Visa": "Payer avec Visa",
+    "Payer avec PayPal": "Payer avec PayPal",
+    "Payer avec MasterCard": "Payer avec MasterCard",
+    "Livraison": "Livraison",
+    "J'accepte les": "J'accepte les",
+    "conditions générales": "conditions générales",
+    "Conditions d'utilisation": "Conditions d'utilisation",
+
+
+
+    "Trier par": "Trier par",
+    "prix croissant": "Par prix croissant",
+    "prix décroissant": "Par prix décroissant",
+    "nom croissant": "nom croissant",
+    "nom décroissant": "nom décroissant",
+    "Aucun article trouvé": "Aucun article trouvé",
+
+
+
+    "Ajouter au panier": "Ajouter au panier",
+    "Quantité": "Quantité",
+    "Quantité à ajouter": "Quantité à ajouter",
+    "Afficher les avis": "Afficher les avis",
+    "Ajouter un avis": "Ajouter un avis",
+
+
+
+    "La page que vous semblez chercher n'existe pas.": "La page que vous semblez chercher n'existe pas.",
+    "Revenez à la page d'accueil": "Revenez à la page d'accueil",
+
+
+
+    "Créer un nouveau compte": "Créer un nouveau compte",
+    "Ou": "Ou",
+    "Prénom": "Prénom",
+    "Veuillez saisir un prénom": "saisir un prénom",
+    "Vous avez dépassé la taille maximale de 35 caractères": "Vous avez dépassé la taille maximale de 35 caractères",
+    "Nom": "Nom",
+    "Veuillez saisir votre nom": "Veuillez saisir votre nom",
+    "Date de naissance": "Date de naissance",
+    "Surnom": "Surnom",
+    "Veuillez saisir un surnom": "Veuillez saisir un surnom",
+    "Rôle": "Rôle",
+    "Choisissez un rôle": "Choisissez un rôle",
+    "Admin": "Admin",
+    "Client(e)": "Client(e)",
+    "Employé(e)": "Employé(e)",
+    "Le rôle est requis": "Le rôle est requis",
+    "Entrer un format jpg ou png": "Entrer un format jpg ou png",
+    "Mot de passe": "Mot de passe",
+    "Veuillez saisir le mot de passe": "Veuillez saisir le mot de passe",
+    "Confirmez votre motde passe": "Confirmez votre motde passe",
+    "Les mots de passe ne correspondent pas": "Les mots de passe ne correspondent pas",
+    "Activer le compte": "Activer le compte",
+    "J'ai lu et j'accepte les conditions d'utilisation": "J'ai lu et j'accepte les conditions d'utilisation",
+    "Il est important d'accepter les conditions": "Il est important d'accepter les conditions",
+    "Créer": "Créer",
+    "Vous avez déjà un compte": "Vous avez déjà un compte",
+    "Connnectez-vous": "Connnectez-vous",
+
+
+
+    "Ajouter un article": "Ajouter un article",
+    "Prix": "Prix",
+    "En stock": "En stock",
+    "Vendu": "Vendu",
+    "Note": "Note",
+    "Statut": "Statut",
+    "Action": "Action",
+    "Gestion stock": "Gestion stock",
+    "Actif": "Actif",
+    "Inactif": "Inactif",
+    "Modifier": "Modifier",
+    "Supprimer": "Supprimer",
+    "Afficher": "Afficher",
+    "Affichage de 1 à 5 sur 100 entrées": "Affichage de 1 à 5 sur 100 entrées",
+
+
+
+    "Coupons disponibles": "Coupons disponibles",
+    "Rechercher": "Rechercher",
+    "Valeur": "Valeur",
+    "Date de fin": "Date de fin",
+    "Case à cocher": "Case à cocher",
+    "Aucun coupon disponible": "Aucun coupon disponible",
+    "Annuler tout": "Annuler tout",
+    "Appliquer": "Appliquer",
+    "Tout appliquer": "Tout appliquer",
+
+
+
+    "Carrière": "Carrière",
+    "Blog": "Blog",
+    "Contactez-nous": "Contactez-nous",
+    "Politique de confidentialité": "Politique de confidentialité",
+    "Conditions générales": "Conditions générales",
+    "Tous droits réservés": "Tous droits réservés",
+    "Page Facebook": "Page Facebook",
+    "Communauté Discord": "Communauté Discord",
+    "Compte GitHub": "Compte GitHub",
+    "Compte Dribble": "Compte Dribble",
+
+
+
+    "Connectez-vous": "Connectez-vous",
+    "Connection avec": "Connection avec",
+    "Se souvenir de moi": "Se souvenir de moi",
+    "Mot de passse oublié": "Mot de passse oublié",
+    "Connection": "Connection",
+    "Vous n'avez pas de compte": "Vous n'avez pas de compte",
+    "Créez": "Créez",
+    "en un": "en un",
+
+
+
+    "Créer nouveau produit": "Créer nouveau produit",
+    "Veuillez saisir un nom d'article": "Veuillez saisir un nom d'article",
+    "Veuillez saisir un prix pour cet article": "Veuillez saisir un prix pour cet article",
+    "Le prix doit être supérieur à 0": "Le prix doit être supérieur à 0",
+    "Sélectionner une catégorie": "Sélectionner une catégorie",
+    "Boucles d'oreilles": "Boucles d'oreilles",
+    "Chapeau": "Chapeau",
+    "Chaussures": "Chaussures",
+    "Collier": "Collier",
+    "Habit": "Habit",
+    "Montre": "Montre",
+    "Pantalon": "Pantalon",
+    "Sac": "Sac",
+    "La catégorie est requise": "La catégorie est requise.",
+    "Description": "Description",
+    "Veuillez entrer une description": "Veuillez entrer une description",
+    "Vidéo": "Vidéo",
+    "Veuillez saisir une quantité": "Veuillez saisir une quantité",
+    "La quantité doit être supérieur à 0": "La quantité doit être supérieur à 0",
+    "Ajouter le produit": "Ajouter le produit",
+    "Ajouter": "Ajouter",
+
+
+
+    "Supprimer un produit": "Supprimer un produit",
+    "Catégorie": "Catégorie",
+    "Etes-vous sur de vouloir supprimer cet article de votre stock": "Etes-vous sur de vouloir supprimer cet article de votre stock",
+    
+
+    
+    "Modifier un produit": "Modifier un produit",
+    "Modifier le produit": "Modifier le produit",
+
+
+
+    "Articles en rabais": "Articles en rabais",
+    "de moins j'usqu'au": "de moins j'usqu'au",
+    "Pix de base": "Pix de base",
+    "Prix actuel": "Prix actuel",
+    "Aucun article en rabais": "Aucun article en rabais",
+
+
+
+    "Créer un avis": "Créer un avis",
+    "Modifier votre avis": "Modifier votre avis",
+    "Description de l'avis": "Description de l'avis",
+    "Annuler": "Annuler",
+
+
+
+    "Produit": "Produit",
+    "Message": "Message",
+    "Vous n'avez évalué aucun article": "Vous n'avez évalué aucun article",
+    "Avis des clients": "Avis des clients",
+    "Nombre total d'avis": "Nombre total d'avis",
+    "Note moyenne": "Note moyenne",
+    "Aucun avis pour cet article": "Aucun avis pour cet article",
+    "Êtes-vous sûr de vouloir supprimer cet avis": "Êtes-vous sûr de vouloir supprimer cet avis",
+    "Cette action ne peut pas être annulée": "Cette action ne peut pas être annulée",
+    "Non, annuler": "Non, annuler",
+    "Oui, supprimer": "Oui, supprimer"
 }

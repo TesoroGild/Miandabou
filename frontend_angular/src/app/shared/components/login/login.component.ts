@@ -5,10 +5,12 @@ import { ToastService } from '../../../services/toast/toast.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-login-comp',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterModule, TranslatePipe],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -20,11 +22,15 @@ export class LoginComponent {
   userIsLoggedIn: boolean = false;
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private formBuilder: FormBuilder,
     private router: Router,
     private toastService: ToastService,
     private authService: AuthService
-  ) { }
+  ) {
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

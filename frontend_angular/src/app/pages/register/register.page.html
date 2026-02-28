@@ -2,7 +2,7 @@
     <div class="items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-4 space-y-4 md:space-y-6 sm:p-6">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Créer un nouveau compte
+                {{'Créer un nouveau compte' | translate}}
             </h1>
 
             <!--Sign in section-->
@@ -53,7 +53,7 @@
             <div
                 class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500">
                 <p class="mx-4 mb-0 text-center font-semibold dark:text-white">
-                    Ou
+                    {{'Ou' | translate}}
                 </p>
             </div>
 
@@ -66,31 +66,34 @@
                 <!--  FIRST NAME -->
                 <div class="mb-5">
                     <label for="firstname" class="mb-3 block text-base font-medium text-black dark:text-white">
-                        *Prénom
+                        *{{'Prénom' | translate}}
                     </label>
                     <input type="text" name="firstname" id="firstname" placeholder="First Name"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
                         formControlName="firstname"
                     />
-                    <span *ngIf="firstnameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez
-                        saisir un prénom.</span>
-                    <span *ngIf="firstnameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">Vous
-                        avez dépassé la taille maximale de 35 caractères.</span>
+                    <span *ngIf="firstnameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Veuillez saisir un prénom' | translate}}.
+                    </span>
+                    <span *ngIf="firstnameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Vous avez dépassé la taille maximale de 35 caractères' | translate}}.
+                    </span>
                 </div>
 
                 <!--  LAST NAME -->
                 <div class="mb-5">
                     <label for="lastname" class="mb-3 block text-base font-medium text-black dark:text-white">
-                        *Nom
+                        *{{'Nom' | translate}}
                     </label>
                     <input type="text" name="lastname" id="lastname" placeholder="Last Name"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
                         formControlName="lastname"
                     />
-                    <span *ngIf="lastnameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez
-                        saisir votre nom.</span>
-                    <span *ngIf="lastnameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">Vous
-                        avez dépassé la taille maximale de 35 caractères.</span>
+                    <span *ngIf="lastnameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Veuillez saisir votre nom' | translate}}.
+                    </span>
+                    <span *ngIf="lastnameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Vous avez dépassé la taille maximale de 35 caractères' | translate}}.</span>
                 </div>
 
                 <!--  DATE OF BIRTH -->
@@ -98,7 +101,7 @@
                     <div class="w-full px-3 sm:w-1/2">
                         <div class="mb-5">
                             <label for="dateOB" class="mb-3 block text-base font-medium text-black dark:text-white">
-                                Date de naissance
+                                {{'Date de naissance' | translate}}
                             </label>
                             <input type="date" name="dateOB" id="dateOB"
                                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
@@ -111,31 +114,35 @@
                 <!--  USERNAME -->
                 <div class="mb-5">
                     <label for="username" class="mb-3 block text-base font-medium text-black dark:text-white">
-                        Surnom
+                        {{'Surnom' | translate}}
                     </label>
                     <input type="text" name="username" id="username" placeholder="Username"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
                         formControlName="username"
                     />
-                    <span *ngIf="unameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez
-                        saisir un surnom.</span>
-                    <span *ngIf="unameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">Vous
-                        avez dépassé la taille maximale de 35 caractères.</span>
+                    <span *ngIf="unameEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Veuillez saisir un surnom' | translate}}.
+                    </span>
+                    <span *ngIf="unameLength()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Vous avez dépassé la taille maximale de 35 caractères' | translate}}.</span>
                 </div>
 
                 <!--  EMAIL -->
                 <div>
-                    <label for="email" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">*Email</label>
+                    <label for="email" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">*{{'Email' | translate}}</label>
                     <!--  required="" -->
                     <input type="email" name="email" id="email"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         placeholder="name@company.com" formControlName="email">
                     <span *ngIf="emailEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
-                        Veuillez saisir un email.</span>
+                        {{'Veuillez saisir un email' | translate}}.
+                    </span>
                     <span *ngIf="emailFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">
-                        Format email invalid!</span>
+                        {{'Format email invalid' | translate}}!
+                    </span>
                     <span *ngIf="emailLength()" class="text-xs font-light text-red-500" style="margin: 0px;">
-                        Vous avez dépassé la taille maximale de 35 caractères.</span>
+                        {{'Vous avez dépassé la taille maximale de 35 caractères' | translate}}.
+                    </span>
                 </div>
 
                 <!--  PHONE NUMBER -->
@@ -143,7 +150,7 @@
                     <label for="phonenumber" 
                         class="mb-3 block text-base font-medium text-black dark:text-white"
                     >
-                        Téléphone
+                        {{'Téléphone' | translate}}
                     </label>
                     <input type="text" name="phonenumber" id="phonenumber" placeholder="(111) 111-1111"
                         #phoneInput 
@@ -151,27 +158,27 @@
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" 
                         formControlName="phonenumber"
                     />
-                    <span *ngIf="phoneFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">Mauvais format.</span>
+                    <span *ngIf="phoneFormat()" class="text-xs font-light text-red-500" style="margin: 0px;">{{'Mauvais format' | translate}}.</span>
                 </div>
 
                 <!--  ROLE -->
                 <div class="mb-4">
-                    <label for="role" class="block text-black dark:text-white text-base font-medium mb-2">*Rôle</label>
+                    <label for="role" class="block text-black dark:text-white text-base font-medium mb-2">*{{'Rôle' | translate}}</label>
                     <select id="role" name="role"
                         class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" 
                         formControlName="role"
                         required
                     >
-                        <option value="" disabled selected hidden>Choisissez un rôle</option>
-                        <option value="ROLE_ADMIN">Admin</option>
-                        <option value="ROLE_USER">Client</option>
-                        <option value="ROLE_EMPLOYEE">Employé(e)</option>
+                        <option value="" disabled selected hidden>{{'Choisissez un rôle' | translate}}</option>
+                        <option value="ROLE_ADMIN">{{'Admin' | translate}}</option>
+                        <option value="ROLE_USER">{{'Client(e)' | translate}}</option>
+                        <option value="ROLE_EMPLOYEE">{{'Employé(e)' | translate}}</option>
                     </select>
                     <span *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" 
                             class="text-xs font-light text-red-500" 
                             style="margin: 0px;"
                         >
-                            Le rôle est requis.
+                            {{'Le rôle est requis' | translate}}.
                         </span>
                 </div>
 
@@ -197,37 +204,39 @@
                                 hover:file:bg-violet-100"
                             />
                         </label>
-                        <span *ngIf="!hasUserExtension" class="text-xs font-light text-red-500" style="margin: 0px;">Entrer un format jpg ou png.</span>
+                        <span *ngIf="!hasUserExtension" class="text-xs font-light text-red-500" style="margin: 0px;">{{'Entrer un format jpg ou png' | translate}}.</span>
                     </div>
                 </div>
 
                 <!--  PASSWORD -->
                 <div>
-                    <label for="password" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">*Mot
-                        de passe</label>
+                    <label for="password" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">
+                        *{{'Mot de passe' | translate}}</label>
                     <input type="password" name="password" id="password" placeholder="••••••••"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         formControlName="password"
                     >
-                    <span *ngIf="passwordEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">Veuillez 
-                        saisir le mot de passe.</span>
+                    <span *ngIf="passwordEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;">
+                        {{'Veuillez saisir le mot de passe' | translate}}.
+                    </span>
                 </div>
 
                 <!--  CONFIRM PASSWORD -->
                 <div>
-                    <label for="cpassword" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">*Confirmez votre mot
-                        de passe</label>
+                    <label for="cpassword" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">
+                        *{{'Confirmez votre motde passe' | translate}}.
+                    </label>
                     <input type="password" name="cpassword" id="cpassword" placeholder="••••••••"
                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         [(ngModel)]="cpassword" [ngModelOptions]="{standalone: true}"
                     >
-                    <span *ngIf="!cpasswordMatch()" class="text-xs font-light text-red-500" style="margin: 0px;">Les mots de passe ne correspondent pas.</span>
+                    <span *ngIf="!cpasswordMatch()" class="text-xs font-light text-red-500" style="margin: 0px;">{{'Les mots de passe ne correspondent pas' | translate}}.</span>
                 </div>
 
                 <!--  STATUS -->
                 <div>
                     <label for="isActive" class="inline-flex items-center cursor-pointer">
-                        <span class=" text-base font-medium text-gray-900 dark:text-gray-300">Activer le compte</span>
+                        <span class=" text-base font-medium text-gray-900 dark:text-gray-300">{{'Activer le compte' | translate}}</span>
                         <input type="checkbox" value="" class="sr-only peer" 
                             name="isActive" id="isActive" formControlName="isActive" checked>
                         <div
@@ -245,10 +254,10 @@
                                 required="">
                         </div>
                         <div class="ml-3 text-sm">
-                            <label for="remember" class="text-gray-500 dark:text-gray-300">J'ai lu et j'accepte les conditions d'utilisation</label>
+                            <label for="remember" class="text-gray-500 dark:text-gray-300">{{'J\'ai lu et j\'accepte les conditions d\'utilisation' | translate}}</label>
                         </div>
                         <span *ngIf="registerForm.get('acceptTerms')?.touched && registerForm.get('acceptTerms')?.invalid" class="text-red-500">
-                            Il est important d'accepter les conditions.
+                            {{'Il est important d\'accepter les conditions' | translate}}.
                         </span>
                     </div>
                 </div>
@@ -257,15 +266,15 @@
                 <button type="submit" [disabled]="registerForm.invalid"
                     class="w-full text-white bg-[#e7cc96] disabled:hover:bg-[#e7cc96] hover:bg-[#e7cc96]  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#e7cc96] dark:hover:bg-[#e7cc96] dark:focus:ring-primary-800 disabled:opacity-50"
                 >
-                    Créer
+                    {{'Créer' | translate}}
                 </button>
             </form>
 
             <!-- Separator between social media sign in and email/password sign in -->
             <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 dark:before:border-neutral-500 dark:after:border-neutral-500"></div>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                    Vous avez déjà un compte? 
-                    <a [routerLink]="['/login']" class="font-medium text-[#af8124] hover:underline dark:text-primary-500">Connnectez-vous!</a>
+                    {{'Vous avez déjà un compte' | translate}}? 
+                    <a [routerLink]="['/login']" class="font-medium text-[#af8124] hover:underline dark:text-primary-500">{{'Connnectez-vous' | translate}}!</a>
                 </p>
         </div>
     </div>

@@ -9,19 +9,25 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginComponent } from '../../shared/components/login/login.component';
 import { CouponsComponent } from '../../shared/components/coupons/coupons.component';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule, LoginComponent, CouponsComponent],
+  imports: [CommonModule, FormsModule, LoginComponent, CouponsComponent, TranslatePipe],
   templateUrl: './cart.page.html',
   styleUrl: './cart.page.scss'
 })
 export class CartPage {
    constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private cartService: CartService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.cartService.getItemsCartToDisplay().subscribe(items => {

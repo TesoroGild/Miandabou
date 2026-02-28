@@ -53,3 +53,9 @@ export interface ItemToOrder {
     quantityBuy: number;
     itemPrice: number;
 }
+
+export interface ItemOnSale {
+    id: number;
+    name: string;
+    price : string;
+}

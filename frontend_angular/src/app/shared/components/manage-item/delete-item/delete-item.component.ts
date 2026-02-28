@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { environment } from '../../../../../environments/environment';
 import { ItemService } from '../../../../services/item/item.service';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-delete-item',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './delete-item.component.html',
   styleUrl: './delete-item.component.scss'
 })
@@ -16,10 +18,12 @@ export class DeleteItemComponent {
   @Output() close = new EventEmitter<void>();
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private toastService: ToastService,
     private itemService: ItemService,
   ) {
-
+    this.translateService.use(this.langService.initLangage());
   }
 
   ngOnInit() {

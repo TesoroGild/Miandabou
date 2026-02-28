@@ -11,12 +11,14 @@ import { CommonModule } from '@angular/common';
 import { Item, ItemCart, ItemToOrder } from '../../interfaces/item.interface';
 import { Order, OrderToCreate } from '../../interfaces/order.interface';
 import { CheckoutData } from '../../interfaces/checkout.interface';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 declare const google: any;
 
 @Component({
   selector: 'app-checkout',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './checkout.page.html',
   styleUrl: './checkout.page.scss'
 })
@@ -41,6 +43,8 @@ export class CheckoutPage {
 
 
   constructor (
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private router: Router,
     private cartService: CartService,
     private formBuilder: FormBuilder,
@@ -48,6 +52,7 @@ export class CheckoutPage {
     private checkoutService: CheckoutService,
     private toastService: ToastService
   ) {
+    this.translateService.use(this.langService.initLangage());
     this.userToDisplay$ = this.authService.getUserToDisplay();
   }
 

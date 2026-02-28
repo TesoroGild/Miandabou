@@ -4,10 +4,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { ItemService } from '../../../../services/item/item.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { environment } from '../../../../../environments/environment';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-update-item',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './update-item.component.html',
   styleUrl: './update-item.component.scss'
 })
@@ -29,10 +31,13 @@ export class UpdateItemComponent {
   itemId: number = 0;
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private formBuilder: FormBuilder,
     private itemService: ItemService,
     private toastService: ToastService
   ) {
+    this.translateService.use(this.langService.initLangage());
     this.itemForm = this.formBuilder.group({
       name: [
         null, 

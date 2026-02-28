@@ -34,13 +34,16 @@
                 <figure class="max-w-screen-md mx-auto">
                     <!-- Stars -->
                     <div class="flex items-center space-x-1 mb-4">
-                        <ng-container *ngFor="let _ of [].constructor(testimonial.rating)">
-                            <svg class="w-5 h-5 text-fg-yellow" ...></svg>
-                        </ng-container>
-
-                        <ng-container *ngFor="let _ of [].constructor(5 - testimonial.rating)">
-                            <svg class="w-5 h-5 text-fg-disabled" ...></svg>
-                        </ng-container>
+                        <svg 
+                            *ngFor="let star of stars"
+                            [class.text-yellow-300]="star <= testimonial.rating"
+                            [class.text-gray-300]="star > testimonial.rating"
+                            [class.dark:text-gray-500]="star > testimonial.rating"
+                            class="h-5 w-5 fill-current" 
+                            viewBox="0 0 22 20" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                        </svg>
                     </div>
 
                     <blockquote>
@@ -48,10 +51,8 @@
                     </blockquote>
 
                     <figcaption class="flex items-center mt-6 space-x-3">
-                        <img class="w-6 h-6 rounded-full" [src]="testimonial.avatar">
                         <div class="flex items-center divide-x divide-default">
                             <cite class="pe-3 font-medium text-heading">{{ testimonial.author }}</cite>
-                            <cite class="ps-3 text-sm text-body">{{ testimonial.role }}</cite>
                         </div>
                     </figcaption>
                 </figure>
@@ -64,9 +65,9 @@
             <!-- Coupon  -->
             <div id="carousel-item-3" class="hidden duration-700 ease-in-out" data-carousel-item>
                 <div class="flex-1">
-                    <h2 class="text-2xl font-bold text-heading">Réduction temporaire</h2>
-                    <p class="text-body mt-2">Obtenez <strong class="text-red-600">-{{calculateDiscount()}}</strong> de réduction sur votre prochain achat en utilisant le code <strong class="text-blue-600">{{this.couponFound.name}}</strong></p>
-                    <button [routerLink]="['/#']"
+                    <h2 class="text-2xl font-bold text-heading">{{'Réduction temporaire' | translate}}</h2>
+                    <p class="text-body mt-2">{{'Obtenez' | translate}} <strong class="text-red-600">-{{displayDiscount()}}</strong> {{'de réduction sur votre prochain achat en utilisant le code' | translate}} <strong class="text-blue-600">{{this.couponFound.name}}</strong></p>
+                    <button (click)="openItemsOnSale()"
                         class="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-base hover:bg-primary-hover hover:cursor-pointer rounded-md">
                         <span>Articles concernés</span>
                     </button>
@@ -130,13 +131,28 @@
                         {{ 'Rejoindre' | translate }}
                     </button>
                 </div>
-                <span *ngIf="emailEmpty()" class="text-xs font-light text-red-500" style="margin: 0px;" >
-                    {{ 'Veuillez saisir un email.' | translate }}</span>
-                <span *ngIf="emailFormat()" class="text-xs font-light text-red-500" style="margin: 0px;" >
-                    {{ 'Format email invalide!' | translate }}</span>
-                <span *ngIf="emailLength()" class="text-xs font-light text-red-500" style="margin: 0px;" >
-                    {{ 'Vous avez dépassé la taille maximale de 60 caractères' | translate }}.</span>
+                @if(emailEmpty()) {
+                    <span class="text-xs font-light text-red-500" style="margin: 0px;" >
+                        {{ 'Veuillez saisir un email.' | translate }}
+                    </span>
+                }
+                @if(emailFormat()) {
+                    <span  class="text-xs font-light text-red-500" style="margin: 0px;" >
+                        {{ 'Format email invalid!' | translate }}
+                    </span>
+                }
+                @if(emailLength()) {
+                    <span  class="text-xs font-light text-red-500" style="margin: 0px;" >
+                        {{ 'Vous avez dépassé la taille maximale de 60 caractères' | translate }}.
+                    </span>
+                }
             </form>
         </div>
     </div>
 </div>
+
+<app-on-sale
+    [isOpen]="showItemsOnSaleComp"
+    (close)="closeItemsOnSale()"
+    [coupon]="this.couponFound"
+></app-on-sale>

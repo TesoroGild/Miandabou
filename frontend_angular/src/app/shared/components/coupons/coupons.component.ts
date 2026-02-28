@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartService } from '../../../services/cart/cart.service';
 import { Coupon } from '../../../interfaces/coupon.interface';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-coupons-comp',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './coupons.component.html',
   styleUrl: './coupons.component.scss'
 })
@@ -17,7 +19,13 @@ export class CouponsComponent {
   couponsSelected: Coupon[] = [];
   couponsTotal: number = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
+    private cartService: CartService
+  ) { 
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.cartService.getCoupons().subscribe(coupons => {

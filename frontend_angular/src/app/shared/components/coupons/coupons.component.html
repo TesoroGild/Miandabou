@@ -9,7 +9,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Coupons disponibles
+                    {{'Coupons disponibles' | translate}}
                 </h3>
                 <!-- Close Button -->
                 <button type="button"
@@ -28,7 +28,7 @@
             <div class="p-4 md:p-5 space-y-4">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="pb-4 bg-white dark:bg-gray-900">
-                        <label for="table-search" class="sr-only">Search</label>
+                        <label for="table-search" class="sr-only">{{'Rechercher' | translate}}</label>
                         <div class="relative mt-1">
                             <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -49,13 +49,13 @@
                                     <div class="flex items-center"></div>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nom
+                                    {{'Nom' | translate}}
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Valeur ($ ou %)
+                                    {{'Valeur' | translate}} ($ / %)
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Date de fin
+                                    {{'Date de fin' | translate}}
                                 </th>
                             </tr>
                         </thead>
@@ -67,7 +67,7 @@
                                         <div class="flex items-center">
                                             <input id="checkbox-table-search-1" type="checkbox" [checked]="checkboxStates[i]"
                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                            <label for="checkbox-table-search-1" class="sr-only">{{'Case à cocher' | translate}}</label>
                                         </div>
                                     </td>
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -86,7 +86,7 @@
                                 <!-- NO COUPONS AVAILABLE -->
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td colspan="4" class="p-2 text-center">
-                                        Aucun coupon disponible.
+                                        {{'Aucun coupon disponible' | translate}}.
                                     </td>
                                 </tr>
                             </ng-template>
@@ -98,11 +98,17 @@
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button data-modal-hide="default-modal" (click)="cancelCoupons()"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Annuler tout</button>
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {{'Annuler tout' | translate}}
+                </button>
                 <button data-modal-hide="default-modal" (click)="applyCoupons()"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Appliquer</button>
+                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    {{'Appliquer' | translate}}
+                </button>
                 <button data-modal-hide="default-modal" (click)="applyAllCoupons()"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Tout appliquer</button>
+                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    {{'Tout appliquer' | translate}}
+                </button>
             </div>
         </div>
     </div>

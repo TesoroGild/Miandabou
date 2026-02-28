@@ -5,10 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { ReviewFormComponent } from "../review-form/review-form.component";
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-reviews-list',
-  imports: [CommonModule, ReviewFormComponent],
+  imports: [CommonModule, ReviewFormComponent, TranslatePipe],
   templateUrl: './reviews-list.component.html',
   styleUrl: './reviews-list.component.scss'
 })
@@ -25,10 +27,12 @@ export class ReviewsListComponent {
   reviewToEdit!: Review;
 
   constructor (
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private route: ActivatedRoute,
     private reviewsService: ReviewsService
   ) {
-    
+    this.translateService.use(this.langService.initLangage());
   }
 
   ngOnInit () {

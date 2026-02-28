@@ -6,10 +6,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router } from '@angular/router';
 import { ItemService } from '../../../../services/item/item.service';
 import { ToastService } from '../../../../services/toast/toast.service';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-add-item',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './add-item.component.html',
   styleUrl: './add-item.component.scss'
 })
@@ -23,10 +25,14 @@ export class AddItemComponent {
   hasImgExtension: boolean = true;
 
   constructor(
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private formBuilder: FormBuilder,
     private itemService: ItemService,
     private toastService: ToastService
-  ) { }
+  ) {
+    this.translateService.use(this.langService.initLangage());
+  }
 
   ngOnInit() {
     this.itemForm = this.formBuilder.group({

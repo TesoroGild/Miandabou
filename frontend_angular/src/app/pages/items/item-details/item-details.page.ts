@@ -7,10 +7,12 @@ import { CartService } from '../../../services/cart/cart.service';
 import { ToastService } from '../../../services/toast/toast.service';
 import { ReviewFormComponent } from "../../../shared/components/reviews/review-form/review-form.component";
 import { ReviewsListComponent } from '../../../shared/components/reviews/reviews-list/reviews-list.component';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../../services/langages/langages.service';
 
 @Component({
   selector: 'app-item-details',
-  imports: [ReviewFormComponent, ReviewsListComponent],
+  imports: [ReviewFormComponent, ReviewsListComponent, TranslatePipe],
   templateUrl: './item-details.page.html',
   styleUrl: './item-details.page.scss'
 })
@@ -42,11 +44,15 @@ export class ItemDetailsPage {
   showReviewFormModal: boolean = false;
 
   constructor ( 
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private route: ActivatedRoute, 
     private itemService: ItemService,
     private cartService: CartService,
     private toastService: ToastService
-  ) { }
+  ) { 
+    this.translateService.use(this.langService.initLangage());
+  }
   
   ngOnInit() {
     this.tmpItemToDetail = history.state.data;

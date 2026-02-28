@@ -13,15 +13,16 @@ import { UpdateItemComponent } from "../../shared/components/manage-item/update-
 import { Item } from '../../interfaces/item.interface';
 
 ///Services
-import { CartService } from '../../services/cart/cart.service';
 import { ItemService } from '../../services/item/item.service';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
+
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { LangagesService } from '../../services/langages/langages.service';
 
 const SORT_KEY = 'sort-key';
 @Component({
   selector: 'app-stock',
-  imports: [CommonModule, RouterModule, AddItemComponent, DeleteItemComponent, UpdateItemComponent],
+  imports: [CommonModule, RouterModule, AddItemComponent, DeleteItemComponent, UpdateItemComponent, TranslatePipe],
   templateUrl: './stock.page.html',
   styleUrl: './stock.page.scss'
 })
@@ -39,11 +40,13 @@ export class StockPage {
   isAdmin: boolean = false;
 
   constructor (
-    private cartService: CartService,
+    private translateService: TranslateService,
+    private langService: LangagesService,
     private router: Router, 
     private itemService: ItemService,
     private authService: AuthService
   ) { 
+    this.translateService.use(this.langService.initLangage());
     this.filterSelect = this.loadFilterSelection();
     this.isAdmin = authService.isAdmin();
   }
