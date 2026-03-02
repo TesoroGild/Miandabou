@@ -254,6 +254,11 @@ export class CheckoutPage {
             this.checkoutForm.reset();
             this.toastService.success(res.msg);
             this.router.navigate(['/bills']);
+            localStorage.removeItem("cart");
+            localStorage.removeItem("subTotal");
+            localStorage.removeItem("total");
+            localStorage.removeItem("tps");
+            localStorage.removeItem("tvq");
           },
           error: (err: any) => {
             this.toastService.error(err.error.msg);
@@ -328,5 +333,18 @@ export class CheckoutPage {
       && this.checkoutForm.get("cardowner")?.value != null
       && this.checkoutForm.get("cardnumber")?.value != null
     );
+  }
+
+  fillCardData() {
+    this.checkoutForm.patchValue({
+      cardnumber: '4242 4242 4242 4242',
+      cardexpirationdate: '12/26',
+      cvv: '123',
+      cardowner: 'John Doe'
+    });
+  }
+
+  fillAddressData() {
+
   }
 }

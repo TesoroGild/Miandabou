@@ -61,6 +61,4 @@ ng serve
 ### Télecharger la facture
 
 ## Should have
-* Logique avec les coupons.
-* Commentaires et notes.
 * Couleur et taille des articles.

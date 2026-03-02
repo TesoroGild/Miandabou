@@ -19,7 +19,7 @@ final class CouponsController extends AbstractController
     {
         try {
             $coupons = $couponsRepository->findAll();
-            
+            $logger->error("CEST VIDE OU QUOI ".$coupons[0]);
             return $this->json([
                 'coupons' => $coupons,
                 'msg' => 'Liste des coupons!'

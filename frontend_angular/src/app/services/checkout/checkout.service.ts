@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, map, throwError } from 'rxjs';
 import { jsPDF } from 'jspdf';
 import html2canvas from "html2canvas";
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,18 @@ export class CheckoutService {
   addressBill:any;
   itemsBill:any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
   checkout(orderToCreate: any) : any {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
     const jsonData = JSON.stringify(orderToCreate);
     return this.http.post<any>(
       `${environment.backendUrl}/api/checkout`, 
-      jsonData
+      jsonData,
+      { headers }
     ).pipe(
       map((res: any) => {
         this.orderBill = res.order;

@@ -9,12 +9,12 @@
                 <div class="space-y-6">
                     <!-- ADDRESS -->
                     <div class="border-b border-gray-900/10 pb-6">
-                        <p class="mt-1 text-sm leading-6 text-gray-600">{{'Utilisez une adresse où vous pouvez recevoir votre commande.' | translate}}
+                        <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-slate-100">{{'Utilisez une adresse où vous pouvez recevoir votre commande.' | translate}}
                         </p>
 
                         <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-5">
                             <div class="sm:col-span-2">
-                                <label for="phonenumber" class="block text-sm font-medium leading-6 text-gray-900">{{'Téléphone' | translate}}</label>
+                                <label for="phonenumber" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Téléphone' | translate}}</label>
                                 <div class="mt-2">
                                     <input [disabled]="userToDisplay.tel !== undefined || userToDisplay.tel !== null || userToDisplay.tel !== ''" 
                                         type="text" name="phonenumber" id="phonenumber" placeholder="(111) 111-1111"
@@ -28,7 +28,7 @@
                             </div>
     
                             <div class="col-span-full">
-                                <label for="address" class="block text-sm font-medium leading-6 text-gray-900">{{'Addresse' | translate}} *</label>
+                                <label for="address" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Addresse' | translate}} *</label>
                                 <div class="mt-2">
                                     <input type="text" name="location-input" id="location-input" autocomplete="location-input" 
                                         placeholder="Saisissez votre adresse"
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">{{'Ville' | translate}} *</label>
+                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Ville' | translate}} *</label>
                                 <div class="mt-2">
                                     <input type="text" name="city" id="city"
                                         class="pl-4 block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -51,7 +51,7 @@
                             </div>
     
                             <div class="sm:col-span-2">
-                                <label for="province" class="block text-sm font-medium leading-6 text-gray-900">{{'Etat / Province' | translate}} *</label>
+                                <label for="province" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Etat / Province' | translate}} *</label>
                                 <div class="mt-2">
                                     <input type="text" name="province" id="province"
                                         class="pl-4 block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -60,7 +60,7 @@
                             </div>
     
                             <div class="sm:col-span-2">
-                                <label for="zipcode" class="block text-sm font-medium leading-6 text-gray-900">{{'ZIP / Code postal' | translate}} *</label>
+                                <label for="zipcode" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'ZIP / Code postal' | translate}} *</label>
                                 <div class="mt-2">
                                     <input type="text" name="zipcode" id="zipcode"
                                         class="pl-4 block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="country" class="block text-sm font-medium leading-6 text-gray-900">{{'Pays' | translate}} *</label>
+                                <label for="country" class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Pays' | translate}} *</label>
                                 <div class="mt-2">
                                     <input type="text" name="country" id="country"
                                         class="pl-4 block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -83,8 +83,8 @@
                     <div class="border-b border-gray-900/10 pb-6">
                         <div class="space-y-10">
                             <fieldset>
-                                <legend class="text-sm font-semibold leading-6 text-gray-900">{{'Notifications' | translate}} *</legend>
-                                <p class="mt-1 text-sm leading-6 text-gray-600">
+                                <legend class="text-sm font-semibold leading-6 text-gray-900 dark:text-slate-300">{{'Notifications' | translate}} *</legend>
+                                <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
                                     {{'Comment voulez-vous recevoir les mises à jour concernant votre commande?' | translate}}
                                 </p>
                                 <div class="mt-2 space-y-2">
@@ -92,19 +92,19 @@
                                         <input id="push-email" name="meansofcommunication" type="radio" formControlName="meansofcommunication"
                                             class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="emailcommunication">
                                         <label for="push-email"
-                                            class="block text-sm font-medium leading-6 text-gray-900">{{'Email' | translate}}</label>
+                                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Email' | translate}}</label>
                                     </div>
                                     <div class="flex items-center gap-x-3">
                                         <input id="push-phonenumber" name="meansofcommunication" type="radio" formControlName="meansofcommunication"
                                             class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="phonecommunication">
                                         <label for="push-phonenumber"
-                                            class="block text-sm font-medium leading-6 text-gray-900">{{'Téléphone' | translate}}</label>
+                                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Téléphone' | translate}}</label>
                                     </div>
                                     <div class="flex items-center gap-x-3">
                                         <input id="push-nothing" name="meansofcommunication" type="radio" formControlName="meansofcommunication"
                                             class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="nonecommunication">
                                         <label for="push-nothing"
-                                            class="block text-sm font-medium leading-6 text-gray-900">{{'Pas de notifications' | translate}}</label>
+                                            class="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-300">{{'Pas de notifications' | translate}}</label>
                                     </div>
                                 </div>
                             </fieldset>
@@ -114,13 +114,19 @@
                     <!-- PAYMENT METHOD -->
                     <div class="items-center justify-end gap-x-6">
                         <div class="w-full">
-                            <legend class="text-sm font-semibold leading-6 text-gray-900">
+                            <legend class="text-sm font-semibold leading-6 text-gray-900 dark:text-slate-300">
                                 {{'Informations de paiement' | translate}} *
                             </legend>
+                            <p class="text-sm font-semibold leading-6 text-red-500">⚠️ Ce formulaire est une simulation. Ne saisissez pas de vraies coordonnées bancaires. Pour tester le flux complet de commande et la génération de facture, utilisez le bouton ci-dessous.</p>
+                            <button type="button" (click)="fillCardData()" 
+                                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                            >
+                            ⚡ Auto-remplir
+                            </button>
                             
-                            <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
+                            <div class="mt-2 sm:mt-4 lg:flex lg:items-start lg:gap-12">
                                 <div class="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
-                                    <div class="mb-6 grid grid-cols-2 gap-4">
+                                    <div class="mb-4 grid grid-cols-2 gap-4">
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="cardowner" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> {{'Nom du titulaire' | translate}}* </label>
                                             <input type="text" id="cardowner" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" 
@@ -265,7 +271,7 @@
                 <!-- PAYMENT -->
                 <div class="mt-6 flex items-center justify-end gap-x-6 h-14">
                     <button type="submit" [disabled]="checkoutForm.invalid"
-                        class="w-full h-full disabled:bg-gray-400 bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        class="w-full h-full disabled:bg-gray-400 bg-blue-500 hover:cursor-pointer px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         {{'Commander' | translate}}
                     </button>
                 </div>

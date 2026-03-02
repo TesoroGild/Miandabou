@@ -81,22 +81,15 @@ export class BillsPage {
   }
 
   displayDate(date: any) {
-    let displaydate = new Date(date.date);
+    let displaydate = new Date(date);
     return displaydate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
   }
 
-  displayMessage(communicationchannel: string) {
-    if (communicationchannel == "emailcommunication") return "Nous converserons avec vous via cette adresse mail " +  + " pour toutes mises à jour.";
-    else if (communicationchannel == "phonecommunication") return "Nous converserons avec vous via ce numéro de téléphone {{ displayMessage(order.communicationchannel) }} pour toutes mises à jour.";
-    else if (communicationchannel == "nonecommunication") return "Nous ne communiquerons pas avec vous conformement à votre choix.";
-    else return null;
-  }
-
   homePage() {
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/home']);
   }
 
   articlesPage() {
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/items']);
   }
 }

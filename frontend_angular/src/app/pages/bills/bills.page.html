@@ -10,7 +10,7 @@
         <div class="mt-3 space-y-4 border-b border-t border-gray-200 py-8 dark:border-gray-700 sm:mt-2">
           <dl>
             <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{{ userToDisplay.firstname }} {{ userToDisplay.lastname }}</dd>
-            <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{{ 'Nous converserons avec vous via' | translate }} {{ displayMessage(order.communicationchannel) }} {{ 'pour toutes mises à jour' | translate }}.</dd>
+            <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{{ 'Nous converserons avec vous via' | translate }} {{ order.communicationchannel }} {{ 'pour toutes mises à jour' | translate }}.</dd>
             <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{{ 'Le colis sera livré au' | translate }} {{ shippingAddress.fulladdress }}.</dd>
             <dd class="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{{ 'Date estimée de livraison' | translate }}: {{ displayDate(order.expecteddateshipping) }} {{'entre 8am et 5pm' | translate}}.</dd>
           </dl>
