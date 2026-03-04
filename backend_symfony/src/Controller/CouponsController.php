@@ -19,7 +19,6 @@ final class CouponsController extends AbstractController
     {
         try {
             $coupons = $couponsRepository->findAll();
-            $logger->error("CEST VIDE OU QUOI ".$coupons[0]);
             return $this->json([
                 'coupons' => $coupons,
                 'msg' => 'Liste des coupons!'
@@ -33,7 +32,7 @@ final class CouponsController extends AbstractController
         }
     }
 
-    #[Route('/api/coupons/{id}/items', name: 'app_coupons', methods:['GET'])]
+    #[Route('/api/coupons/{id}/items', name: 'app_coupons_items', methods:['GET'])]
     #[OA\Tag(name: 'Coupons')]
     public function getItemsCoupons(Coupons $coupons, LoggerInterface $logger): JsonResponse
     {
