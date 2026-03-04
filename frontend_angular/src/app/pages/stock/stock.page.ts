@@ -204,14 +204,14 @@ export class StockPage {
     const addedQty = this.getChangeValue(item.id);
     if (addedQty <= 0) return;
 
-    this.itemService.updateStock(item.id, item.tempQuantity).subscribe({
-      next: (response: any) => {
-        // Optionnel : Mettre à jour la vue directement après succès
-        item.quantity += item.tempQuantity;
-        item.tempQuantity = 0; // Reset le compteur après ajout
-        // Notification de succès ici
-      },
-      error: (err: any) => console.error('Erreur lors de l\'update', err)
-    });
+    // this.itemService.updateStock(item.id, item.tempQuantity).subscribe({
+    //   next: (response: any) => {
+    //     // Optionnel : Mettre à jour la vue directement après succès
+    //     item.quantity += item.tempQuantity;
+    //     item.tempQuantity = 0; // Reset le compteur après ajout
+    //     // Notification de succès ici
+    //   },
+    //   error: (err: any) => console.error('Erreur lors de l\'update', err)
+    // });
   }
 }
