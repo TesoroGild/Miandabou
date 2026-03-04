@@ -38,6 +38,7 @@ export class StockPage {
   selectedItem: any;
   isLoading: boolean = false;
   isAdmin: boolean = false;
+  public stockChanges: { [key: string]: number } = {};
 
   constructor (
     private translateService: TranslateService,
@@ -183,7 +184,34 @@ export class StockPage {
     }
   }
 
-  updateProductQuantity() {
+  getChangeValue(itemId: string): number {
+    return this.stockChanges[itemId] || 0;
+  }
 
+  increment(itemId: string) {
+    const current = this.getChangeValue(itemId);
+    this.stockChanges[itemId] = current + 1;
+  }
+
+  decrement(itemId: string) {
+    const current = this.getChangeValue(itemId);
+    if (current > 0) {
+      this.stockChanges[itemId] = current - 1;
+    }
+  }
+
+  updateProductQuantity(item: any) {
+    const addedQty = this.getChangeValue(item.id);
+    if (addedQty <= 0) return;
+
+    this.itemService.updateStock(item.id, item.tempQuantity).subscribe({
+      next: (response: any) => {
+        // Optionnel : Mettre à jour la vue directement après succès
+        item.quantity += item.tempQuantity;
+        item.tempQuantity = 0; // Reset le compteur après ajout
+        // Notification de succès ici
+      },
+      error: (err: any) => console.error('Erreur lors de l\'update', err)
+    });
   }
 }

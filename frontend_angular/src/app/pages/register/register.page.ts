@@ -15,7 +15,6 @@ import { LangagesService } from '../../services/langages/langages.service';
   styleUrl: './register.page.scss'
 })
 export class RegisterPage {
-  phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
   registerForm!: FormGroup;
 
   userIsLoggedIn: boolean = false;
@@ -43,7 +42,7 @@ export class RegisterPage {
         null,
         [
           Validators.required,
-          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
           Validators.maxLength(35)
         ],
       ],
@@ -85,7 +84,7 @@ export class RegisterPage {
       phonenumber: [
         null,
         [
-          Validators.pattern(this.phonePattern)
+          Validators.pattern(/^\(\d{3}\) \d{3}-\d{4}$/)
         ]
       ],
       isActive: [
@@ -218,24 +217,55 @@ export class RegisterPage {
       && this.registerForm.get('email')!.touched;
   }
 
-  //phonenumber
-  formatInput(inputElement: HTMLInputElement) {
-    // Get the raw input value
-    let rawValue = inputElement.value.replace(/\D/g, '');
-
-    // Apply phone number format (xxx) xxx-xxxx
-    let formattedNumber = '';
-    if (rawValue.length > 0) {
-      formattedNumber = '(' + rawValue.substring(0, 3) + ') ' + rawValue.substring(3, 6) + '-' + rawValue.substring(6, 10);
-    }
-    
-    // Update the input value with the formatted number
-    inputElement.value = formattedNumber;
+  phoneNumberEmpty(): boolean {
+    const meansofcommunication = this.registerForm.get("meansofcommunication")?.value;
+    if (meansofcommunication == "phonecommunication")
+      return this.showPhoneError("phonenumber", "required")
+      || this.showError("phonenumber", "required");
+    else return false;
   }
 
-  phoneFormat() {
-    return this.registerForm.get('phonenumber')!.hasError('pattern') 
-      && this.registerForm.get('phonenumber')!.touched;
+  formatPhoneNumberInput(inputElement: HTMLInputElement) {
+    const value = inputElement.value;
+    // 1. On ne garde que les chiffres
+    let rawValue = inputElement.value.replace(/\D/g, '');
+    
+    // Limiter à 10 chiffres pour éviter les débordements
+    rawValue = rawValue.substring(0, 10);
+
+    let formattedValue = '';
+
+    // 2. On construit le format dynamiquement selon la longueur
+    if (rawValue.length === 0) {
+      formattedValue = '';
+    } else if (rawValue.length <= 3) {
+      formattedValue = `(${rawValue}`;
+    } else if (rawValue.length <= 6) {
+      formattedValue = `(${rawValue.substring(0, 3)}) ${rawValue.substring(3)}`;
+    } else {
+      formattedValue = `(${rawValue.substring(0, 3)}) ${rawValue.substring(3, 6)}-${rawValue.substring(6)}`;
+    }
+
+    // 3. On met à jour l'input
+    inputElement.value = formattedValue;
+
+    // 4. Important : Mettre à jour manuellement le formControl si tu utilises Reactive Forms
+    // Car l'event (input) sur l'élément HTML ne met pas toujours à jour le Control proprement après modification manuelle de la value
+    this.registerForm.get('phonenumber')?.setValue(formattedValue, { emitEvent: false });
+  }
+
+  phoneNumberFormat() {
+    const control = this.registerForm.get('phonenumber');
+    // Renvoie true seulement si le champ n'est pas vide ET que le pattern est invalide
+    return control?.errors?.['pattern'] && control?.touched && control?.value.length > 0;
+  }
+
+  private showPhoneError(
+    field: "phonenumber", 
+    error: string): boolean {
+    return (
+      this.registerForm.controls[field].hasError(error)
+    );
   }
 
   //picture

@@ -1,20 +1,19 @@
-
-<section class="py-12 relative">
+<section class="pb-8 relative bg-white dark:bg-gray-900">
     <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
 
-        <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black dark:text-white">{{'Votre Panier d\'achat' | translate}}
+        <h2 class="font-manrope font-bold text-2xl md:text-4xl leading-10 mb-2 lg:mb-4 text-center text-black dark:text-white">
+            {{'Votre Panier d\'achat' | translate}}
         </h2>
         
-        <div class="col mb-4" *ngFor="let item of cart">
-            <div
-                class="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">
-                <div class="col-span-12 lg:col-span-2 img box">
-                    <img src="{{ picture(item.item.contenthash) }}" alt="speaker image"
-                        class="max-lg:w-full lg:w-[180px] ">
+        <div class="col" *ngFor="let item of cart">
+            <div class="rounded-3xl border-2 border-gray-100 dark:border-gray-800 p-2 lg:p-4 lg:p-8 grid grid-cols-12 mb-2 lg:mb-8 max-lg:max-w-lg max-lg:mx-auto lg:gap-y-4 shadow-sm">
+                <div class="col-span-12 lg:col-span-2 flex justify-center items-center">
+                    <img src="{{ picture(item.item.contenthash) }}" alt="product image"
+                        class="rounded-2xl object-cover w-28 h-28 lg:w-[180px] lg:h-auto shadow-sm">
                 </div>
-                <div class="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
-                    <div class="flex items-center justify-between w-full mb-4">
-                        <h5 class="font-manrope font-bold text-2xl leading-9 text-gray-900">
+                <div class="col-span-12 lg:col-span-10 detail w-full lg:pl-4">
+                    <div class="flex items-center justify-between w-full mb-1 lg:mb-4">
+                        <h5 class="font-manrope font-bold text-xl lg:text-2xl leading-tight text-gray-900 dark:text-white">
                             {{ item.item.name }}
                         </h5>
                         <button (click)="deleteFromCart(item.item)" 
@@ -28,82 +27,63 @@
                             </svg>
                         </button>
                     </div>
-                    <p class="font-normal text-base leading-7 text-gray-500 mb-6">
+                    <p class="font-normal text-sm md:text-base leading-6 text-gray-500 dark:text-gray-400 mb-1 lg:mb-4 line-clamp-2 md:line-clamp-none">
                         {{ item.item.description }}
                     </p>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-3 bg-gray-50 dark:bg-gray-800 p-1 rounded-full border border-gray-100 dark:border-gray-700">
                             <button (click)="decraseQuantityInCart(item.item)"
-                                class="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18"
-                                    height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.5 9.5H13.5" stroke="" stroke-width="1.6" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
+                                    class="w-8 h-8 rounded-full flex items-center justify-center bg-white dark:bg-gray-700 shadow-sm hover:bg-gray-100">
+                                <svg class="stroke-gray-900 dark:stroke-white" width="14" height="14" viewBox="0 0 18 19"><path d="M4.5 9.5H13.5" stroke-width="2" stroke-linecap="round"/></svg>
                             </button>
+                            
                             <input [(ngModel)]="item.quantityBuy" (ngModelChange)="updateQuantity(item.item, item.quantityBuy)"
-                                class="border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-2 bg-gray-100  text-center"> 
+                                    class="w-10 text-center bg-transparent border-none focus:ring-0 font-semibold text-gray-900 dark:text-white text-sm">
+                            
                             <button (click)="addToCart(item.item)"
-                                class="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
-                                <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" width="18"
-                                    height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.75 9.5H14.25M9 14.75V4.25" stroke="" stroke-width="1.6"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                    class="w-8 h-8 rounded-full flex items-center justify-center bg-white dark:bg-gray-700 shadow-sm hover:bg-gray-100">
+                                <svg class="stroke-gray-900 dark:stroke-white" width="14" height="14" viewBox="0 0 18 19"><path d="M3.75 9.5H14.25M9 14.75V4.25" stroke-width="2" stroke-linecap="round"/></svg>
                             </button>
                         </div>
-                        <h6 class="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">${{ itemTotal(item.item.id) }}</h6>
+                        <h6 class="text-indigo-600 font-manrope font-bold text-xl md:text-2xl">${{ itemTotal(item.item.id) }}</h6>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">
-            <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
-                <p class="font-normal text-xl leading-8 text-gray-400">{{'Sous Total' | translate}}</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ subTotal }}</h6>
+        <div class="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 w-full mb-4 max-lg:max-w-xl max-lg:mx-auto border border-gray-100 dark:border-gray-700">
+            <div class="flex items-center justify-between w-full pb-2 border-b border-gray-200">
+                <p class="font-normal text-base md:text-lg text-gray-400">{{'Sous Total' | translate}}</p>
+                <h6 class="font-semibold text-base md:text-lg text-gray-900 dark:text-white">${{ subTotal }}</h6>
             </div>
-            <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
-                <p class="font-normal text-xl leading-8 text-gray-400">Tps</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ tps }}</h6>
+            <div class="flex items-center justify-between w-full pb-2 border-b border-gray-200">
+                <p class="font-normal text-base md:text-lg text-gray-400">Tps</p>
+                <h6 class="font-semibold text-base md:text-lg text-gray-900 dark:text-white">${{ tps }}</h6>
             </div>
-            <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
-                <p class="font-normal text-xl leading-8 text-gray-400">Tvq</p>
-                <h6 class="font-semibold text-xl leading-8 text-gray-900 dark:text-white">${{ tvq }}</h6>
+            <div class="flex items-center justify-between w-full pb-2 border-b border-gray-200">
+                <p class="font-normal text-base md:text-lg text-gray-400">Tvq</p>
+                <h6 class="font-semibold text-base md:text-lg text-gray-900 dark:text-white">${{ tvq }}</h6>
             </div>
-            <div class="flex items-center justify-between w-full pb-6 border-b border-gray-200">
-                <p class="font-normal text-xl leading-8 text-gray-400">{{'Coupon' | translate}}</p>
-                <h6 class="font-semibold text-xl leading-8 text-red-500">-${{ couponsTotal }}</h6>
+            <div class="flex items-center justify-between w-full pb-2 border-b border-gray-200">
+                <p class="font-normal text-base md:text-lg text-gray-400">{{'Coupon' | translate}}</p>
+                <h6 class="font-semibold text-base md:text-lg text-red-500">-${{ couponsTotal }}</h6>
             </div>
-            <div class="flex items-center justify-between w-full py-6">
-                <p class="font-manrope font-medium text-2xl leading-9 text-gray-100">{{'Total' | translate}}</p>
-                <h6 class="font-manrope font-medium text-2xl leading-9 text-indigo-500">${{ total }}</h6>
+            <div class="flex items-center justify-between w-full py-2">
+                <p class="font-manrope font-bold text-xl md:text-2xl text-gray-100">{{'Total' | translate}}</p>
+                <h6 class="font-manrope font-bold text-xl md:text-2xl text-indigo-500">${{ total }}</h6>
             </div>
         </div>
 
-        <div *ngIf="isUserLoggedIn(); else noItems" 
-            class="flex items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-            <button
-                (click)="openCouponsModal()"
-                class="rounded-full py-4 w-full max-w-[280px]  flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
-                <span class="px-2 font-semibold text-lg leading-8 text-indigo-600">{{'Ajouter des coupons' | translate}}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M8.25324 5.49609L13.7535 10.9963L8.25 16.4998" stroke="#4F46E5" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
-            <button 
-                (click)="checkoutPage()"
-                class="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700"
-            >
-                {{'Commander' | translate}}
-                <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-                    <path d="M8.75324 5.49609L14.2535 10.9963L8.75 16.4998" stroke="white" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
-        </div>
-        <ng-template #noItems>
+        @if(isUserLoggedIn()) {
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+                <button (click)="openCouponsModal()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm md:text-base hover:bg-indigo-100 transition-all">
+                    {{'Ajouter des coupons' | translate}}
+                </button>
+                <button (click)="checkoutPage()" class="w-full sm:w-auto px-12 py-4 rounded-full bg-indigo-600 text-white font-bold text-sm md:text-base shadow-lg shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all">
+                    {{'Commander' | translate}}
+                </button>
+            </div>
+        } @else {
             <div class="flex items-center flex-col sm:flex-row justify-center gap-3 mt-8">
                 <button (click)="openLoginModal()"
                     class="px-6 font-semibold text-lg text-indigo-600 rounded-full py-4 w-full max-w-[280px] flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
@@ -115,31 +95,37 @@
                     </svg>
                 </button>
             </div>
-        </ng-template>
+        }
     </div>
 </section>
 
 <!-- Login Modal -->
-<div *ngIf="showLoginModal" class="bg-black opacity-70 fixed inset-0 z-5"></div>
-<div *ngIf="showLoginModal" id="loginModal" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center min-h-screen">
-    <div class="bg-gray-50 dark:bg-gray-900 w-1/4 px-6 pt-6 rounded shadow-md">
-        <!-- Modal header -->
-        <div class="flex items-center justify-between px-4 md:px-5 border-b rounded-t dark:border-gray-600">
-            <!-- Close Button -->
+<div *ngIf="showLoginModal" class="bg-black/70 fixed inset-0 z-[60] backdrop-blur-sm"></div>
+
+<div *ngIf="showLoginModal" id="loginModal" 
+    class="fixed z-[70] inset-0 overflow-y-auto flex items-center justify-center p-4">
+    
+    <div class="bg-gray-50 dark:bg-gray-900 w-full max-w-lg md:max-w-md rounded-2xl shadow-xl dark:border dark:border-gray-700 flex flex-col max-h-[90vh]">
+        
+        <div class="flex items-center justify-between p-4 border-b dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                </h3>
             <button (click)="closeLoginModal()"
-                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
                     <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <!-- Modal body -->
-        <app-login-comp [isOpen]="showLoginModal" (close)="closeLoginModal()"></app-login-comp>
-        <!-- Modal footer -->
-        <div class="flex items-center px-4 pt-2 md:px-5 md:pt-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+
+        <div class="overflow-y-auto flex-1">
+            <app-login-comp [isOpen]="showLoginModal" (close)="closeLoginModal()"></app-login-comp>
+        </div>
+
+        <div class="flex items-center justify-end p-4 border-t border-gray-200 dark:border-gray-600">
             <button (click)="closeLoginModal()"
-                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-800 dark:bg-white dark:border-gray-700 dark:text-gray-900 dark:hover:bg-gray-200 mb-2">
+                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-xl text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700">
                 {{'Fermer' | translate}}
             </button>
         </div>

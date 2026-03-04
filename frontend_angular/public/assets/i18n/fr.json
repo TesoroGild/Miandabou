@@ -13,8 +13,8 @@
     "Recevoir nos dernières nouvelles": "Recevoir nos dernières nouvelles",
     "Rejoindre": "Rejoindre",
     "Veuillez saisir un email.": "Veuillez saisir un email.",
-    "Format email invalid!": "Format email invalid!",
-    "Vous avez dépassé la taille maximale de 60 caractères.": "Vous avez dépassé la taille maximale de 60 caractères.",
+    "Format email invalide": "Format email invalide",
+    "Maximum 60 caractères": "Maximum 60 caractères",
     "Réduction temporaire": "Réduction temporaire",
     "Obtenez": "Obtenez",
     "de réduction sur votre prochain achat en utilisant le code": "de réduction sur votre prochain achat en utilisant le code",
@@ -42,19 +42,19 @@
 
 
 
-    "Merci pour votre achat chez Miandabou Accessoires. Voici le numero de votre commande": "Merci pour votre achat chez Miandabou Accessoires. Voici le numero de votre commande",
+    "Merci pour votre achat chez Miandabou Accessoires": "Merci pour votre achat chez Miandabou Accessoires",
+    "Commande n°": "Commande n°",
     "Nous converserons avec vous via": "Nous converserons avec vous via",
     "pour toutes mises à jour": "pour toutes mises à jour",
     "Le colis sera livré au": "Le colis sera livré au",
-    "Date estimée de livraison": "Date estimée de livraison",
+    "Livraison estimée": "Livraison estimée",
     "entre 8am et 5pm": "entre 8am et 5pm",
     "Résumé de la commande": "Résumé de la commande",
     "Prix original": "Prix original",
     "Rabais": "Rabais",
-    "Ramassage en magasin": "Ramassage en magasin",
-    "Télécharger la facture": "Télécharger la facture",
-    "Retour à l'écran d'acceuil": "Retour à l'écran d'acceuil",
-    "Retourner à la liste des articles": "Retourner à la liste des articles",
+    "Télécharger la facture PDF": "Télécharger la facture PDF",
+    "Retour à l'acceuil": "Retour à l'acceuil",
+    "Continuer mes achats": "Continuer mes achats",
 
 
 
@@ -63,12 +63,13 @@
     "Coupon": "Coupon",
     "Total": "Total",
     "Ajouter des coupons": "Ajouter des coupons",
-    "Commander": "Commander",
+    "CONFIRMER LA COMMANDE": "CONFIRMER LA COMMANDE",
     "Connectez-vous pour poursuivre votre achat": "Connectez-vous pour poursuivre votre achat",
     "Fermer": "Fermer",
 
 
 
+    "Informations de livraison": "Informations de livraison",
     "Utilisez une adresse où vous pouvez recevoir votre commande.": "Utilisez une adresse où vous pouvez recevoir votre commande.",
     "Téléphone": "Téléphone",
     "Mauvais format": "Mauvais format",
@@ -82,15 +83,17 @@
     "Comment voulez-vous recevoir les mises à jour concernant votre commande?": "Comment voulez-vous recevoir les mises à jour concernant votre commande?",
     "Email": "Email",
     "Pas de notifications": "Pas de notifications",
+    "Choisir une méthode de paiement": "Choisir une méthode de paiement",
+    "Auto-remplir": "Auto-remplir",
     "Informations de paiement": "Informations de paiement",
     "Nom du titulaire": "Nom du titulaire",
     "Numéro de carte": "Numéro de carte",
     "Date d'expiration": "Date d'expiration",
     "CVV": "CVV",
     "Les 3 derniers chiffres au dos de la carte": "Les 3 derniers chiffres au dos de la carte",
-    "Payer avec Visa": "Payer avec Visa",
-    "Payer avec PayPal": "Payer avec PayPal",
-    "Payer avec MasterCard": "Payer avec MasterCard",
+    "Visa": "Visa",
+    "PayPal": "PayPal",
+    "MasterCard": "MasterCard",
     "Livraison": "Livraison",
     "J'accepte les": "J'accepte les",
     "conditions générales": "conditions générales",
@@ -110,8 +113,8 @@
     "Ajouter au panier": "Ajouter au panier",
     "Quantité": "Quantité",
     "Quantité à ajouter": "Quantité à ajouter",
-    "Afficher les avis": "Afficher les avis",
-    "Ajouter un avis": "Ajouter un avis",
+    "Voir les avis": "Voir les avis",
+    "Noter le produit": "Noter le produit",
 
 
 
@@ -136,10 +139,11 @@
     "Client(e)": "Client(e)",
     "Employé(e)": "Employé(e)",
     "Le rôle est requis": "Le rôle est requis",
+    "Photo utilisateur": "Photo utilisateur",
     "Entrer un format jpg ou png": "Entrer un format jpg ou png",
     "Mot de passe": "Mot de passe",
     "Veuillez saisir le mot de passe": "Veuillez saisir le mot de passe",
-    "Confirmez votre motde passe": "Confirmez votre motde passe",
+    "Confirmez votre mot de passe": "Confirmez votre mot de passe",
     "Les mots de passe ne correspondent pas": "Les mots de passe ne correspondent pas",
     "Activer le compte": "Activer le compte",
     "J'ai lu et j'accepte les conditions d'utilisation": "J'ai lu et j'accepte les conditions d'utilisation",
@@ -168,12 +172,12 @@
 
 
     "Coupons disponibles": "Coupons disponibles",
-    "Rechercher": "Rechercher",
+    "Rechercher un article...": "Rechercher un article...",
     "Valeur": "Valeur",
     "Date de fin": "Date de fin",
     "Case à cocher": "Case à cocher",
     "Aucun coupon disponible": "Aucun coupon disponible",
-    "Annuler tout": "Annuler tout",
+    "Tout annuler": "Tout annuler",
     "Appliquer": "Appliquer",
     "Tout appliquer": "Tout appliquer",
 
@@ -185,21 +189,18 @@
     "Politique de confidentialité": "Politique de confidentialité",
     "Conditions générales": "Conditions générales",
     "Tous droits réservés": "Tous droits réservés",
-    "Page Facebook": "Page Facebook",
-    "Communauté Discord": "Communauté Discord",
+    "Page LinkedIn": "Page LinkedIn",
     "Compte GitHub": "Compte GitHub",
-    "Compte Dribble": "Compte Dribble",
 
 
 
     "Connectez-vous": "Connectez-vous",
     "Connection avec": "Connection avec",
     "Se souvenir de moi": "Se souvenir de moi",
-    "Mot de passse oublié": "Mot de passse oublié",
+    "Mot de passe oublié": "Mot de passe oublié",
     "Connection": "Connection",
-    "Vous n'avez pas de compte": "Vous n'avez pas de compte",
-    "Créez": "Créez",
-    "en un": "en un",
+    "Pas de compte": "Pas de compte",
+    "Créez-en un": "Créez-en un",
 
 
 
@@ -249,6 +250,7 @@
     "Créer un avis": "Créer un avis",
     "Modifier votre avis": "Modifier votre avis",
     "Description de l'avis": "Description de l'avis",
+    "Description de l'article...": "Description de l'article...",
     "Annuler": "Annuler",
 
 
@@ -261,7 +263,10 @@
     "Note moyenne": "Note moyenne",
     "Aucun avis pour cet article": "Aucun avis pour cet article",
     "Êtes-vous sûr de vouloir supprimer cet avis": "Êtes-vous sûr de vouloir supprimer cet avis",
-    "Cette action ne peut pas être annulée": "Cette action ne peut pas être annulée",
+    "Cette action est irréversible": "Cette action est irréversible",
     "Non, annuler": "Non, annuler",
-    "Oui, supprimer": "Oui, supprimer"
+    "Oui, supprimer": "Oui, supprimer",
+
+    "avis" : "avis",
+    "Lien vers une vidéo": "Lien vers une vidéo"
 }

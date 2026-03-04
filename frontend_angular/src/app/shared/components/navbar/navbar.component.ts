@@ -31,8 +31,9 @@ export class NavbarComponent {
   total: number = 0;
   couponsTotal: number = 0;
   coupons: Coupon[] = [];
-  registerModal = false;
-  updateModal = false;
+  registerModal: boolean = false;
+  updateModal: boolean = false;
+  isMenuOpen: boolean = false;
 
   languages = [
     {
@@ -103,8 +104,24 @@ export class NavbarComponent {
   }
 
   navigateToItems() {
+    this.closeMenu();
     if (this.isEmployee()) this.router.navigate(['/stock']);
     else this.router.navigate(['/items']);
+  }
+
+  navigateToCart() {
+    this.closeMenu();
+    this.router.navigate(['/cart']);
+  }
+  
+  navigateToAbout() {
+    this.closeMenu();
+    this.router.navigate(['/about']);
+  }
+
+  navigateToContact() {
+    this.closeMenu();
+    this.router.navigate(['/contact']);
   }
 
   isLoggedIn () {
@@ -128,6 +145,7 @@ export class NavbarComponent {
 
   @ViewChild('dropdownLangageWrapper') dropdownLangageWrapper!: ElementRef;
   @ViewChild('dropdownProfileWrapper') dropdownProfileWrapper!: ElementRef;
+  @ViewChild('navbar-menu') menuWrapper!: ElementRef;
   @HostListener('document:click', ['$event'])
   clickDropdownsOut(event: any) {
     // Si l'élément cliqué n'est pas contenu dans le dropdownLangageWrapper
@@ -137,6 +155,10 @@ export class NavbarComponent {
 
     if (this.dropdownProfileWrapper && !this.dropdownProfileWrapper.nativeElement.contains(event.target)) {
       this.isProfileDropdownOpen = false;
+    }
+
+    if (this.menuWrapper && !this.menuWrapper.nativeElement.contains(event.target)) {
+      this.isMenuOpen = false;
     }
   }
 
@@ -186,5 +208,13 @@ export class NavbarComponent {
       this.currentLang = this.languages[2];
     }
     this.isLanguagesDropdownOpen = false;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
   }
 }

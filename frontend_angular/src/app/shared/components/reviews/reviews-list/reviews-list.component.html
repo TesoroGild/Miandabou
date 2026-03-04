@@ -8,266 +8,167 @@
     @else {
         @if (isUserReviews) {
             @if (reviews.length > 0) {
-                <section class="mt-10 flex justify-center items-center w-full md:inset-0 h-9/10 max-h-full ">
-                    <div class="pt-2 mx-auto max-w-screen-xl px-4 2xl:px-0 bg-gray-900 w-8/10 rounded-xl">
-                        <div class="mx-auto max-w-5xl">
-                            <div class="gap-4 sm:flex sm:items-center sm:justify-between">
-                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">{{'Mes avis' | translate}}</h2>
-                            </div>
-                            
-                            @for (review of reviews; track review.id; let i = $index) {
-                                <div class="mt-6 flow-root sm:mt-8">
-                                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
-                                        <div class="grid md:grid-cols-12 gap-4 md:gap-6 pb-4 md:pb-6">
-                                            <dl class="md:col-span-3 order-3 md:order-1">
-                                                <dt class="sr-only">{{'Produit' | translate}}:</dt>
-                                                <dd class="text-base font-semibold text-gray-900 dark:text-white">
-                                                    <a href="#" class="hover:underline">{{ review.item }}</a>
-                                                </dd>
-                                            </dl>
-            
-                                            <dl class="md:col-span-6 order-4 md:order-2">
-                                                <dt class="sr-only">{{'Message' | translate}}:</dt>
-                                                <dd class=" text-gray-500 dark:text-gray-400">{{ review.content }}</dd>
-                                            </dl>
-                                            
-                                            <div class="md:col-span-3 content-center order-1 md:order-3 flex items-center justify-between">
-                                                <div class="flex items-center space-x-0.5 text-blue-700">
-                                                    <svg 
-                                                        *ngFor="let star of stars"
-                                                        [class.text-yellow-300]="star <= review.rating"
-                                                        [class.text-gray-300]="star > review.rating"
-                                                        [class.dark:text-gray-500]="star > review.rating"
-                                                        class="h-5 w-5 fill-current" 
-                                                        viewBox="0 0 22 20" 
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                                    </svg>
-                                                </div>
-                                                <div class="flex ml-4">
-                                                    <button (click)="openEditForm(review)" class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                        <svg class="me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                                                            </svg>                              
-                                                        <span>{{'Modifer' | translate}}</span>
-                                                    </button>
-                                                    <button (click)="showDeletePopup()" class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-500">
-                                                        <svg class="me-1.5 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"></path>
-                                                        </svg>
-                                                        {{'Supprimer' | translate}}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                <section class="mt-10 flex justify-center items-center w-full overflow-hidden px-2">
+    <div class="pt-6 mx-auto max-w-screen-xl bg-gray-900 w-full md:w-10/12 rounded-xl shadow-2xl">
+        <div class="px-4 sm:px-8 max-w-5xl mx-auto"> <div class="mb-4 flex items-center justify-between border-b border-gray-700 pb-4">
+                <h2 class="text-xl font-semibold text-white sm:text-2xl">
+                    {{ 'Mes avis' | translate }}
+                </h2>
+            </div>
 
-                            <!-- Navigation -->
-                            <nav class="my-4 flex items-center justify-center sm:mt-8" aria-label="Page navigation example">
-                                <ul class="flex h-8 items-center -space-x-px text-sm">
-                                    <li>
-                                        <a href="#" class="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span class="sr-only">Previous</span>
-                                        <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
-                                        </svg>
-                                    </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-current="page" class="z-10 flex h-8 items-center justify-center border border-blue-300 bg-blue-50 px-3 leading-tight text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span class="sr-only">Next</span>
-                                        <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
-                                        </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+            <div class="divide-y divide-gray-700">
+                @for (review of reviews; track review.id) {
+                <div class="py-6">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                        
+                        <div class="md:col-span-3">
+                            <p class="text-base font-semibold text-white truncate">
+                                <a href="#" class="hover:underline">{{ review.item }}</a>
+                            </p>
+                        </div>
+
+                        <div class="md:col-span-6">
+                            <p class="text-gray-400 text-sm sm:text-base break-words">
+                                {{ review.content }}
+                            </p>
+                        </div>
+
+                        <div class="md:col-span-3 flex flex-col space-y-4">
+                            <div class="flex items-center space-x-1 text-yellow-300">
+                                @for (star of [1,2,3,4,5]; track $index) {
+                                    <svg [class.text-gray-600]="star > review.rating" class="h-5 w-5 fill-current" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                }
+                            </div>
+
+                            <div class="flex flex-wrap gap-2">
+                                <button (click)="openEditForm(review)" class="flex-1 inline-flex justify-center items-center rounded-md bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 transition">
+                                    <span>{{'Modifier' | translate}}</span>
+                                </button>
+                                <button (click)="showDeletePopup()" class="flex-1 inline-flex justify-center items-center rounded-md bg-red-900/20 px-3 py-2 text-sm text-red-500 hover:bg-red-900/40 transition">
+                                    {{'Supprimer' | translate}}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </section>
-            }
-            @else {
-                <div class="justify-self-center mt-8 text-slate-900 text-xl font-semibold dark:text-white">{{'Vous n\'avez évalué aucun article' | translate}}.</div>
+                </div>
+                }
+            </div>
+
+            <nav class="py-6 flex justify-center overflow-x-auto" aria-label="Page navigation">
+                <ul class="inline-flex items-center -space-x-px text-sm">
+                    </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+            } @else {
+                <div class="flex justify-center mt-20 text-slate-900 text-xl font-semibold dark:text-white">
+                    {{ "Vous n'avez évalué aucun article" | translate }}.
+                </div>
             }
         }
         @else {
-            <div class="fixed inset-0 z-10 bg-black opacity-70"></div>
-            <div class="mt-24 overflow-y-auto overflow-x-hidden fixed z-20 flex justify-center items-start w-full md:inset-0 h-9/10 max-h-full">
-                <div class="max-w-6xl mx-auto bg-gray-900 w-8/10">
-                    <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 dark:border-gray-700 md:p-5">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white !leading-tight">{{'Avis des clients' | translate}}</h3>
-                        <button (click)="closeReviewsModal()" class="right-5 top-5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editReviewModal">
-                            <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
+            <div class="fixed inset-0 z-10 bg-black opacity-70" (click)="closeReviewsModal()"></div>
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+                <div class="bg-white dark:bg-gray-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl pointer-events-auto">
+                    <div class="sticky top-0 bg-white dark:bg-gray-800 border-b dark:border-gray-700 p-5 flex justify-between items-center z-10">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                        {{ 'Avis des clients' | translate }}
+                    </h3>
+                    <button (click)="closeReviewsModal()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+                        <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
                     </div>
-                    
+
+                    <div class="p-6">
                     @if (reviews.length > 0) {
-                        <!-- Stats -->
-                        <div class="flex lg:items-center sm:justify-between max-lg:flex-col gap-x-6 gap-y-8 mt-8 w-9/10 justify-self-center">
-                            <div class="space-y-2 w-full max-w-sm">
-                                <div class="flex items-center">
-                                    <div class="min-w-9">
-                                    <p class="text-sm text-slate-900 font-medium dark:text-white">5.0</p>
-                                    </div>
-                                    <div class="bg-gray-300 rounded w-full h-3">
-                                    <div class="w-2/3 h-full rounded bg-blue-700"></div>
-                                    </div>
-                                    <div class="min-w-14">
-                                    <p class="text-sm text-slate-900 font-medium ml-4 dark:text-white">66%</p>
-                                    </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                            <div class="space-y-3">
+                            @for (stat of [ {r:5, p:66}, {r:4, p:33}, {r:3, p:16}, {r:2, p:8}, {r:1, p:6} ]; track stat.r) {
+                                <div class="flex items-center gap-3">
+                                <span class="text-sm font-bold dark:text-white w-5">{{stat.r}}.0</span>
+                                <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-600" [style.width.%]="stat.p"></div>
                                 </div>
-                                <div class="flex items-center">
-                                    <div class="min-w-9">
-                                    <p class="text-sm text-slate-900 font-medium dark:text-white">4.0</p>
-                                    </div>
-                                    <div class="bg-gray-300 rounded w-full h-3">
-                                    <div class="w-1/3 h-full rounded bg-blue-700"></div>
-                                    </div>
-                                    <div class="min-w-14">
-                                    <p class="text-sm text-slate-900 font-medium ml-4 dark:text-white">33%</p>
-                                    </div>
+                                <span class="text-xs text-gray-500 w-8">{{stat.p}}%</span>
                                 </div>
-                                <div class="flex items-center">
-                                    <div class="min-w-9">
-                                    <p class="text-sm text-slate-900 font-medium dark:text-white">3.0</p>
-                                    </div>
-                                    <div class="bg-gray-300 rounded w-full h-3">
-                                    <div class="w-1/6 h-full rounded bg-blue-700"></div>
-                                    </div>
-                                    <div class="min-w-14">
-                                    <p class="text-sm text-slate-900 font-medium ml-4 dark:text-white">16%</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="min-w-9">
-                                    <p class="text-sm text-slate-900 font-medium dark:text-white">2.0</p>
-                                    </div>
-                                    <div class="bg-gray-300 rounded w-full h-3">
-                                    <div class="w-1/12 h-full rounded bg-blue-700"></div>
-                                    </div>
-                                    <div class="min-w-14">
-                                    <p class="text-sm text-slate-900 font-medium ml-4 dark:text-white">8%</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="min-w-9">
-                                    <p class="text-sm text-slate-900 font-medium dark:text-white">1.0</p>
-                                    </div>
-                                    <div class="bg-gray-300 rounded w-full h-3">
-                                    <div class="w-[6%] h-full rounded bg-blue-700"></div>
-                                    </div>
-                                    <div class="min-w-14">
-                                    <p class="text-sm text-slate-900 font-medium ml-4 dark:text-white">6%</p>
-                                    </div>
-                                </div>
+                            }
                             </div>
-                            <div class="w-full lg:text-center">
-                                <h3 class="text-slate-900 text-xl font-semibold dark:text-white">{{'Nombre total d\'avis' | translate}}</h3>
-                                <h6 class="text-slate-600 text-base mt-3 font-medium dark:text-slate-300">{{ totalReviews }} Reviews</h6>
+                            <div class="text-center flex flex-col justify-center border-y md:border-y-0 md:border-x border-gray-200 dark:border-gray-600 py-4">
+                            <p class="text-4xl font-black text-gray-900 dark:text-white">4.8</p>
+                            <div class="flex justify-center text-yellow-400 my-1">
+                                <svg *ngFor="let s of [1,2,3,4,5]" class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                             </div>
-                            <div class="w-full lg:text-center">
-                                <h3 class="text-slate-900 text-xl font-semibold dark:text-white">{{'Note moyenne' | translate}}</h3>
-                                <div class="flex items-center lg:justify-center space-x-0.5 text-blue-700 mt-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 17.42L6.25 21.54c-.29.2-.66-.09-.56-.43l2.14-6.74L2.08 10.15c-.26-.2-.13-.6.2-.62l7.07-.05L11.62 2.66c.1-.32.56-.32.66 0l2.24 6.82 7.07.05c.33.01.46.42.2.62l-5.75 4.22 2.14 6.74c.1.34-.27.63-.56.43L12 17.42z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 17.42L6.25 21.54c-.29.2-.66-.09-.56-.43l2.14-6.74L2.08 10.15c-.26-.2-.13-.6.2-.62l7.07-.05L11.62 2.66c.1-.32.56-.32.66 0l2.24 6.82 7.07.05c.33.01.46.42.2.62l-5.75 4.22 2.14 6.74c.1.34-.27.63-.56.43L12 17.42z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 17.42L6.25 21.54c-.29.2-.66-.09-.56-.43l2.14-6.74L2.08 10.15c-.26-.2-.13-.6.2-.62l7.07-.05L11.62 2.66c.1-.32.56-.32.66 0l2.24 6.82 7.07.05c.33.01.46.42.2.62l-5.75 4.22 2.14 6.74c.1.34-.27.63-.56.43L12 17.42z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 17.42L6.25 21.54c-.29.2-.66-.09-.56-.43l2.14-6.74L2.08 10.15c-.26-.2-.13-.6.2-.62l7.07-.05L11.62 2.66c.1-.32.56-.32.66 0l2.24 6.82 7.07.05c.33.01.46.42.2.62l-5.75 4.22 2.14 6.74c.1.34-.27.63-.56.43L12 17.42z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                    <path d="M12 17.42L6.25 21.54c-.29.2-.66-.09-.56-.43l2.14-6.74L2.08 10.15c-.26-.2-.13-.6.2-.62l7.07-.05L11.62 2.66c.1-.32.56-.32.66 0l2.24 6.82 7.07.05c.33.01.46.42.2.62l-5.75 4.22 2.14 6.74c.1.34-.27.63-.56.43L12 17.42z" />
-                                    </svg>
-                                </div>
+                            <p class="text-sm text-gray-500">{{ totalReviews }} {{ 'avis' | translate }}</p>
                             </div>
                         </div>
-                        <!-- Reviews -->
-                        <div class="space-y-8 my-12 flex flex-wrap gap-6 justify-center w-full">
-                            @for (review of reviews; track review.id; let i = $index) {
-                                <div class="sm:p-8 p-6 bg-gray-100 rounded-xl w-9/10">
-                                    <div class="flex items-start justify-between flex-wrap gap-4">
-                                        <div class="flex items-center gap-4 self-center">
-                                            <p class="text-[15px] text-slate-900 font-semibold">{{ review.user }}</p>
+                        
+
+                        <div class="space-y-4">
+                            @for (review of reviews; track review.id) {
+                                <div class="p-4 border dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
+                                        <div class="flex items-start justify-between flex-wrap gap-4">
+                                            <div class="flex items-center gap-4 self-center">
+                                                <span class="font-bold text-gray-900 dark:text-white">{{ review.user }}</span>
+                                            </div>
+                                            <div class="flex items-center space-x-0.5 text-yellow-400 mt-1">
+                                                <svg *ngFor="let star of [1,2,3,4,5]" 
+                                                    [class.text-gray-300]="star > review.rating"
+                                                    class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                                </svg>
+                                            </div>
                                         </div>
-                                        <div class="flex items-center space-x-0.5 text-blue-700">
-                                            <svg 
-                                                *ngFor="let star of stars"
-                                                [class.text-yellow-300]="star <= review.rating"
-                                                [class.text-gray-300]="star > review.rating"
-                                                [class.dark:text-gray-500]="star > review.rating"
-                                                class="h-5 w-5 fill-current" 
-                                                viewBox="0 0 22 20" 
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <div class="mt-4">
-                                            <p class="text-slate-600 text-[15px] leading-relaxed">{{ review.content }} </p>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mt-2">{{ review.content }}</p>
                                 </div>
                             }
                         </div>
+
+                    } @else {
+                        <div class="text-center py-12">
+                        <p class="text-gray-500 dark:text-gray-400 font-medium">{{'Vous n\'avez évalué aucun article' | translate}}.</p>
+                        </div>
                     }
-                    @else {
-                        <div class="justify-self-center my-8 text-slate-900 text-xl font-semibold dark:text-white">{{'Aucun avis pour cet article' | translate}}.</div>
-                    }
+                    </div>
+
                 </div>
             </div>
         }
     }
 
     @if(!hideDelete) {
-        <div class="fixed inset-0 z-10 bg-gray-600 opacity-70"></div>
+        <div class="fixed inset-0 z-[60] bg-gray-900/80 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-0">
+            <div class="relative w-full max-w-md transform overflow-hidden rounded-lg bg-white p-4 text-center shadow-xl dark:bg-gray-800 sm:p-5">
+                
+                <button (click)="hideDeletePopup()" type="button" class="absolute right-2.5 top-2.5 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
 
-        <div class="fixed z-50 h-modal w-full overflow-y-auto md:inset-0 md:h-full justify-items-center content-center">
-            <div class="relative h-full w-full max-w-md p-4 md:h-auto">
-            <!-- Modal content -->
-                <div class="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
-                    <button (click)="hideDeletePopup()" type="button" class="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteReviewModal">
-                        <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Close modal</span>
+                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+                    <svg class="h-8 w-8 text-red-600 dark:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+
+                <h3 class="mb-2 text-lg font-medium text-gray-900 dark:text-white">
+                    {{'Supprimer cet avis ?' | translate}}
+                </h3>
+                <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">
+                    {{'Cette action est irréversible.' | translate}}
+                </p>
+
+                <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-center">
+                    <button (click)="hideDeletePopup()" type="button" class="w-full sm:w-auto rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white sm:px-4">
+                        {{'Non, annuler' | translate}}
                     </button>
-                    <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700">
-                        <svg class="h-8 w-8 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                        </svg>
-                        <span class="sr-only">Danger icon</span>
-                    </div>
-                    <p class="mb-3.5 text-gray-900 dark:text-white">{{'Êtes-vous sûr de vouloir supprimer cet avis' | translate}}?</p>
-                    <p class="mb-4 text-gray-500 dark:text-gray-300">{{'Cette action ne peut pas être annulée' | translate}}.</p>
-                    <div class="flex items-center justify-center space-x-4">
-                        <button (click)="hideDeletePopup()" data-modal-toggle="deleteReviewModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{'Non, annuler' | translate}}</button>
-                        <button class="rounded-lg bg-red-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">{{'Oui, supprimer'}}</button>
-                    </div>
+                    <button type="button" class="w-full sm:w-auto rounded-lg bg-red-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600">
+                        {{'Oui, supprimer' | translate}}
+                    </button>
                 </div>
             </div>
         </div>

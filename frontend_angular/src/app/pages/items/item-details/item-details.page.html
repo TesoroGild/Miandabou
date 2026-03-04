@@ -1,156 +1,73 @@
-
-<!-- dark:bg-gray-900 -->
-<section class="py-8 md:py-16 antialiased">
+<section class="py-4 md:py-16 antialiased bg-white dark:bg-gray-900">
   <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
     <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-      <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-        <img class="w-full" src="{{ picture(tmpItemToDetail.contenthash) }}" alt="item picture" />
+      
+      <div class="shrink-0 max-w-md lg:max-w-lg mx-auto w-full">
+        <div class="bg-gray-100 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm">
+            <img class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300" 
+                 src="{{ picture(tmpItemToDetail.contenthash) }}" alt="item picture" />
+        </div>
       </div>
 
       <div class="mt-6 sm:mt-8 lg:mt-0">
-          <!-- dark:text-white -->
-        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ tmpItemToDetail.name }}</h1>
-        <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
-          <!-- dark:text-white -->
-          <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">${{ tmpItemToDetail.price }}</p>
+        <div class="flex justify-between items-start">
+            <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
+                {{ tmpItemToDetail.name }}
+            </h1>
+        </div>
 
-          <div class="flex items-center gap-2 mt-2 sm:mt-0">
-            <div class="flex items-center gap-1">
-              <svg
-                class="w-4 h-4 text-yellow-300"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"/>
-              </svg>
-              <svg
-                class="w-4 h-4 text-yellow-300"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"/>
-              </svg>
-              <svg
-                class="w-4 h-4 text-yellow-300"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-                />
-              </svg>
-              <svg
-                class="w-4 h-4 text-yellow-300"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-                />
-              </svg>
-              <svg
-                class="w-4 h-4 text-yellow-300"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"
-                />
-              </svg>
+        <div class="mt-4 flex items-center justify-between sm:justify-start sm:gap-8">
+          <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
+            ${{ tmpItemToDetail.price }}
+          </p>
+
+          <div class="flex items-center gap-1">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span class="ml-1 text-sm font-bold text-gray-900 dark:text-white">5.0</span>
             </div>
-            <!-- dark:text-gray-400 -->
-            <p class="text-sm font-medium leading-none text-gray-500 ">
-              (5.0)
-            </p>
+            <span class="text-xs text-gray-500 underline">(12 avis)</span>
           </div>
         </div>
 
-        <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-          <!-- dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <div class="flex items-center justify-between border dark:border-gray-700 rounded-xl p-1 bg-gray-50 dark:bg-gray-800 w-full sm:w-32">
+            <button (click)="qty.value = (+qty.value > 1 ? +qty.value - 1 : 1).toString()" 
+              class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-black dark:hover:text-white">
+              -
+            </button>
+            <input #qty type="number" value="1" class="w-8 text-center bg-transparent border-none focus:ring-0 font-bold dark:text-white" readonly>
+            <button (click)="qty.value = (+qty.value + 1).toString()" 
+              class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-black dark:hover:text-white">
+              +
+            </button>
+          </div>
+
           <button (click)="addToCart(tmpItemToDetail, +qty.value)"
-            class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none  flex items-center justify-center"
+            class="flex-1 text-white bg-blue-700 hover:bg-blue-800 shadow-lg shadow-blue-500/30 font-bold rounded-xl text-md px-8 py-4 flex items-center justify-center transition-all active:scale-95"
           >
-            <svg
-              class="w-5 h-5 -ms-2 me-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
-              />
-            </svg>
+            <svg class="w-5 h-5 me-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" /></svg>
             {{'Ajouter au panier' | translate}}
           </button>
-          <div>
-              <div class="kqgYncRJQ7spwKfig6It neyUwteEn7DOg9pBSJJE of9ZBUyLwvTqtb1zIUGL">
-                  <label for="quantity" class="MxG1ClE4KPrIvlL5_Q5x _A6LflweZRUwrcL6M2Tk g3OYBOqwXUEW4dRGogkH a0Ed69aMSu0vgf4oysz0 text-black dark:text-gray-100">{{'Quantité' | translate}}</label>
-                  <button data-tooltip-target="quantity-desc-2" data-tooltip-trigger="hover" class="ml-1">
-                      <svg class="kbeH5ty3CtPKxXm5TXph eVNhx7m5tjSVbfYQzDdT" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                          <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z" clip-rule="evenodd"></path>
-                      </svg>
-                  </button>
-                  <div id="quantity-desc-2" role="tooltip" class="invisible opacity-0 iZ8W30HPRQAuO6al90LU _v8hjA9ct_v6OhSQD7fC ADhvqXKjAizJqFADNpvd MQMN74ivNmI6x68DZajA zhRMeqbg7JsftloqW_W6 MxG1ClE4KPrIvlL5_Q5x _A6LflweZRUwrcL6M2Tk wP9HMsqy6b96l2HBRbgb M4SAv60iaayh2_Cd_QyF KB__y25H2tVACg2mjb4C J_ldU2ISOuzV8yupuBpE _Qk4_E9_iLqcHsRZZ4ge ltPMSn_g3PKyqeS8vmZk Usqns9w__onp5CWoXDJ0 _t2wg7hRcyKsNN8CSSeU AtHBVur__RVIv6BHiI4a p3NM1OB16vfk_yD2siUB" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(981px, -412px); " data-popper-placement="top">
-                      {{'Quantité à ajouter' | translate}}
-                      <div class="POMYoNHqN8pOsNYFYFHr" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(138px, 0px);"></div>
-                  </div>
-                  <!-- dark:focus:ring-blue-500 dark:focus:border-blue-500 -->
-                  <select #qty id="quantity" class="ml-2 rounded-lg yjGyQxv8jnYk9_MGMqLN PWreZZgitgAm_Nv4Noh9 T_tFENbpK8DMDNjQRyQa g3OYBOqwXUEW4dRGogkH MxG1ClE4KPrIvlL5_Q5x _Qk4_E9_iLqcHsRZZ4ge focus:ring-blue-500 focus:border-blue-500 ttxtqsLWp2pFRX8yUvWd _THnngc93i5ObWx8MFJE _4wtDMQ2AdJOlYvml5sL _t2wg7hRcyKsNN8CSSeU _BIVSYBXQUqEf_ltPrSk _DJ2tfp6E9c_teMKVD3z a0Ed69aMSu0vgf4oysz0 ">
-                      <option value="1" selected="">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                  </select>
-              </div>
-          </div>
         </div>
-        <!-- dark:border-gray-800 -->
-        <hr class="my-6 md:my-8 border-gray-200 " />
-        <!-- dark:text-gray-400 -->
-        <p class="mb-6 text-gray-500 ">
+
+        <hr class="my-8 border-gray-200 dark:border-gray-800" />
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
           {{ tmpItemToDetail.description }}
         </p>
-        <!-- dark:border-gray-800 -->
-        <hr class="my-6 md:my-8 border-gray-200 " />
 
-        <div class="flex">
+        <hr class="my-8 border-gray-200 dark:border-gray-800" />
+
+        <div class="grid grid-cols-2 gap-3">
           <button (click)="openReviewsModal()"
-            class="mr-4 text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none  flex items-center justify-center"
+            class="text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 font-medium rounded-xl text-sm px-4 py-3 transition-colors text-center"
           >
-            {{'Afficher les avis' | translate}}
+            {{'Voir les avis' | translate}}
           </button>
           <button (click)="openReviewFormModal()"
-            class="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none  flex items-center justify-center"
+            class="text-blue-700 dark:text-blue-400 border border-blue-700 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 font-medium rounded-xl text-sm px-4 py-3 transition-colors text-center"
           >
-            {{'Ajouter un avis' | translate}}
+            {{'Noter le produit' | translate}}
           </button>
         </div>
       </div>

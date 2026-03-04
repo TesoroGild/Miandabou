@@ -40,6 +40,7 @@ export class CheckoutPage {
   userSubscription!: Subscription;
   itemsCart: ItemCart[] = [];
   itemsToOrder: ItemToOrder[] = [];
+  selectedMethod: string = 'visa';
 
 
   constructor (
@@ -92,7 +93,7 @@ export class CheckoutPage {
       phonenumber: [
         null,
         [
-          Validators.pattern(/^(\(\d{3}\) \d{3}-\d{4})$/)
+          Validators.pattern(/^\(\d{3}\) \d{3}-\d{4}$/)
         ]
       ],
       meansofcommunication: [
@@ -197,6 +198,21 @@ export class CheckoutPage {
     this.policyModal = false;
   }
 
+  setPaymentMethod(method: string) {
+    this.selectedMethod = method;
+    
+    // Tu peux aussi mettre à jour les validateurs de ton checkoutForm ici
+    // Par exemple, si c'est PayPal, les champs de carte ne sont plus requis.
+    if (method === 'paypal') {
+      this.checkoutForm.get('cardnumber')?.clearValidators();
+      this.checkoutForm.get('cvv')?.clearValidators();
+    } else {
+      this.checkoutForm.get('cardnumber')?.setValidators([Validators.required]);
+      // ...
+    }
+    this.checkoutForm.get('cardnumber')?.updateValueAndValidity();
+  }
+  
   pay () {
     if (this.isUserLoggedIn()) {
       let addressValue = this.checkoutForm.get("address")?.value;
@@ -278,19 +294,38 @@ export class CheckoutPage {
   }
 
   formatPhoneNumberInput(inputElement: HTMLInputElement) {
+    const value = inputElement.value;
+    // 1. On ne garde que les chiffres
     let rawValue = inputElement.value.replace(/\D/g, '');
-
-    let formattedNumber = '';
-    if (rawValue.length > 0) {
-      formattedNumber = '(' + rawValue.substring(0, 3) + ') ' + rawValue.substring(3, 6) + '-' + rawValue.substring(6, 10);
-    }
     
-    inputElement.value = formattedNumber;
+    // Limiter à 10 chiffres pour éviter les débordements
+    rawValue = rawValue.substring(0, 10);
+
+    let formattedValue = '';
+
+    // 2. On construit le format dynamiquement selon la longueur
+    if (rawValue.length === 0) {
+      formattedValue = '';
+    } else if (rawValue.length <= 3) {
+      formattedValue = `(${rawValue}`;
+    } else if (rawValue.length <= 6) {
+      formattedValue = `(${rawValue.substring(0, 3)}) ${rawValue.substring(3)}`;
+    } else {
+      formattedValue = `(${rawValue.substring(0, 3)}) ${rawValue.substring(3, 6)}-${rawValue.substring(6)}`;
+    }
+
+    // 3. On met à jour l'input
+    inputElement.value = formattedValue;
+
+    // 4. Important : Mettre à jour manuellement le formControl si tu utilises Reactive Forms
+    // Car l'event (input) sur l'élément HTML ne met pas toujours à jour le Control proprement après modification manuelle de la value
+    this.checkoutForm.get('phonenumber')?.setValue(formattedValue, { emitEvent: false });
   }
 
   phoneNumberFormat() {
-    return this.checkoutForm.get('phonenumber')!.hasError('pattern') 
-      && this.checkoutForm.get('phonenumber')!.touched;
+    const control = this.checkoutForm.get('phonenumber');
+    // Renvoie true seulement si le champ n'est pas vide ET que le pattern est invalide
+    return control?.errors?.['pattern'] && control?.touched && control?.value.length > 0;
   }
 
   private showError(

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Item } from '../../interfaces/item.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ItemService {
   private bestItemsSold: BehaviorSubject<Item[]>;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
     this.itemsToDisplay = new BehaviorSubject<Item[]>([]);
     this.itemsInPromotions = new BehaviorSubject<Item[]>([]);
@@ -69,6 +71,15 @@ export class ItemService {
     return this.http.post<any>(
       `${environment.backendUrl}/api/items/${id}/edit`,
       item
+    );
+  }
+
+  updateStock (id: number, qty: number) : any {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.post<any>(
+      `${environment.backendUrl}/api/items/${id}/edit/stock`,
+      qty,
+      { headers }
     );
   }
 

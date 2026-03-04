@@ -11,8 +11,13 @@
     "Recevoir nos dernières nouvelles": "Receive our latest news",
     "Rejoindre": "Join",
     "Veuillez saisir un email.": "Please enter an email.",
-    "Format email invalid!": "Invalid email format!",
-    "Vous avez dépassé la taille maximale de 60 caractères.": "You have exceeded the maximum character limit of 60.",
+    "Format email invalide": "Invalid email format",
+    "Maximum 60 caractères": "Maximum 60 characters",
+    "Réduction temporaire": "Temporary discount",
+    "Obtenez": "Get",
+    "de réduction sur votre prochain achat en utilisant le code": "off your next purchase using the code",
+    "Articles concernés": "Items included",
+
     
     
     "Français (FR)": " French (FR) ",
@@ -35,19 +40,19 @@
 
 
 
-    "Merci pour votre achat chez Miandabou Accessoires. Voici le numero de votre commande": "Thank you for your purchase at Miandabou Accessoires. Here is your order number",
+    "Merci pour votre achat chez Miandabou Accessoires": "Thank you for your purchase at Miandabou Accessoires",
+    "Commande n°": "Oder n°",
     "Nous converserons avec vous via": "We will communicate with you via",
     "pour toutes mises à jour": "for all updates",
     "Le colis sera livré au": "The package will be delivered to",
-    "Date estimée de livraison": "Estimated delivery date",
+    "Livraison estimée": "Estimated delivery",
     "entre 8am et 5pm": "between 8am and 5pm",
     "Résumé de la commande": "Order summary",
     "Prix original": "Original price",
     "Rabais": "Discount",
-    "Ramassage en magasin": "In-store pickup",
-    "Télécharger la facture": "Download invoice",
-    "Retour à l'écran d'acceuil": "Back to home screen",
-    "Retourner à la liste des articles": "Return to item list",
+    "Télécharger la facture PDF": "Download invoice PDF",
+    "Retour à lacceuil": "Back to home",
+    "Continuer mes achats": "Continue shopping",
 
 
 
@@ -56,12 +61,13 @@
     "Coupon": "Coupon",
     "Total": "Total",
     "Ajouter des coupons": "Add coupons",
-    "Commander": "Checkout",
+    "CONFIRMER LA COMMANDE": "PLACE ORDER",
     "Connectez-vous pour poursuivre votre achat": "Log in to continue your purchase",
     "Fermer": "Close",
 
 
 
+    "Informations de livraison": "Delivery informations",
     "Utilisez une adresse où vous pouvez recevoir votre commande.": "Use an address where you can receive your order.",
     "Téléphone": "Phone",
     "Mauvais format": "Invalid format",
@@ -75,15 +81,17 @@
     "Comment voulez-vous recevoir les mises à jour concernant votre commande?": "How would you like to receive updates about your order?",
     "Email": "Email",
     "Pas de notifications": "No notifications",
+    "Choisir une méthode de paiement": "Select a payment method",
+    "Auto-remplir": "Auto-fill",
     "Informations de paiement": "Payment information",
     "Nom du titulaire": "Cardholder name",
     "Numéro de carte": "Card number",
     "Date d'expiration": "Expiration date",
     "CVV": "CVV",
     "Les 3 derniers chiffres au dos de la carte": "The last 3 digits on the back of the card",
-    "Payer avec Visa": "Pay with Visa",
-    "Payer avec PayPal": "Pay with PayPal",
-    "Payer avec MasterCard": "Pay with MasterCard",
+    "Visa": "Visa",
+    "PayPal": "PayPal",
+    "MasterCard": "MasterCard",
     "Livraison": "Delivery",
     "J'accepte les": "I accept the",
     "conditions générales": "terms and conditions",
@@ -103,8 +111,8 @@
     "Ajouter au panier": "Add to cart",
     "Quantité": "Quantity",
     "Quantité à ajouter": "Quantity to add",
-    "Afficher les avis": "Show reviews",
-    "Ajouter un avis": "Add a review",
+    "Voir les avis": "Show reviews",
+    "Noter le produit": "Rate the product",
 
 
 
@@ -129,10 +137,11 @@
     "Client(e)": "Client",
     "Employé(e)": "Employee",
     "Le rôle est requis": "Role is required",
+    "Photo utilisateur": "User picture",
     "Entrer un format jpg ou png": "Enter a jpg or png format",
     "Mot de passe": "Password",
     "Veuillez saisir le mot de passe": "Please enter the password",
-    "Confirmez votre motde passe": "Confirm your password",
+    "Confirmez votre mot de passe": "Confirm your password",
     "Les mots de passe ne correspondent pas": "Passwords do not match",
     "Activer le compte": "Activate account",
     "J'ai lu et j'accepte les conditions d'utilisation": "I have read and accept the terms of use",
@@ -161,12 +170,12 @@
 
 
     "Coupons disponibles": "Available coupons",
-    "Rechercher": "Search",
+    "Rechercher un article...": "Search an item...",
     "Valeur": "Value",
     "Date de fin": "End date",
     "Case à cocher": "Checkbox",
     "Aucun coupon disponible": "No coupons available",
-    "Annuler tout": "Clear all",
+    "Tout annuler": "Clear all",
     "Appliquer": "Apply",
     "Tout appliquer": "Apply all",
 
@@ -178,21 +187,18 @@
     "Politique de confidentialité": "Privacy policy",
     "Conditions générales": "Terms and conditions",
     "Tous droits réservés": "All rights reserved",
-    "Page Facebook": "Facebook page",
-    "Communauté Discord": "Discord community",
+    "Page LinkedIn": "LinkedIn page",
     "Compte GitHub": "GitHub account",
-    "Compte Dribble": "Dribbble account",
 
 
 
     "Connectez-vous": "Log in",
     "Connection avec": "Login with",
     "Se souvenir de moi": "Remember me",
-    "Mot de passse oublié": "Forgot password",
+    "Mot de passe oublié": "Forgot password",
     "Connection": "Login",
-    "Vous n'avez pas de compte": "Don't have an account",
-    "Créez": "Create",
-    "en un": "in one",
+    "Pas de compte": "Don't have an account",
+    "Créez-en un": "Create one",
 
 
 
@@ -242,6 +248,7 @@
     "Créer un avis": "Create a review",
     "Modifier votre avis": "Edit your review",
     "Description de l'avis": "Review description",
+    "Description de l'article...": "Article description...",
     "Annuler": "Cancel",
 
 
@@ -254,7 +261,10 @@
     "Note moyenne": "Average rating",
     "Aucun avis pour cet article": "No reviews for this item",
     "Êtes-vous sûr de vouloir supprimer cet avis": "Are you sure you want to delete this review",
-    "Cette action ne peut pas être annulée": "This action cannot be undone",
+    "Cette action est irréversible": "This action cannot be undone",
     "Non, annuler": "No, cancel",
-    "Oui, supprimer": "Yes, delete"
+    "Oui, supprimer": "Yes, delete",
+
+    "avis" : "reviews",
+    "Lien vers une vidéo": "Video link"
 }
