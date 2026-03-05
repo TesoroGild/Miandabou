@@ -27,14 +27,11 @@ ng test
 * Le budget alloué au build de l'application a été atteidn en raison des nombreux warnings donnant l'erreur : bundle initial exceeded maximum budget. Budget 1.00 MB was not met by 323.62 kB with a total of 1.32 MB.
 
 # TODO
-* CRUD coupons, address
 * Coupons
     * Ne pas permettre de tous les mettre.
     * Ne pas afficher ceux expirés
-    * Changer la logique (certains coupons seulement pour certains items)
+    * Certains coupons seulement pour certains items
 * Auth
     * Double validation
     * Token expiration
 * Email
-* Stepper pour l'achat
-* Navbar pour la page actuelle.

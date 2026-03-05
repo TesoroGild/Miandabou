@@ -1,0 +1,37 @@
+@media print {
+  // 1. Cacher les éléments globaux du site et les boutons
+  @page {
+    margin: 0;
+  }
+  app-navbar, 
+  app-footer, 
+  .no-print, 
+  button,
+  .sidebar {
+    display: none !important;
+  }
+
+  // 2. Forcer le "Mode Light" et l'impression des couleurs
+  body, #invoice {
+    background-color: white !important;
+    color: black !important;
+    margin: 1.6cm !important;
+    padding: 0 !important;
+  }
+
+  #invoice * {
+    // Force les textes en noir et les bordures en gris pour économiser l'encre
+    color: black !important;
+    border-color: #d1d5db !important; 
+    
+    // Crucial pour que les couleurs de fond (badges, etc.) s'impriment
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  // 3. Ajuster la mise en page
+  @page {
+    size: auto;
+    margin: 1.5cm; // Marges propres sur le papier
+  }
+}

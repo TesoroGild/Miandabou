@@ -116,6 +116,11 @@ export class AuthService {
     localStorage.removeItem(this.keyToken);
     localStorage.removeItem(this.keyRole);
     localStorage.removeItem(this.keyUser);
+    localStorage.removeItem("cart");
+    localStorage.removeItem("subTotal");
+    localStorage.removeItem("total");
+    localStorage.removeItem("tps");
+    localStorage.removeItem("tvq");
     //localStorage.clear();
     this.userIsLoggedIn.next(false);
     this.userIsAdmin.next(false);

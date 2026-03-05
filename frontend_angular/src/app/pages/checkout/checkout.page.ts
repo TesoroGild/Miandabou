@@ -269,12 +269,12 @@ export class CheckoutPage {
           next: (res: any) => {
             this.checkoutForm.reset();
             this.toastService.success(res.msg);
-            this.router.navigate(['/bills']);
             localStorage.removeItem("cart");
             localStorage.removeItem("subTotal");
             localStorage.removeItem("total");
             localStorage.removeItem("tps");
             localStorage.removeItem("tvq");
+            this.router.navigate(['/bills']);
           },
           error: (err: any) => {
             this.toastService.error(err.error.msg);

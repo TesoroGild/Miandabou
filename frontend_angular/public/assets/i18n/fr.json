@@ -149,6 +149,7 @@
     "J'ai lu et j'accepte les conditions d'utilisation": "J'ai lu et j'accepte les conditions d'utilisation",
     "Il est important d'accepter les conditions": "Il est important d'accepter les conditions",
     "Créer": "Créer",
+    "Poster": "Poster",
     "Vous avez déjà un compte": "Vous avez déjà un compte",
     "Connnectez-vous": "Connnectez-vous",
 
@@ -268,5 +269,6 @@
     "Oui, supprimer": "Oui, supprimer",
 
     "avis" : "avis",
-    "Lien vers une vidéo": "Lien vers une vidéo"
+    "Lien vers une vidéo": "Lien vers une vidéo",
+    "Stock" : "Stock"
 }

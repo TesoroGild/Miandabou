@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -74,23 +74,21 @@ export class ItemService {
     );
   }
 
-  updateStock (id: number, qty: number) : any {
+  updateStock (id: number, datas: any) : Observable<HttpResponse<any>> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
-    return this.http.post<any>(
+    return this.http.patch<any>(
       `${environment.backendUrl}/api/items/${id}/edit/stock`,
-      qty,
-      { headers }
+      datas,
+      { 
+        headers: headers,
+        observe: 'response'
+      }
     );
   }
-
-  // getItemsToDisplay () {
-  //   return this.itemsToDisplay.asObservable();
-  // }
 
   getPromoItems (): Observable<Item[]> {
     return this.itemsToDisplay.pipe(
       switchMap((data) => {
-        // Simulate an update operation and return the new data
         this.itemsInPromotions.next(data.filter((item: Item) => Number(item.promo) !== 0));
         return this.itemsInPromotions.asObservable();
       })

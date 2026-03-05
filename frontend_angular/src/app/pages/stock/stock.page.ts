@@ -15,7 +15,7 @@ import { Item } from '../../interfaces/item.interface';
 ///Services
 import { ItemService } from '../../services/item/item.service';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { ToastService } from '../../services/toast/toast.service';
 import { TranslateService, TranslatePipe } from '@ngx-translate/core';
 import { LangagesService } from '../../services/langages/langages.service';
 
@@ -45,7 +45,8 @@ export class StockPage {
     private langService: LangagesService,
     private router: Router, 
     private itemService: ItemService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) { 
     this.translateService.use(this.langService.initLangage());
     this.filterSelect = this.loadFilterSelection();
@@ -204,14 +205,37 @@ export class StockPage {
     const addedQty = this.getChangeValue(item.id);
     if (addedQty <= 0) return;
 
-    // this.itemService.updateStock(item.id, item.tempQuantity).subscribe({
-    //   next: (response: any) => {
-    //     // Optionnel : Mettre à jour la vue directement après succès
-    //     item.quantity += item.tempQuantity;
-    //     item.tempQuantity = 0; // Reset le compteur après ajout
-    //     // Notification de succès ici
-    //   },
-    //   error: (err: any) => console.error('Erreur lors de l\'update', err)
-    // });
+    const datas = {
+      qty: addedQty,
+      mode: "relative"
+    }
+    
+    this.itemService.updateStock(item.id, datas).subscribe({
+      next: (res: any) => {
+        this.refreshItems();
+        console.log(res.body)
+        if (res.status === 202) {
+          this.toastService.warning(res.body.msg);
+        } else {
+          this.toastService.success(res.body.msg);
+        }
+        this.stockChanges[item.id] = 0;
+      },
+      error: (err: any) => {
+        if (err.status >= 404 && err.status < 500) {
+          this.toastService.error('Erreur : ' + err.error.msg);
+        } else if (err.status >= 500 && err.status <= 511) {
+          this.toastService.warning('Erreur : ' + err.error.msg);
+        } else {
+          this.toastService.warning('Erreur inconnue');
+        }
+      }
+        //est-ce que on doit actualiser la page en fond (item) et garder le modal ouvert?
+          // const currentUrl = this.router.url;
+          // //remplacer true
+          // if (currentUrl != "/cart") this.router.navigate(['']);
+          // else this.router.navigate(['/checkout'])
+          // console.log("LOGIN: USER CONNECTED");
+    });
   }
 }

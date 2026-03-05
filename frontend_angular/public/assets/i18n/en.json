@@ -147,6 +147,7 @@
     "J'ai lu et j'accepte les conditions d'utilisation": "I have read and accept the terms of use",
     "Il est important d'accepter les conditions": "It is important to accept the terms",
     "Créer": "Create",
+    "Poster": "Post",
     "Vous avez déjà un compte": "Already have an account",
     "Connnectez-vous": "Log in",
 
@@ -266,5 +267,6 @@
     "Oui, supprimer": "Yes, delete",
 
     "avis" : "reviews",
-    "Lien vers une vidéo": "Video link"
+    "Lien vers une vidéo": "Video link",
+    "Stock" : "Stock"
 }

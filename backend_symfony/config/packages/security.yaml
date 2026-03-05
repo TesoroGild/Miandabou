@@ -50,7 +50,7 @@ security:
         # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/items/\d+/edit$, roles: ROLE_EMP, methods: [POST] }
-        - { path: ^/api/items/\d+/qty$, roles: ROLE_EMP, methods: [PATCH] }
+        - { path: ^/api/items/\d+/edit/stock$, roles: ROLE_EMP, methods: [PATCH] }
         - { path: ^/api/items/\d+/delete$, roles: ROLE_ADMIN, methods: [PATCH] }
         - { path: ^/api/items$, roles: ROLE_EMP, methods: [POST] }
         - { path: ^/api/checkout, roles: ROLE_CLIENT }

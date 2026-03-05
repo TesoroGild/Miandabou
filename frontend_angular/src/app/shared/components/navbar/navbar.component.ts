@@ -50,6 +50,7 @@ export class NavbarComponent {
     }
   ];
   currentLang = this.languages[0];
+  isUserEmployee: boolean = false;
 
   constructor(
     private router: Router, 
@@ -72,6 +73,7 @@ export class NavbarComponent {
     this.userSubscription = this.userToDisplay$.subscribe((u) => {
       this.userToDisplay = u;
     })
+    this.isUserEmployee = this.isEmployee();
   }
 
   ngOnInit(): void {

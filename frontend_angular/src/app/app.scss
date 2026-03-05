@@ -1,0 +1,17 @@
+// styles.scss
+@media print {
+  // On cache tout ce qui ne doit pas apparaître sur le papier
+  app-navbar, 
+  app-footer, 
+  .no-print,
+  button { 
+    display: none !important; 
+  }
+
+  // On s'assure que le body n'a pas de marges bizarres
+  body {
+    background-color: white !important;
+    margin: 0;
+    padding: 0;
+  }
+}

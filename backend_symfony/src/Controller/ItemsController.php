@@ -295,15 +295,53 @@ final class ItemsController extends AbstractController
         }
     }
 
-    #[Route('/api/items/{id}/qty', name: 'item_update_quantity', methods: ['PATCH'])]
+    #[Route('/api/items/{id}/edit/stock', name: 'item_update_quantity', methods: ['PATCH'])]
     #[OA\Tag(name: 'Items')]
     public function updateQuantity(int $id, ItemsRepository $itemsRepository, LoggerInterface $logger, 
         EntityManagerInterface $entityManager, Request $request, UploadService $uploadService): JsonResponse
     {
+        $item = $itemsRepository->findItem($id);
+
+        if (!$item) {
+            return $this->json(['message' => 'Article non trouvé'], 404);
+        }
+
+        $this->denyAccessUnlessGranted('POST_EDIT', $item);
+
+        $data = json_decode($request->getContent(), true);
+        $qty = $data['qty'] ?? null; 
+        $mode = $data['mode'] ?? 'absolute';
+
+        if ($qty === null || !is_numeric($qty)) {
+            return $this->json(['message' => 'Quantité invalide!'], 400);
+        }
+
+        if ($mode === 'relative') {
+            $item->setQuantity($item->getQuantity() + (int)$qty);
+        } else {
+            $item->setQuantity((int)$qty);
+        }
+        
+        if ($item->getQuantity() < 0) {
+            return $this->json(['error' => 'Stock insuffisant'], 400);
+        }
+
+        $entityManager->persist($item);
+        $entityManager->flush();
+
         try {
-            return $this->json([
-                'msg' => 'Quantité modifiée avec succès.'
-            ], Response::HTTP_OK);
+            if ($item->getQuantity() <= 3) 
+            {
+                return $this->json([
+                    'msg' => 'Limite de stock atteinte.'
+                ], Response::HTTP_ACCEPTED);
+            }
+            else 
+            {
+                return $this->json([
+                    'msg' => 'Quantité modifiée avec succès.'
+                ], Response::HTTP_OK);
+            } 
         } catch (\Throwable $t) {//\Exception $e
             $logger->error('Erreur updatequantity: ' . $t->getMessage());
             return $this->json(
